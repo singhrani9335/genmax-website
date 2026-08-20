@@ -1,9 +1,26 @@
 @import "tailwindcss";
 
+/* ================================
+   GENMAX IT SOLUTION
+   MIGHTY WARNERS STYLE THEME
+================================ */
+
 :root {
+  --genmax-blue: #244b82;
+  --genmax-blue-dark: #193765;
+  --genmax-pink: #c94d91;
+  --genmax-pink-dark: #ae3c7c;
+
   --background: #ffffff;
-  --foreground: #111827;
+  --foreground: #244b82;
+  --light-bg: #f8f9fc;
+  --gray-text: #68758b;
+  --border: #e5e7eb;
 }
+
+/* ================================
+   RESET
+================================ */
 
 * {
   box-sizing: border-box;
@@ -13,25 +30,264 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+}
+
+body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* ================================
+   LINKS
+================================ */
 
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* ================================
+   BUTTONS
+================================ */
+
 button,
 a {
-  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  font-family: inherit;
+}
+
+/* ================================
+   IMAGES
+================================ */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ================================
+   SELECTION
+================================ */
+
 ::selection {
-  background: #2563eb;
+  background: var(--genmax-pink);
   color: #ffffff;
+}
+
+/* ================================
+   SCROLLBAR
+================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--genmax-blue);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--genmax-pink);
+}
+
+/* ================================
+   COMMON GENMAX COLORS
+================================ */
+
+.genmax-blue {
+  color: var(--genmax-blue);
+}
+
+.genmax-pink {
+  color: var(--genmax-pink);
+}
+
+.genmax-blue-bg {
+  background-color: var(--genmax-blue);
+}
+
+.genmax-pink-bg {
+  background-color: var(--genmax-pink);
+}
+
+/* ================================
+   COMMON SECTION
+================================ */
+
+.genmax-section {
+  width: 100%;
+  background: #ffffff;
+}
+
+.genmax-section-light {
+  width: 100%;
+  background: var(--light-bg);
+}
+
+/* ================================
+   CONTAINER
+================================ */
+
+.genmax-container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 1024px) {
+  .genmax-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* ================================
+   DECORATIVE CIRCLES
+   Mighty Warners style
+================================ */
+
+.genmax-circle {
+  position: absolute;
+  border: 5px solid var(--genmax-pink);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+/* ================================
+   HERO TEXT
+================================ */
+
+.genmax-heading {
+  color: var(--genmax-blue);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.genmax-heading-highlight {
+  color: var(--genmax-pink);
+  font-weight: 700;
+}
+
+.genmax-description {
+  color: var(--gray-text);
+  line-height: 1.8;
+}
+
+/* ================================
+   COMMON PINK BUTTON
+================================ */
+
+.genmax-btn-pink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--genmax-pink);
+  color: #ffffff;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.genmax-btn-pink:hover {
+  background: var(--genmax-pink-dark);
+  transform: translateY(-1px);
+}
+
+/* ================================
+   COMMON BLUE BUTTON
+================================ */
+
+.genmax-btn-blue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--genmax-blue);
+  color: #ffffff;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.genmax-btn-blue:hover {
+  background: var(--genmax-blue-dark);
+  transform: translateY(-1px);
+}
+
+/* ================================
+   OUTLINE BUTTON
+================================ */
+
+.genmax-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--genmax-pink);
+  background: #ffffff;
+  color: var(--genmax-blue);
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.genmax-btn-outline:hover {
+  background: var(--genmax-pink);
+  color: #ffffff;
+}
+
+/* ================================
+   CARDS
+================================ */
+
+.genmax-card {
+  background: #ffffff;
+  border: 1px solid #edf0f5;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.genmax-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(36, 75, 130, 0.1);
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 767px) {
+  .genmax-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .genmax-circle {
+    border-width: 4px;
+  }
 }
