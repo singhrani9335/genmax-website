@@ -32,7 +32,7 @@ export default function Hero() {
       {/* LEFT CIRCLE */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-[90px] top-[330px] z-0 h-[175px] w-[175px] rounded-full border-[5px] border-[#C75B7C]"
+        className="pointer-events-none absolute -left-[90px] top-[330px] z-0 h-[175px] w-[175px] rounded-full border-[5px] border-[#F04D02]"
       />
 
       {/* LEFT DOTS */}
@@ -43,7 +43,7 @@ export default function Hero() {
         {Array.from({ length: 25 }).map((_, index) => (
           <span
             key={index}
-            className="h-1.5 w-1.5 rounded-full bg-[#C75B7C]"
+            className="h-1.5 w-1.5 rounded-full bg-[#F04D02]"
           />
         ))}
       </div>
@@ -61,7 +61,7 @@ export default function Hero() {
               {/* TOP CIRCLE */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-[58px] -top-[36px] z-0 h-[120px] w-[120px] rounded-full border-[5px] border-[#C75B7C] sm:-right-[62px] sm:-top-[38px] sm:h-[125px] sm:w-[125px] lg:-right-[62px] lg:-top-[36px] lg:h-[125px] lg:w-[125px] xl:-right-[64px] xl:-top-[38px] xl:h-[130px] xl:w-[130px]"
+                className="pointer-events-none absolute -right-[58px] -top-[36px] z-0 h-[120px] w-[120px] rounded-full border-[5px] border-[#F04D02] sm:-right-[62px] sm:-top-[38px] sm:h-[125px] sm:w-[125px] lg:-right-[62px] lg:-top-[36px] lg:h-[125px] lg:w-[125px] xl:-right-[64px] xl:-top-[38px] xl:h-[130px] xl:w-[130px]"
               />
 
               {/* IMAGE BOX */}
@@ -81,7 +81,7 @@ export default function Hero() {
                 {/* SMALL DOT */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute right-[38px] top-[58px] z-20 h-4 w-4 rounded-full bg-[#C75B7C] sm:right-[42px] sm:top-[62px] lg:right-[42px] lg:top-[62px] xl:right-[44px] xl:top-[64px]"
+                  className="pointer-events-none absolute right-[38px] top-[58px] z-20 h-4 w-4 rounded-full bg-[#F04D02] sm:right-[42px] sm:top-[62px] lg:right-[42px] lg:top-[62px] xl:right-[44px] xl:top-[64px]"
                 />
               </div>
             </div>
@@ -94,16 +94,16 @@ export default function Hero() {
             <div className="mb-4 flex items-center justify-center gap-3 lg:justify-start">
               <span
                 aria-hidden="true"
-                className="h-[2px] w-10 bg-[#C75B7C]"
+                className="h-[2px] w-10 bg-[#F04D02]"
               />
 
-              <span className="text-[11px] font-medium uppercase tracking-[2.5px] text-[#C75B7C] sm:text-[12px]">
+              <span className="text-[11px] font-medium uppercase tracking-[2.5px] text-[#F04D02] sm:text-[12px]">
                 Creative Digital Agency
               </span>
             </div>
 
             {/* HEADING */}
-            <h1 className="mx-auto max-w-[650px] text-[36px] font-normal leading-[1.13] tracking-[-1.5px] text-[#34405A] sm:text-[43px] lg:mx-0 lg:text-[49px] xl:text-[53px]">
+            <h1 className="mx-auto max-w-[650px] text-[36px] font-normal leading-[1.13] tracking-[-1.5px] text-[#222222] sm:text-[43px] lg:mx-0 lg:text-[49px] xl:text-[53px]">
               We Empower Your
               <br />
               Brand With World Class
@@ -111,7 +111,7 @@ export default function Hero() {
 
               <span
                 key={currentText}
-                className="inline-block font-semibold tracking-[-1.8px] text-[#C75B7C]"
+                className="inline-block font-semibold tracking-[-1.8px] text-[#F04D02]"
                 style={{
                   animation: "heroFadeText 0.65s ease-in-out",
                 }}
@@ -123,7 +123,7 @@ export default function Hero() {
             {/* LINE */}
             <div
               aria-hidden="true"
-              className="mx-auto mt-7 h-[2px] w-16 bg-[#C75B7C] lg:mx-0"
+              className="mx-auto mt-7 h-[2px] w-16 bg-[#F04D02] lg:mx-0"
             />
           </div>
         </div>
@@ -134,19 +134,19 @@ export default function Hero() {
           <div className="grid grid-cols-2 lg:grid-cols-4">
 
             {/* EXPERIENCE */}
-            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#C75B7C] hover:to-[#34405A] lg:mx-3 lg:my-2 lg:rounded-[4px]">
+            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302] lg:mx-3 lg:my-2 lg:rounded-[4px]">
               <Trophy
                 size={42}
                 strokeWidth={1.2}
-                className="shrink-0 text-[#34405A] transition-colors duration-500 group-hover:text-white"
+                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white"
               />
 
               <div>
-                <p className="text-[26px] font-medium leading-none text-[#C75B7C] transition-colors duration-500 group-hover:text-white">
+                <p className="text-[26px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white">
                   12+
                 </p>
 
-                <p className="mt-2 text-[12px] leading-5 text-[#444B5B] transition-colors duration-500 group-hover:text-white">
+                <p className="mt-2 text-[12px] leading-5 text-[#444444] transition-colors duration-500 group-hover:text-white">
                   Year of
                   <br />
                   Experience
@@ -155,19 +155,19 @@ export default function Hero() {
             </div>
 
             {/* PROJECTS */}
-            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#C75B7C] hover:to-[#34405A]">
+            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302]">
               <Users
                 size={42}
                 strokeWidth={1.2}
-                className="shrink-0 text-[#34405A] transition-colors duration-500 group-hover:text-white"
+                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white"
               />
 
               <div>
-                <p className="text-[26px] font-medium leading-none text-[#C75B7C] transition-colors duration-500 group-hover:text-white">
+                <p className="text-[26px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white">
                   700+
                 </p>
 
-                <p className="mt-2 text-[12px] leading-5 text-[#444B5B] transition-colors duration-500 group-hover:text-white">
+                <p className="mt-2 text-[12px] leading-5 text-[#444444] transition-colors duration-500 group-hover:text-white">
                   Successful
                   <br />
                   Projects
@@ -176,19 +176,19 @@ export default function Hero() {
             </div>
 
             {/* COUNTRIES */}
-            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#C75B7C] hover:to-[#34405A]">
+            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302]">
               <Globe2
                 size={42}
                 strokeWidth={1.2}
-                className="shrink-0 text-[#34405A] transition-colors duration-500 group-hover:text-white"
+                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white"
               />
 
               <div>
-                <p className="text-[26px] font-medium leading-none text-[#C75B7C] transition-colors duration-500 group-hover:text-white">
+                <p className="text-[26px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white">
                   10+
                 </p>
 
-                <p className="mt-2 text-[12px] leading-5 text-[#444B5B] transition-colors duration-500 group-hover:text-white">
+                <p className="mt-2 text-[12px] leading-5 text-[#444444] transition-colors duration-500 group-hover:text-white">
                   Countries
                   <br />
                   Worldwide
@@ -197,19 +197,19 @@ export default function Hero() {
             </div>
 
             {/* CLIENTS */}
-            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#C75B7C] hover:to-[#34405A]">
+            <div className="group flex min-h-[125px] items-center justify-center gap-3 px-3 py-5 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302]">
               <Handshake
                 size={42}
                 strokeWidth={1.2}
-                className="shrink-0 text-[#34405A] transition-colors duration-500 group-hover:text-white"
+                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white"
               />
 
               <div>
-                <p className="text-[26px] font-medium leading-none text-[#C75B7C] transition-colors duration-500 group-hover:text-white">
+                <p className="text-[26px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white">
                   400+
                 </p>
 
-                <p className="mt-2 text-[12px] leading-5 text-[#444B5B] transition-colors duration-500 group-hover:text-white">
+                <p className="mt-2 text-[12px] leading-5 text-[#444444] transition-colors duration-500 group-hover:text-white">
                   Happy
                   <br />
                   Clients

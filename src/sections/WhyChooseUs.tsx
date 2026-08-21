@@ -24,17 +24,17 @@ export default function WhyChooseUs() {
           <div className="relative z-10 order-1 lg:order-2 lg:-ml-2">
 
             {/* MAIN HEADING */}
-            <h2 className="whitespace-nowrap text-[30px] font-normal leading-[1.15] tracking-[-1px] text-[#34405A] sm:text-[36px] lg:text-[40px] xl:text-[44px]">
-              Why <span className="text-[#C75B7C]">Choose Us</span>
+            <h2 className="whitespace-nowrap text-[30px] font-normal leading-[1.15] tracking-[-1px] text-[#222222] sm:text-[36px] lg:text-[40px] xl:text-[44px]">
+              Why <span className="text-[#F04D02]">Choose Us</span>
             </h2>
 
             {/* SUB HEADING */}
-            <h3 className="mt-3 whitespace-nowrap text-[17px] font-medium leading-[1.3] text-[#34405A] sm:text-[19px] lg:text-[21px]">
+            <h3 className="mt-3 whitespace-nowrap text-[17px] font-medium leading-[1.3] text-[#222222] sm:text-[19px] lg:text-[21px]">
               Cast Off Towards Success - Let Us Be Your Guiding Hand
             </h3>
 
             {/* NORMAL TEXT */}
-            <p className="mt-4 max-w-[600px] text-[14px] leading-[1.6] text-[#64748B] sm:text-[15px]">
+            <p className="mt-4 max-w-[600px] text-[14px] leading-[1.6] text-[#666666] sm:text-[15px]">
               For ten years, we&apos;ve honed our craft in digital marketing
               to bring you the best solutions. Our secret? A people-first
               approach and a commitment to deliver uncompromising quality.
@@ -42,13 +42,19 @@ export default function WhyChooseUs() {
               in a class of their own.
             </p>
 
-            <p className="mt-3 max-w-[600px] text-[14px] leading-[1.6] text-[#64748B] sm:text-[15px]">
+            <p className="mt-3 max-w-[600px] text-[14px] leading-[1.6] text-[#666666] sm:text-[15px]">
               Our team of skilled professionals combines creativity,
               innovation, and cutting-edge technology to craft customized
               solutions tailored to your unique business needs. Join forces
               with us and watch our collaboration take you to new heights
               of accomplishment.
             </p>
+
+            {/* ORANGE ACCENT */}
+            <div className="mt-6 flex items-center gap-3">
+              <span className="h-[3px] w-[55px] rounded-full bg-[#F04D02]" />
+              <span className="h-[3px] w-[15px] rounded-full bg-[#FE8302]" />
+            </div>
 
           </div>
         </div>
