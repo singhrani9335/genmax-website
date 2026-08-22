@@ -5,30 +5,34 @@ import OurClients from "@/sections/OurClients";
 import WhyChooseUs from "@/sections/WhyChooseUs";
 import PortfolioShowcase from "@/sections/Portfolio/PortfolioShowcase";
 import CaseStudiesShowcase from "@/sections/CaseStudies/CaseStudiesShowcase";
+import TestimonialsNews from "@/sections/TestimonialsNews/TestimonialsNews";
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-white">
-      {/* Hero Section */}
+    <main className="min-h-screen w-full min-w-0 overflow-x-hidden bg-white">
+      {/* ================= HERO ================= */}
       <Hero />
 
-      {/* About Section */}
+      {/* ================= ABOUT ================= */}
       <About />
 
-      {/* Our Clients Section */}
+      {/* ================= OUR CLIENTS ================= */}
       <OurClients />
 
-      {/* Why Choose Us Section */}
+      {/* ================= WHY CHOOSE US ================= */}
       <WhyChooseUs />
 
-      {/* Services Section */}
+      {/* ================= SERVICES ================= */}
       <Services />
 
-      {/* Portfolio Section */}
+      {/* ================= PORTFOLIO ================= */}
       <PortfolioShowcase />
 
-      {/* Case Studies Section */}
+      {/* ================= CASE STUDIES ================= */}
       <CaseStudiesShowcase />
+
+      {/* ================= TESTIMONIALS & NEWS ================= */}
+      <TestimonialsNews />
     </main>
   );
 }

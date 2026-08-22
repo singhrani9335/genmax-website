@@ -2,46 +2,70 @@
 
 /* ================================
    GENMAX IT SOLUTION
-   MIGHTY WARNERS STYLE THEME
+   PROFESSIONAL BLUE THEME
 ================================ */
 
 :root {
-  --genmax-blue: #244b82;
-  --genmax-blue-dark: #193765;
-  --genmax-pink: #c94d91;
-  --genmax-pink-dark: #ae3c7c;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #0f172a;
 
   --background: #ffffff;
-  --foreground: #244b82;
-  --light-bg: #f8f9fc;
-  --gray-text: #68758b;
-  --border: #e5e7eb;
+  --foreground: #0f172a;
+
+  --light-bg: #f8fafc;
+  --gray-text: #64748b;
+  --border: #e2e8f0;
 }
 
 /* ================================
    RESET
 ================================ */
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
-html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Mobile browser safety */
+  max-width: 100%;
+}
+
+/* ================================
+   ROOT SAFETY
+================================ */
+
+#__next {
+  width: 100%;
   min-height: 100%;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
+/* Next.js App Router */
+body > div {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* ================================
@@ -66,13 +90,41 @@ button {
   font-family: inherit;
 }
 
+/* Prevent mobile browser zoom on form controls */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  max-width: 100%;
+}
+
 /* ================================
    IMAGES
 ================================ */
 
-img {
+img,
+svg,
+video,
+canvas {
   max-width: 100%;
+}
+
+img {
   display: block;
+}
+
+/* ================================
+   TABLE SAFETY
+================================ */
+
+table {
+  max-width: 100%;
 }
 
 /* ================================
@@ -80,7 +132,7 @@ img {
 ================================ */
 
 ::selection {
-  background: var(--genmax-pink);
+  background: var(--primary);
   color: #ffffff;
 }
 
@@ -90,52 +142,61 @@ img {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--genmax-blue);
+  background: var(--primary);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--genmax-pink);
+  background: var(--primary-dark);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) #f1f5f9;
 }
 
 /* ================================
-   COMMON GENMAX COLORS
+   COMMON COLORS
 ================================ */
 
 .genmax-blue {
-  color: var(--genmax-blue);
-}
-
-.genmax-pink {
-  color: var(--genmax-pink);
+  color: var(--primary);
 }
 
 .genmax-blue-bg {
-  background-color: var(--genmax-blue);
+  background-color: var(--primary);
 }
 
-.genmax-pink-bg {
-  background-color: var(--genmax-pink);
+.genmax-dark {
+  color: var(--secondary);
+}
+
+.genmax-dark-bg {
+  background-color: var(--secondary);
 }
 
 /* ================================
-   COMMON SECTION
+   COMMON SECTIONS
 ================================ */
 
 .genmax-section {
   width: 100%;
+  max-width: 100%;
   background: #ffffff;
 }
 
 .genmax-section-light {
   width: 100%;
+  max-width: 100%;
   background: var(--light-bg);
 }
 
@@ -146,42 +207,35 @@ img {
 .genmax-container {
   width: 100%;
   max-width: 1320px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-@media (min-width: 1024px) {
-  .genmax-container {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-
 /* ================================
    DECORATIVE CIRCLES
-   Mighty Warners style
 ================================ */
 
 .genmax-circle {
   position: absolute;
-  border: 5px solid var(--genmax-pink);
+  border: 5px solid var(--primary);
   border-radius: 9999px;
   pointer-events: none;
 }
 
 /* ================================
-   HERO TEXT
+   HEADINGS
 ================================ */
 
 .genmax-heading {
-  color: var(--genmax-blue);
+  color: var(--secondary);
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
 .genmax-heading-highlight {
-  color: var(--genmax-pink);
+  color: var(--primary);
   font-weight: 700;
 }
 
@@ -191,48 +245,60 @@ img {
 }
 
 /* ================================
-   COMMON PINK BUTTON
+   PRIMARY BUTTON
 ================================ */
 
-.genmax-btn-pink {
+.genmax-btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--genmax-pink);
+
+  background: var(--primary);
   color: #ffffff;
+
   padding: 14px 28px;
+
   font-size: 13px;
   font-weight: 600;
+
+  border: none;
+
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
 }
 
-.genmax-btn-pink:hover {
-  background: var(--genmax-pink-dark);
+.genmax-btn-primary:hover {
+  background: var(--primary-dark);
   transform: translateY(-1px);
 }
 
 /* ================================
-   COMMON BLUE BUTTON
+   DARK BUTTON
 ================================ */
 
-.genmax-btn-blue {
+.genmax-btn-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--genmax-blue);
+
+  background: var(--secondary);
   color: #ffffff;
+
   padding: 14px 28px;
+
   font-size: 13px;
   font-weight: 600;
+
+  border: none;
+
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
 }
 
-.genmax-btn-blue:hover {
-  background: var(--genmax-blue-dark);
+.genmax-btn-dark:hover {
+  background: #1e293b;
   transform: translateY(-1px);
 }
 
@@ -244,19 +310,23 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--genmax-pink);
+
+  border: 1px solid var(--primary);
   background: #ffffff;
-  color: var(--genmax-blue);
+  color: var(--primary);
+
   padding: 14px 28px;
+
   font-size: 13px;
   font-weight: 600;
+
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
 }
 
 .genmax-btn-outline:hover {
-  background: var(--genmax-pink);
+  background: var(--primary);
   color: #ffffff;
 }
 
@@ -265,8 +335,11 @@ img {
 ================================ */
 
 .genmax-card {
+  max-width: 100%;
+
   background: #ffffff;
-  border: 1px solid #edf0f5;
+  border: 1px solid var(--border);
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
@@ -274,7 +347,7 @@ img {
 
 .genmax-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(36, 75, 130, 0.1);
+  box-shadow: 0 12px 35px rgba(37, 99, 235, 0.1);
 }
 
 /* ================================
@@ -282,12 +355,109 @@ img {
 ================================ */
 
 @media (max-width: 767px) {
+  html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   .genmax-container {
+    width: 100%;
+    max-width: 100%;
+
     padding-left: 20px;
     padding-right: 20px;
   }
 
   .genmax-circle {
     border-width: 4px;
+  }
+
+  /* Prevent long text from causing horizontal overflow */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    max-width: 100%;
+  }
+
+  /* Mobile images stay inside their parent */
+  img {
+    max-width: 100%;
+  }
+
+  /* Buttons stay inside screen */
+  .genmax-btn-primary,
+  .genmax-btn-dark,
+  .genmax-btn-outline {
+    max-width: 100%;
+  }
+}
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 480px) {
+  .genmax-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .genmax-btn-primary,
+  .genmax-btn-dark,
+  .genmax-btn-outline {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .genmax-container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+}
+
+/* ================================
+   DESKTOP
+================================ */
+
+@media (min-width: 1024px) {
+  .genmax-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* ================================
+   REDUCE MOTION
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

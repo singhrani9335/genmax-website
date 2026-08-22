@@ -33,33 +33,35 @@ export default function Navbar() {
     <>
       {/* ================= NAVBAR ================= */}
       <header className="sticky top-0 z-50 w-full bg-white shadow-[0_2px_15px_rgba(0,0,0,0.06)]">
-        <div className="mx-auto max-w-[1600px] px-8 sm:px-10 lg:px-14 xl:px-16">
-          <div className="flex h-[100px] items-center justify-between">
+        <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <div className="flex h-[76px] items-center justify-between sm:h-[86px] lg:h-[100px]">
+
             {/* ================= LOGO ================= */}
             <Link
               href="/"
               aria-label="Home"
-              className="relative ml-6 flex h-[96px] w-[330px] shrink-0 items-center lg:ml-8"
+              className="relative ml-0 flex h-[64px] w-[210px] shrink-0 items-center sm:h-[72px] sm:w-[245px] lg:ml-4 lg:h-[82px] lg:w-[285px] xl:ml-6 xl:h-[86px] xl:w-[300px]"
             >
               <Image
                 src="/images/genmax-logo.png"
                 alt="Genmax"
                 fill
                 priority
-                sizes="330px"
-                className="origin-left scale-[1.28] object-contain object-left"
+                sizes="(max-width: 640px) 210px, (max-width: 1024px) 245px, 300px"
+                className="object-contain object-left"
               />
             </Link>
 
             {/* ================= RIGHT SIDE ================= */}
             <div className="flex items-center">
+
               {/* ================= DESKTOP NAVIGATION ================= */}
-              <nav className="hidden items-center gap-7 lg:flex xl:gap-8">
+              <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
                 {navbarLinks.map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.35px] text-[#222222] transition-colors duration-300 hover:text-[#F04D02]"
+                    className="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.35px] text-[#222222] transition-colors duration-300 hover:text-[#F04D02] xl:text-[13px]"
                   >
                     {link.label}
                   </Link>
@@ -67,23 +69,26 @@ export default function Navbar() {
               </nav>
 
               {/* ================= DESKTOP BUTTONS ================= */}
-              <div className="ml-6 hidden items-center gap-2 lg:flex xl:ml-7">
+              <div className="ml-5 hidden items-center gap-2 lg:flex xl:ml-6">
+
                 {/* GET A QUOTE */}
                 <button
                   type="button"
                   onClick={openQuote}
-                  className="group relative inline-flex h-[48px] items-center justify-center overflow-hidden rounded-[2px] border border-[#222222] bg-[#222222] px-7 text-[11px] font-semibold uppercase tracking-[0.8px] text-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-all duration-300 hover:border-[#F04D02]"
+                  className="group relative inline-flex h-[46px] items-center justify-center overflow-hidden rounded-[2px] border border-[#222222] bg-[#222222] px-5 text-[10px] font-semibold uppercase tracking-[0.8px] text-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-all duration-300 hover:border-[#F04D02] xl:h-[48px] xl:px-7 xl:text-[11px]"
                 >
                   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition-transform duration-300 group-hover:translate-x-0" />
 
-                  <span className="relative z-10">Get A Quote</span>
+                  <span className="relative z-10">
+                    Get A Quote
+                  </span>
                 </button>
 
                 {/* LET'S TALK */}
                 <button
                   type="button"
                   onClick={openConsultation}
-                  className="group relative inline-flex h-[48px] items-center justify-center overflow-hidden rounded-[2px] border border-[#F04D02] bg-gradient-to-r from-[#F04D02] to-[#FE8302] px-7 text-[11px] font-semibold uppercase tracking-[0.8px] text-white shadow-[0_5px_15px_rgba(240,77,2,0.20)] transition-all duration-300"
+                  className="group relative inline-flex h-[46px] items-center justify-center overflow-hidden rounded-[2px] border border-[#F04D02] bg-gradient-to-r from-[#F04D02] to-[#FE8302] px-5 text-[10px] font-semibold uppercase tracking-[0.8px] text-white shadow-[0_5px_15px_rgba(240,77,2,0.20)] transition-all duration-300 xl:h-[48px] xl:px-7 xl:text-[11px]"
                 >
                   <span className="absolute inset-0 translate-x-full bg-gradient-to-r from-[#222222] to-[#333333] transition-transform duration-300 group-hover:translate-x-0" />
 
@@ -97,9 +102,13 @@ export default function Navbar() {
                   type="button"
                   aria-label="Open menu"
                   onClick={() => setIsOpen(true)}
-                  className="ml-1 flex h-[48px] w-[48px] items-center justify-center text-[#222222] transition-colors duration-300 hover:text-[#F04D02]"
+                  className="ml-1 flex h-[46px] w-[46px] items-center justify-center text-[#222222] transition-colors duration-300 hover:text-[#F04D02] xl:h-[48px] xl:w-[48px]"
                 >
-                  <Menu size={31} strokeWidth={1.8} />
+                  <Menu
+                    size={29}
+                    strokeWidth={1.8}
+                    className="xl:h-[31px] xl:w-[31px]"
+                  />
                 </button>
               </div>
 
@@ -108,9 +117,12 @@ export default function Navbar() {
                 type="button"
                 aria-label="Open menu"
                 onClick={() => setIsOpen(true)}
-                className="flex h-[44px] w-[44px] items-center justify-center text-[#222222] transition-colors duration-300 hover:text-[#F04D02] lg:hidden"
+                className="flex h-[42px] w-[42px] items-center justify-center text-[#222222] transition-colors duration-300 hover:text-[#F04D02] lg:hidden"
               >
-                <Menu size={28} strokeWidth={1.8} />
+                <Menu
+                  size={27}
+                  strokeWidth={1.8}
+                />
               </button>
             </div>
           </div>
@@ -136,24 +148,26 @@ export default function Navbar() {
 
           {/* MENU PANEL */}
           <div
-            className={`absolute right-0 top-0 h-full w-[310px] bg-white p-7 shadow-2xl transition-transform duration-300 sm:w-[360px] ${
+            className={`absolute right-0 top-0 h-full w-[290px] bg-white p-6 shadow-2xl transition-transform duration-300 sm:w-[360px] sm:p-7 ${
               isOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
+
             {/* HEADER */}
             <div className="flex items-center justify-between border-b border-[#EEEEEE] pb-5">
+
               <Link
                 href="/"
                 aria-label="Home"
                 onClick={() => setIsOpen(false)}
-                className="relative h-[68px] w-[225px]"
+                className="relative h-[58px] w-[195px] sm:h-[68px] sm:w-[225px]"
               >
                 <Image
                   src="/images/genmax-logo.png"
                   alt="Genmax"
                   fill
                   sizes="225px"
-                  className="origin-left scale-[1.15] object-contain object-left"
+                  className="object-contain object-left"
                 />
               </Link>
 
@@ -163,18 +177,21 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="flex h-[40px] w-[40px] items-center justify-center text-[#222222] transition-colors duration-300 hover:text-[#F04D02]"
               >
-                <X size={25} strokeWidth={1.7} />
+                <X
+                  size={25}
+                  strokeWidth={1.7}
+                />
               </button>
             </div>
 
             {/* LINKS */}
-            <nav className="mt-8 flex flex-col">
+            <nav className="mt-7 flex flex-col sm:mt-8">
               {navbarLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="border-b border-[#EEEEEE] py-4 text-[13px] font-medium uppercase tracking-[0.7px] text-[#222222] transition-colors duration-300 hover:text-[#F04D02]"
+                  className="border-b border-[#EEEEEE] py-3.5 text-[12px] font-medium uppercase tracking-[0.7px] text-[#222222] transition-colors duration-300 hover:text-[#F04D02] sm:py-4 sm:text-[13px]"
                 >
                   {link.label}
                 </Link>
@@ -182,23 +199,26 @@ export default function Navbar() {
             </nav>
 
             {/* MOBILE BUTTONS */}
-            <div className="mt-8 flex flex-col gap-3">
+            <div className="mt-7 flex flex-col gap-3 sm:mt-8">
+
               {/* GET A QUOTE */}
               <button
                 type="button"
                 onClick={openQuote}
-                className="group relative flex h-[50px] items-center justify-center overflow-hidden rounded-[2px] border border-[#222222] bg-[#222222] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-all duration-300"
+                className="group relative flex h-[48px] items-center justify-center overflow-hidden rounded-[2px] border border-[#222222] bg-[#222222] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-all duration-300"
               >
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition-transform duration-300 group-hover:translate-x-0" />
 
-                <span className="relative z-10">Get A Quote</span>
+                <span className="relative z-10">
+                  Get A Quote
+                </span>
               </button>
 
               {/* LET'S TALK */}
               <button
                 type="button"
                 onClick={openConsultation}
-                className="group relative flex h-[50px] items-center justify-center overflow-hidden rounded-[2px] border border-[#F04D02] bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-all duration-300"
+                className="group relative flex h-[48px] items-center justify-center overflow-hidden rounded-[2px] border border-[#F04D02] bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-all duration-300"
               >
                 <span className="absolute inset-0 translate-x-full bg-gradient-to-r from-[#222222] to-[#333333] transition-transform duration-300 group-hover:translate-x-0" />
 
@@ -219,6 +239,7 @@ export default function Navbar() {
             : "pointer-events-none invisible opacity-0"
         }`}
       >
+
         {/* BACKDROP */}
         <button
           type="button"
@@ -235,20 +256,25 @@ export default function Navbar() {
               : "translate-y-5 scale-[0.96]"
           }`}
         >
+
           {/* DECORATIVE CIRCLES */}
           <div className="pointer-events-none absolute -right-[35px] -top-[45px] h-[175px] w-[175px] rounded-full border border-white/10" />
 
           <div className="pointer-events-none absolute bottom-[35px] left-[25%] h-[70px] w-[70px] rounded-full border border-white/15" />
 
-          <div className="relative px-7 py-8 sm:px-10 sm:py-10 lg:px-14 lg:py-11">
+          <div className="relative px-6 py-7 sm:px-10 sm:py-10 lg:px-14 lg:py-11">
+
             {/* HEADER */}
             <div className="flex items-start justify-between">
+
               <div className="max-w-[850px]">
-                <h2 className="text-[32px] font-medium leading-[1.1] tracking-[-1px] text-white sm:text-[38px] lg:text-[42px]">
-                  {popup === "quote" ? "Get A Quote" : "Free Consultation"}
+                <h2 className="text-[30px] font-medium leading-[1.1] tracking-[-1px] text-white sm:text-[38px] lg:text-[42px]">
+                  {popup === "quote"
+                    ? "Get A Quote"
+                    : "Free Consultation"}
                 </h2>
 
-                <p className="mt-1.5 text-[14px] font-medium leading-5 text-white sm:text-[15px]">
+                <p className="mt-1.5 text-[13px] font-medium leading-5 text-white sm:text-[15px]">
                   {popup === "quote"
                     ? "We are here for you! How can we help?"
                     : "Please fill out the quick form and we will be in touch with you in lightning speed"}
@@ -260,21 +286,26 @@ export default function Navbar() {
                 type="button"
                 aria-label="Close popup"
                 onClick={closePopup}
-                className="ml-5 flex h-[38px] w-[38px] shrink-0 items-center justify-center text-white/80 transition-all duration-300 hover:rotate-90 hover:text-white"
+                className="ml-4 flex h-[38px] w-[38px] shrink-0 items-center justify-center text-white/80 transition-all duration-300 hover:rotate-90 hover:text-white"
               >
-                <X size={26} strokeWidth={1.5} />
+                <X
+                  size={26}
+                  strokeWidth={1.5}
+                />
               </button>
             </div>
 
             {/* FORM */}
             <form
-              className="mt-9 sm:mt-10"
+              className="mt-8 sm:mt-10"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
             >
+
               {/* NAME + PHONE */}
-              <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-10">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-10">
+
                 {/* NAME */}
                 <div>
                   <label
@@ -308,8 +339,13 @@ export default function Navbar() {
                       aria-label="Select country"
                       className="mr-2 flex shrink-0 items-center gap-1 text-white"
                     >
-                      <span className="text-[18px] leading-none">🇦🇪</span>
-                      <span className="text-[11px]">▾</span>
+                      <span className="text-[18px] leading-none">
+                        🇦🇪
+                      </span>
+
+                      <span className="text-[11px]">
+                        ▾
+                      </span>
                     </button>
 
                     <input
@@ -324,7 +360,7 @@ export default function Navbar() {
               </div>
 
               {/* EMAIL */}
-              <div className="mt-7">
+              <div className="mt-6 sm:mt-7">
                 <label
                   htmlFor={`${popupPrefix}-email`}
                   className="mb-2 block text-[14px] font-medium text-white"
@@ -342,7 +378,7 @@ export default function Navbar() {
               </div>
 
               {/* MESSAGE */}
-              <div className="mt-7">
+              <div className="mt-6 sm:mt-7">
                 <label
                   htmlFor={`${popupPrefix}-message`}
                   className="mb-2 block text-[14px] font-medium text-white"
@@ -360,9 +396,10 @@ export default function Navbar() {
               </div>
 
               {/* BOTTOM AREA */}
-              <div className="mt-7 flex flex-col gap-7 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-7 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+
                 {/* CHECKBOX + PRIVACY POLICY */}
-                <label className="flex cursor-pointer items-start gap-2 text-[13px] leading-5 text-white">
+                <label className="flex cursor-pointer items-start gap-2 text-[12px] leading-5 text-white sm:text-[13px]">
                   <input
                     type="checkbox"
                     required
@@ -385,12 +422,14 @@ export default function Navbar() {
                 {/* SEND BUTTON */}
                 <button
                   type="submit"
-                  className="relative flex h-[66px] w-full shrink-0 items-center justify-center overflow-hidden border border-white bg-transparent px-12 text-[13px] font-semibold uppercase tracking-[0.5px] text-white transition-all duration-300 hover:bg-white hover:text-[#D5002F] sm:w-[245px]"
+                  className="relative flex h-[58px] w-full shrink-0 items-center justify-center overflow-hidden border border-white bg-transparent px-10 text-[13px] font-semibold uppercase tracking-[0.5px] text-white transition-all duration-300 hover:bg-white hover:text-[#D5002F] sm:h-[66px] sm:w-[245px]"
                   style={{
                     borderBottomRightRadius: "28px",
                   }}
                 >
-                  <span className="relative z-10">Send</span>
+                  <span className="relative z-10">
+                    Send
+                  </span>
                 </button>
               </div>
             </form>
@@ -403,6 +442,7 @@ export default function Navbar() {
                 </span>
               </div>
             </div>
+
           </div>
         </div>
       </div>

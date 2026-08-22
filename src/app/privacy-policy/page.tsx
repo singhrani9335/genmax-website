@@ -22,53 +22,54 @@ import {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-white text-[#555555]">
+    <main className="min-h-screen w-full overflow-x-hidden bg-white text-[#555555]">
       {/* =========================================================
           HERO
       ========================================================= */}
       <section className="relative overflow-hidden bg-white">
-        {/* Background decoration */}
-        <div className="pointer-events-none absolute -right-28 top-10 h-[430px] w-[430px] rounded-full bg-[#F04D02]/[0.035]" />
-        <div className="pointer-events-none absolute -left-32 bottom-0 h-[280px] w-[280px] rounded-full bg-[#202A55]/[0.025]" />
+        <div className="pointer-events-none absolute -right-28 top-10 h-[300px] w-[300px] rounded-full bg-[#F04D02]/[0.035] sm:h-[430px] sm:w-[430px]" />
 
-        <div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-10">
-          <div className="grid min-h-[520px] grid-cols-1 items-center gap-12 py-10 md:grid-cols-[1.55fr_1fr] md:gap-14 lg:py-14">
+        <div className="pointer-events-none absolute -bottom-10 -left-32 h-[220px] w-[220px] rounded-full bg-[#202A55]/[0.025] sm:h-[280px] sm:w-[280px]" />
+
+        <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10">
+          <div className="grid min-h-0 grid-cols-1 items-center gap-8 py-10 sm:gap-12 sm:py-12 md:min-h-[520px] md:grid-cols-[1.55fr_1fr] md:gap-14 lg:py-14">
             {/* IMAGE */}
-            <div className="relative h-[330px] w-full sm:h-[390px] lg:h-[420px]">
+            <div className="relative h-[270px] w-full sm:h-[350px] md:h-[390px] lg:h-[420px]">
               {/* Orange arc */}
-              <div className="absolute -right-4 -top-8 z-0 h-[155px] w-[155px] rounded-full border-[6px] border-[#F04D02] border-b-transparent border-l-transparent sm:h-[175px] sm:w-[175px]" />
+              <div className="absolute -right-2 -top-5 z-0 h-[110px] w-[110px] rounded-full border-[5px] border-[#F04D02] border-b-transparent border-l-transparent sm:-right-4 sm:-top-8 sm:h-[175px] sm:w-[175px] sm:border-[6px]" />
 
-              {/* Navy small circle */}
-              <div className="absolute -bottom-1 -left-4 z-20 h-[76px] w-[76px] rounded-full border-[3px] border-[#202A55]/15 bg-white sm:h-[88px] sm:w-[88px]" />
+              {/* Navy circle */}
+              <div className="absolute -bottom-1 -left-2 z-20 h-[58px] w-[58px] rounded-full border-[3px] border-[#202A55]/15 bg-white sm:-left-4 sm:h-[88px] sm:w-[88px]" />
 
               {/* Image */}
-              <div className="absolute left-0 top-[45px] z-10 h-[275px] w-full overflow-hidden rounded-[4px] shadow-[0_25px_70px_rgba(0,0,0,0.12)] sm:top-[55px] sm:h-[330px] lg:h-[365px]">
+              <div className="absolute left-0 top-[35px] z-10 h-[220px] w-full overflow-hidden rounded-[4px] shadow-[0_20px_55px_rgba(0,0,0,0.12)] sm:top-[50px] sm:h-[300px] md:h-[325px] lg:top-[55px] lg:h-[365px]">
                 <Image
                   src="/images/privacy-policy-banner.jpg"
                   alt="Genmax IT Solution Privacy Policy"
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 65vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 65vw"
                   className="object-cover"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-[#F04D02]/10" />
 
                 {/* Image badge */}
-                <div className="absolute bottom-5 left-5 flex items-center gap-3 rounded-[4px] bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F04D02]/10">
+                <div className="absolute bottom-3 left-3 flex max-w-[calc(100%-24px)] items-center gap-2 rounded-[4px] bg-white/95 px-3 py-2 shadow-lg backdrop-blur-sm sm:bottom-5 sm:left-5 sm:gap-3 sm:px-4 sm:py-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10 sm:h-9 sm:w-9">
                     <ShieldCheck
-                      size={19}
+                      size={17}
                       strokeWidth={1.7}
                       className="text-[#F04D02]"
                     />
                   </div>
 
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[1.5px] text-[#202A55]">
+                  <div className="min-w-0">
+                    <p className="truncate text-[9px] font-bold uppercase tracking-[1.2px] text-[#202A55] sm:text-[10px] sm:tracking-[1.5px]">
                       Privacy First
                     </p>
-                    <p className="mt-0.5 text-[11px] text-[#777777]">
+
+                    <p className="mt-0.5 truncate text-[10px] text-[#777777] sm:text-[11px]">
                       Your information matters
                     </p>
                   </div>
@@ -78,41 +79,42 @@ export default function PrivacyPolicyPage() {
 
             {/* HERO CONTENT */}
             <div className="relative z-20 md:pl-2 lg:pl-6">
-              <div className="mb-5 flex items-center gap-3">
-                <span className="h-[2px] w-9 bg-[#F04D02]" />
-                <span className="text-[11px] font-bold uppercase tracking-[2.5px] text-[#F04D02]">
+              <div className="mb-4 flex items-center gap-3 sm:mb-5">
+                <span className="h-[2px] w-7 shrink-0 bg-[#F04D02] sm:w-9" />
+
+                <span className="text-[9px] font-bold uppercase tracking-[2px] text-[#F04D02] sm:text-[11px] sm:tracking-[2.5px]">
                   Genmax IT Solution
                 </span>
               </div>
 
-              <h1 className="text-[44px] font-normal leading-[1.04] tracking-[-2px] text-[#222222] sm:text-[52px] lg:text-[62px]">
+              <h1 className="text-[40px] font-normal leading-[1.05] tracking-[-1.5px] text-[#222222] sm:text-[52px] sm:tracking-[-2px] lg:text-[62px]">
                 Privacy
                 <br />
                 <span className="text-[#202A55]">Policy</span>
               </h1>
 
-              <div className="mt-6 h-[3px] w-[62px] bg-gradient-to-r from-[#F04D02] to-[#FE8302]" />
+              <div className="mt-5 h-[3px] w-[58px] bg-gradient-to-r from-[#F04D02] to-[#FE8302] sm:mt-6 sm:w-[62px]" />
 
-              <p className="mt-7 max-w-[470px] text-[15px] leading-[1.9] text-[#666666] sm:text-[16px]">
+              <p className="mt-5 max-w-[470px] text-[14px] leading-[1.8] text-[#666666] sm:mt-7 sm:text-[16px] sm:leading-[1.9]">
                 At Genmax IT Solution, we respect your privacy and are
                 committed to protecting the information you share with us.
                 Learn how we collect, use, protect, and manage your
                 information.
               </p>
 
-              <div className="mt-7 flex flex-wrap gap-3">
-                <div className="flex items-center gap-2 rounded-full border border-[#EEEEEE] bg-[#FAFAFA] px-4 py-2.5 text-[11px] font-medium text-[#555555]">
-                  <ShieldCheck size={16} className="text-[#F04D02]" />
+              <div className="mt-6 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3">
+                <div className="flex items-center gap-2 rounded-full border border-[#EEEEEE] bg-[#FAFAFA] px-3 py-2 text-[10px] font-medium text-[#555555] sm:px-4 sm:py-2.5 sm:text-[11px]">
+                  <ShieldCheck size={15} className="text-[#F04D02]" />
                   Transparent
                 </div>
 
-                <div className="flex items-center gap-2 rounded-full border border-[#EEEEEE] bg-[#FAFAFA] px-4 py-2.5 text-[11px] font-medium text-[#555555]">
-                  <LockKeyhole size={16} className="text-[#F04D02]" />
+                <div className="flex items-center gap-2 rounded-full border border-[#EEEEEE] bg-[#FAFAFA] px-3 py-2 text-[10px] font-medium text-[#555555] sm:px-4 sm:py-2.5 sm:text-[11px]">
+                  <LockKeyhole size={15} className="text-[#F04D02]" />
                   Secure
                 </div>
 
-                <div className="flex items-center gap-2 rounded-full border border-[#EEEEEE] bg-[#FAFAFA] px-4 py-2.5 text-[11px] font-medium text-[#555555]">
-                  <UserCheck size={16} className="text-[#F04D02]" />
+                <div className="flex items-center gap-2 rounded-full border border-[#EEEEEE] bg-[#FAFAFA] px-3 py-2 text-[10px] font-medium text-[#555555] sm:px-4 sm:py-2.5 sm:text-[11px]">
+                  <UserCheck size={15} className="text-[#F04D02]" />
                   Responsible
                 </div>
               </div>
@@ -125,8 +127,8 @@ export default function PrivacyPolicyPage() {
           BREADCRUMB
       ========================================================= */}
       <section className="border-y border-[#EEEEEE] bg-[#FAFAFA]">
-        <div className="mx-auto max-w-[1240px] px-5 py-4 sm:px-8 lg:px-10">
-          <div className="flex items-center gap-2.5 text-[12px] sm:text-[13px]">
+        <div className="mx-auto w-full max-w-[1240px] px-5 py-3.5 sm:px-8 sm:py-4 lg:px-10">
+          <div className="flex items-center gap-2 text-[11px] sm:gap-2.5 sm:text-[13px]">
             <Link
               href="/"
               className="text-[#777777] transition-colors duration-300 hover:text-[#F04D02]"
@@ -134,7 +136,7 @@ export default function PrivacyPolicyPage() {
               Home
             </Link>
 
-            <ChevronRight size={14} className="text-[#BBBBBB]" />
+            <ChevronRight size={13} className="shrink-0 text-[#BBBBBB]" />
 
             <span className="font-semibold text-[#202A55]">
               Privacy Policy
@@ -147,7 +149,7 @@ export default function PrivacyPolicyPage() {
           PRIVACY PROMISE CARDS
       ========================================================= */}
       <section className="relative z-20 -mt-1 bg-white">
-        <div className="mx-auto max-w-[1160px] px-5 sm:px-8 lg:px-10">
+        <div className="mx-auto w-full max-w-[1160px] px-5 sm:px-8 lg:px-10">
           <div className="grid overflow-hidden rounded-[5px] border border-[#EEEEEE] bg-white shadow-[0_15px_55px_rgba(0,0,0,0.07)] sm:grid-cols-3">
             <PrivacyCard
               icon={<ShieldCheck size={23} strokeWidth={1.5} />}
@@ -175,23 +177,21 @@ export default function PrivacyPolicyPage() {
           MAIN CONTENT
       ========================================================= */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[1240px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,1fr)_285px] lg:gap-20">
-            {/* =====================================================
-                LEFT CONTENT
-            ===================================================== */}
+        <div className="mx-auto w-full max-w-[1240px] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_285px] lg:gap-20">
+            {/* LEFT CONTENT */}
             <div className="min-w-0">
               {/* INTRO */}
-              <section className="mb-16">
+              <section className="mb-12 sm:mb-16">
                 <SectionEyebrow text="Privacy & Data Protection" />
 
-                <h2 className="mt-4 max-w-[850px] text-[31px] font-normal leading-[1.18] tracking-[-0.8px] text-[#202A55] sm:text-[36px] lg:text-[40px]">
+                <h2 className="mt-4 max-w-[850px] text-[27px] font-normal leading-[1.2] tracking-[-0.6px] text-[#202A55] sm:text-[36px] lg:text-[40px]">
                   Welcome To Our Privacy Policy
                 </h2>
 
-                <div className="mt-5 h-[3px] w-[58px] bg-gradient-to-r from-[#F04D02] to-[#FE8302]" />
+                <div className="mt-4 h-[3px] w-[55px] bg-gradient-to-r from-[#F04D02] to-[#FE8302] sm:mt-5 sm:w-[58px]" />
 
-                <p className="content-text mt-7">
+                <p className="content-text mt-6">
                   <strong className="font-semibold text-[#222222]">
                     Company collecting personal data:
                   </strong>{" "}
@@ -214,22 +214,22 @@ export default function PrivacyPolicyPage() {
                   Genmax IT Solution.
                 </p>
 
-                <div className="mt-8 rounded-[5px] border border-[#F04D02]/15 bg-[#F04D02]/[0.035] p-5 sm:p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10">
+                <div className="mt-7 rounded-[5px] border border-[#F04D02]/15 bg-[#F04D02]/[0.035] p-4 sm:mt-8 sm:p-6">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10 sm:h-11 sm:w-11">
                       <Eye
-                        size={20}
+                        size={19}
                         strokeWidth={1.6}
                         className="text-[#F04D02]"
                       />
                     </div>
 
-                    <div>
-                      <h3 className="text-[16px] font-semibold text-[#202A55]">
+                    <div className="min-w-0">
+                      <h3 className="text-[15px] font-semibold text-[#202A55] sm:text-[16px]">
                         Our Privacy Commitment
                       </h3>
 
-                      <p className="mt-1.5 text-[14px] leading-[1.8] text-[#666666]">
+                      <p className="mt-1.5 text-[13px] leading-[1.8] text-[#666666] sm:text-[14px]">
                         We aim to be transparent about the information we
                         collect, why we use it, and the reasonable steps we
                         take to protect the information entrusted to us.
@@ -238,18 +238,16 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                <p className="content-text mt-7">
+                <p className="content-text mt-6 sm:mt-7">
                   If you have any questions or concerns regarding this Privacy
-                  Policy, please contact Genmax IT Solution through the contact
-                  details provided on our website.
+                  Policy, please contact Genmax IT Solution through the
+                  contact details provided on our website.
                 </p>
               </section>
 
-              {/* =====================================================
-                  PRIVACY SECTIONS
-              ===================================================== */}
-              <div className="space-y-16">
-                {/* YOUR OPT OUT RIGHTS */}
+              {/* PRIVACY SECTIONS */}
+              <div className="space-y-12 sm:space-y-16">
+                {/* 01 */}
                 <PolicySection
                   number="01"
                   title="Your Opt-Out Rights — How to Opt Out"
@@ -311,7 +309,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* PURPOSE */}
+                {/* 02 */}
                 <PolicySection
                   number="02"
                   title="Purpose and Legal Basis for Processing"
@@ -345,7 +343,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* INFORMATION COLLECTION */}
+                {/* 03 */}
                 <PolicySection
                   number="03"
                   title="Information Collection"
@@ -415,7 +413,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* TRACKING */}
+                {/* 04 */}
                 <PolicySection
                   number="04"
                   title="Tracking Technologies, Advertising, and Analytics"
@@ -461,7 +459,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* INFORMATION USE */}
+                {/* 05 */}
                 <PolicySection
                   number="05"
                   title="Information Use and Sharing"
@@ -564,7 +562,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* RIGHTS */}
+                {/* 06 */}
                 <PolicySection
                   number="06"
                   title="Privacy Rights and Choices"
@@ -606,7 +604,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* THIRD PARTY LINKS */}
+                {/* 07 */}
                 <PolicySection
                   number="07"
                   title="Third-Party Links"
@@ -625,7 +623,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* SECURITY */}
+                {/* 08 */}
                 <PolicySection
                   number="08"
                   title="Security and Data Retention"
@@ -658,7 +656,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* DATA CATEGORIES */}
+                {/* 09 */}
                 <PolicySection
                   number="09"
                   title="Categories of Personal Data"
@@ -681,7 +679,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* INTERNATIONAL */}
+                {/* 10 */}
                 <PolicySection
                   number="10"
                   title="International Data Transfers"
@@ -702,7 +700,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* CORRECTING */}
+                {/* 11 */}
                 <PolicySection
                   number="11"
                   title="Correcting, Updating, or Deleting Personal Information"
@@ -721,7 +719,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* CHANGES */}
+                {/* 12 */}
                 <PolicySection
                   number="12"
                   title="Changes to This Privacy Policy"
@@ -741,7 +739,7 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </PolicySection>
 
-                {/* CONTACT */}
+                {/* 13 */}
                 <PolicySection
                   number="13"
                   title="Contact Us"
@@ -755,30 +753,30 @@ export default function PrivacyPolicyPage() {
                     website.
                   </p>
 
-                  {/* PREMIUM CONTACT BOX */}
-                  <div className="relative mt-8 overflow-hidden rounded-[5px] bg-[#202A55] p-7 sm:p-9">
-                    <div className="pointer-events-none absolute -right-14 -top-14 h-[180px] w-[180px] rounded-full border border-white/10" />
+                  {/* CONTACT BOX */}
+                  <div className="relative mt-7 overflow-hidden rounded-[5px] bg-[#202A55] p-5 sm:mt-8 sm:p-9">
+                    <div className="pointer-events-none absolute -right-14 -top-14 h-[150px] w-[150px] rounded-full border border-white/10 sm:h-[180px] sm:w-[180px]" />
 
-                    <div className="pointer-events-none absolute -bottom-16 -left-16 h-[150px] w-[150px] rounded-full bg-[#F04D02]/10" />
+                    <div className="pointer-events-none absolute -bottom-16 -left-16 h-[130px] w-[130px] rounded-full bg-[#F04D02]/10 sm:h-[150px] sm:w-[150px]" />
 
                     <div className="relative z-10">
-                      <div className="flex items-start gap-4">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F04D02] text-white">
-                          <Mail size={21} strokeWidth={1.5} />
+                      <div className="flex items-start gap-3 sm:gap-4">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F04D02] text-white sm:h-12 sm:w-12">
+                          <Mail size={19} strokeWidth={1.5} />
                         </div>
 
-                        <div>
-                          <p className="text-[10px] font-bold uppercase tracking-[2px] text-[#F04D02]">
+                        <div className="min-w-0">
+                          <p className="text-[9px] font-bold uppercase tracking-[1.5px] text-[#F04D02] sm:text-[10px] sm:tracking-[2px]">
                             Get In Touch
                           </p>
 
-                          <h3 className="mt-1 text-[22px] font-normal text-white sm:text-[26px]">
+                          <h3 className="mt-1 text-[19px] font-normal leading-[1.3] text-white sm:text-[26px]">
                             Have a privacy-related question?
                           </h3>
                         </div>
                       </div>
 
-                      <p className="mt-5 max-w-[680px] text-[14px] leading-[1.85] text-white/70 sm:text-[15px]">
+                      <p className="mt-4 max-w-[680px] text-[13px] leading-[1.8] text-white/70 sm:mt-5 sm:text-[15px] sm:leading-[1.85]">
                         Our team is available to help with questions regarding
                         your personal information, privacy choices, or this
                         Privacy Policy.
@@ -786,11 +784,12 @@ export default function PrivacyPolicyPage() {
 
                       <Link
                         href="/contact"
-                        className="group mt-6 inline-flex h-[48px] items-center gap-3 rounded-[3px] bg-[#F04D02] px-6 text-[11px] font-bold uppercase tracking-[1px] text-white transition-all duration-300 hover:bg-[#FE8302]"
+                        className="group mt-5 inline-flex h-[46px] items-center gap-3 rounded-[3px] bg-[#F04D02] px-5 text-[10px] font-bold uppercase tracking-[1px] text-white transition-all duration-300 hover:bg-[#FE8302] sm:mt-6 sm:h-[48px] sm:px-6 sm:text-[11px]"
                       >
                         Contact Us
+
                         <ArrowRight
-                          size={16}
+                          size={15}
                           className="transition-transform duration-300 group-hover:translate-x-1"
                         />
                       </Link>
@@ -800,30 +799,29 @@ export default function PrivacyPolicyPage() {
               </div>
 
               {/* LAST UPDATED */}
-              <div className="mt-16 border-t border-[#EAEAEA] pt-7">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <p className="text-[13px] leading-6 text-[#888888]">
+              <div className="mt-12 border-t border-[#EAEAEA] pt-6 sm:mt-16 sm:pt-7">
+                <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                  <p className="text-[12px] leading-6 text-[#888888] sm:text-[13px]">
                     <span className="font-semibold text-[#444444]">
                       Last Updated:
                     </span>{" "}
                     August 21, 2026
                   </p>
 
-                  <div className="flex items-center gap-2 text-[12px] text-[#999999]">
+                  <div className="flex items-center gap-2 text-[11px] text-[#999999] sm:text-[12px]">
                     <ShieldCheck
                       size={16}
                       className="text-[#F04D02]"
                       strokeWidth={1.5}
                     />
+
                     <span>Genmax IT Solution</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* =====================================================
-                SIDEBAR
-            ===================================================== */}
+            {/* SIDEBAR */}
             <aside className="hidden lg:block">
               <div className="sticky top-[110px]">
                 {/* Navigation */}
@@ -845,10 +843,7 @@ export default function PrivacyPolicyPage() {
 
                   <div className="divide-y divide-[#EEEEEE]">
                     <SidebarItem number="01" text="Opt-Out Rights" />
-                    <SidebarItem
-                      number="02"
-                      text="Purpose & Legal Basis"
-                    />
+                    <SidebarItem number="02" text="Purpose & Legal Basis" />
                     <SidebarItem number="03" text="Information Collection" />
                     <SidebarItem number="04" text="Tracking & Analytics" />
                     <SidebarItem number="05" text="Information Sharing" />
@@ -887,6 +882,7 @@ export default function PrivacyPolicyPage() {
                     className="group mt-4 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.8px] text-[#F04D02] transition-colors hover:text-[#202A55]"
                   >
                     Contact Us
+
                     <ArrowRight
                       size={14}
                       className="transition-transform group-hover:translate-x-1"
@@ -908,6 +904,7 @@ export default function PrivacyPolicyPage() {
                     <p className="text-[12px] font-semibold text-[#202A55]">
                       Privacy First
                     </p>
+
                     <p className="mt-0.5 text-[11px] text-[#888888]">
                       Responsible data practices
                     </p>
@@ -939,20 +936,22 @@ function PrivacyCard({
 }) {
   return (
     <div
-      className={`group flex items-start gap-4 px-6 py-7 transition-all duration-300 hover:bg-[#FAFAFA] sm:px-7 ${
+      className={`group flex items-start gap-4 px-5 py-6 transition-all duration-300 hover:bg-[#FAFAFA] sm:px-7 sm:py-7 ${
         !last
           ? "border-b border-[#EEEEEE] sm:border-b-0 sm:border-r"
           : ""
       }`}
     >
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10 text-[#F04D02] transition-all duration-300 group-hover:bg-[#F04D02] group-hover:text-white">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10 text-[#F04D02] transition-all duration-300 group-hover:bg-[#F04D02] group-hover:text-white sm:h-11 sm:w-11">
         {icon}
       </div>
 
-      <div>
-        <h3 className="text-[15px] font-semibold text-[#202A55]">{title}</h3>
+      <div className="min-w-0">
+        <h3 className="text-[14px] font-semibold text-[#202A55] sm:text-[15px]">
+          {title}
+        </h3>
 
-        <p className="mt-1.5 text-[12.5px] leading-[1.7] text-[#777777]">
+        <p className="mt-1.5 text-[12px] leading-[1.7] text-[#777777] sm:text-[12.5px]">
           {text}
         </p>
       </div>
@@ -967,9 +966,9 @@ function PrivacyCard({
 function SectionEyebrow({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="h-[2px] w-8 bg-[#F04D02]" />
+      <span className="h-[2px] w-7 shrink-0 bg-[#F04D02] sm:w-8" />
 
-      <span className="text-[10px] font-bold uppercase tracking-[2px] text-[#F04D02]">
+      <span className="text-[9px] font-bold uppercase tracking-[1.5px] text-[#F04D02] sm:text-[10px] sm:tracking-[2px]">
         {text}
       </span>
     </div>
@@ -993,22 +992,22 @@ function PolicySection({
 }) {
   return (
     <section className="scroll-mt-28">
-      <div className="mb-7">
-        <div className="mb-3 flex items-center gap-3">
-          <span className="flex h-7 min-w-7 items-center justify-center rounded-full bg-[#F04D02]/10 px-2 text-[10px] font-bold tracking-[1px] text-[#F04D02]">
+      <div className="mb-6 sm:mb-7">
+        <div className="mb-3 flex items-center gap-2.5 sm:gap-3">
+          <span className="flex h-7 min-w-7 items-center justify-center rounded-full bg-[#F04D02]/10 px-2 text-[9px] font-bold tracking-[1px] text-[#F04D02] sm:text-[10px]">
             {number}
           </span>
 
-          <span className="h-px w-8 bg-[#F04D02]" />
+          <span className="h-px w-6 bg-[#F04D02] sm:w-8" />
 
           <span className="text-[#F04D02]">{icon}</span>
         </div>
 
-        <h2 className="max-w-[880px] text-[27px] font-normal leading-[1.25] tracking-[-0.6px] text-[#202A55] sm:text-[30px] lg:text-[32px]">
+        <h2 className="max-w-[880px] text-[24px] font-normal leading-[1.3] tracking-[-0.4px] text-[#202A55] sm:text-[30px] sm:tracking-[-0.6px] lg:text-[32px]">
           {title}
         </h2>
 
-        <div className="mt-4 h-[2px] w-[45px] bg-[#F04D02]" />
+        <div className="mt-3 h-[2px] w-[42px] bg-[#F04D02] sm:mt-4 sm:w-[45px]" />
       </div>
 
       <div>{children}</div>
@@ -1032,16 +1031,18 @@ function SubTitle({
   letter?: string;
 }) {
   return (
-    <h3 className="mb-3 mt-8 flex items-center gap-2.5 text-[17px] font-semibold leading-[1.45] text-[#222222]">
+    <h3 className="mb-3 mt-7 flex items-start gap-2.5 text-[15px] font-semibold leading-[1.45] text-[#222222] sm:mt-8 sm:text-[17px]">
       {(number || letter) && (
-        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-[#202A55]/5 px-1.5 text-[9px] font-bold uppercase text-[#202A55]">
+        <span className="mt-0.5 flex h-6 min-w-6 shrink-0 items-center justify-center rounded-full bg-[#202A55]/5 px-1.5 text-[9px] font-bold uppercase text-[#202A55]">
           {number || letter}
         </span>
       )}
 
-      {icon && <span className="text-[#F04D02]">{icon}</span>}
+      {icon && (
+        <span className="mt-0.5 shrink-0 text-[#F04D02]">{icon}</span>
+      )}
 
-      {title}
+      <span>{title}</span>
     </h3>
   );
 }
@@ -1052,19 +1053,19 @@ function SubTitle({
 
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="my-6 space-y-3 pl-1">
+    <ul className="my-5 space-y-3 pl-0 sm:my-6">
       {items.map((item, index) => (
         <li
           key={index}
-          className="flex items-start gap-3 text-[15px] leading-[1.85] text-[#5D5D5D] sm:text-[15.5px]"
+          className="flex items-start gap-2.5 text-[14px] leading-[1.8] text-[#5D5D5D] sm:gap-3 sm:text-[15.5px] sm:leading-[1.85]"
         >
           <CheckCircle2
-            size={17}
+            size={16}
             strokeWidth={1.8}
             className="mt-[5px] shrink-0 text-[#F04D02]"
           />
 
-          <span>{item}</span>
+          <span className="min-w-0">{item}</span>
         </li>
       ))}
     </ul>
@@ -1085,18 +1086,18 @@ function InfoBox({
   text: string;
 }) {
   return (
-    <div className="mt-7 rounded-[5px] border-l-[3px] border-[#F04D02] bg-[#FAFAFA] px-5 py-5 sm:px-6">
-      <div className="flex items-start gap-4">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10 text-[#F04D02]">
+    <div className="mt-6 rounded-[5px] border-l-[3px] border-[#F04D02] bg-[#FAFAFA] px-4 py-4 sm:mt-7 sm:px-6 sm:py-5">
+      <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F04D02]/10 text-[#F04D02] sm:h-10 sm:w-10">
           {icon}
         </div>
 
-        <div>
-          <h3 className="text-[15px] font-semibold text-[#202A55]">
+        <div className="min-w-0">
+          <h3 className="text-[14px] font-semibold text-[#202A55] sm:text-[15px]">
             {title}
           </h3>
 
-          <p className="mt-1.5 text-[13.5px] leading-[1.8] text-[#6B6B6B]">
+          <p className="mt-1.5 text-[13px] leading-[1.8] text-[#6B6B6B] sm:text-[13.5px]">
             {text}
           </p>
         </div>
