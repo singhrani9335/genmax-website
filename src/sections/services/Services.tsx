@@ -9,132 +9,259 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-[#17110F] py-11 sm:py-13 lg:py-16"
+      className="relative w-full overflow-hidden bg-[#120E0C] py-16 sm:py-20 lg:py-24"
     >
-      {/* ================= BACKGROUND GLOW ================= */}
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[350px] w-[350px] rounded-full bg-[#F04D02]/20 blur-[100px] sm:h-[450px] sm:w-[450px] lg:h-[500px] lg:w-[500px] lg:blur-[120px]" />
+      {/* =====================================================
+          BACKGROUND GLOW
+      ====================================================== */}
 
-      <div className="pointer-events-none absolute -bottom-40 -left-40 h-[350px] w-[350px] rounded-full bg-[#FE8302]/15 blur-[100px] sm:h-[400px] sm:w-[400px] lg:h-[450px] lg:w-[450px] lg:blur-[120px]" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-[180px] -top-[180px] h-[420px] w-[420px] rounded-full bg-[#F04D02]/10 blur-[120px] sm:h-[520px] sm:w-[520px]"
+      />
 
-      <div className="pointer-events-none absolute left-[40%] top-[35%] hidden h-[300px] w-[300px] rounded-full bg-[#F04D02]/5 blur-[100px] sm:block" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-[220px] -left-[180px] h-[450px] w-[450px] rounded-full bg-[#FE8302]/8 blur-[120px] sm:h-[560px] sm:w-[560px]"
+      />
 
-      {/* ================= MAIN CONTAINER ================= */}
-      <div className="relative z-10 mx-auto w-full max-w-[1450px] px-5 sm:px-8 md:px-10 lg:px-16 xl:px-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[40%_60%] lg:gap-8">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[45%] top-[40%] h-[280px] w-[280px] rounded-full bg-[#F04D02]/[0.025] blur-[100px]"
+      />
 
-          {/* ================= LEFT CONTENT ================= */}
-          <div className="relative lg:pr-12">
+      {/* =====================================================
+          SUBTLE GRID
+      ====================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      {/* =====================================================
+          MAIN CONTAINER
+      ====================================================== */}
+
+      <div className="relative z-10 mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14 xl:px-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[38%_62%] lg:gap-10 xl:gap-16">
+
+          {/* =================================================
+              LEFT CONTENT
+          ================================================== */}
+
+          <div className="relative">
+
+            {/* Small Label */}
+            <div className="mb-6 flex items-center gap-3">
+              <span className="relative h-px w-10 bg-[#F04D02] sm:w-12">
+                <span className="absolute left-0 top-0 h-px w-1/2 bg-[#FF8B63]" />
+              </span>
+
+              <span className="text-[8px] font-semibold uppercase tracking-[3px] text-[#FF7040] sm:text-[9px]">
+                What We Offer
+              </span>
+            </div>
 
             {/* Heading */}
-            <h2 className="text-[34px] font-normal leading-[1.1] tracking-[-1px] text-white sm:text-[42px] md:text-[46px] lg:text-[52px]">
-              Our <span className="text-[#F04D02]">Services</span>
+            <h2 className="max-w-[520px] text-[38px] font-medium leading-[1.04] tracking-[-2px] text-white sm:text-[46px] md:text-[52px] lg:text-[56px] xl:text-[62px]">
+              Powerful
+              <br />
+              <span className="text-[#F04D02]">Digital</span>
+              <br />
+              Solutions
+              <br />
+              <span className="text-white/90">
+                For Modern Brands.
+              </span>
             </h2>
 
-            {/* Paragraph */}
-            <p className="mt-4 max-w-[560px] text-[13px] leading-[1.75] text-white/70 sm:mt-5 sm:text-[14px] md:text-[15px] lg:text-[16px]">
-              At Genmax, we are passionate about helping businesses build a
-              stronger digital presence and achieve meaningful growth. We
-              combine creativity, technology, and digital expertise to create
-              solutions that are tailored to the unique needs of every
-              business. From web development and SEO to digital marketing,
-              social media, eCommerce, and creative design, our team focuses
-              on delivering smart, reliable, and result-driven digital
-              solutions that help brands move forward.
+            {/* Accent */}
+            <div className="mt-7 flex items-center gap-2">
+              <span className="h-[2px] w-12 bg-[#F04D02]" />
+              <span className="h-[2px] w-3 bg-[#FE8302]" />
+            </div>
+
+            {/* Description */}
+            <p className="mt-6 max-w-[570px] text-[12px] leading-[1.9] text-white/50 sm:text-[13px] md:text-[14px] lg:text-[15px]">
+              At Genmax, we combine creativity, technology, and digital
+              expertise to help businesses build powerful digital experiences
+              and achieve meaningful growth.
             </p>
 
-            {/* Work With Us */}
-            <div className="mt-6 sm:mt-7">
+            <p className="mt-3 max-w-[570px] text-[12px] leading-[1.9] text-white/35 sm:text-[13px] md:text-[14px]">
+              From web development and SEO to digital marketing, social media,
+              eCommerce, and creative design, we create smart solutions around
+              your business goals.
+            </p>
+
+            {/* CTA */}
+            <div className="mt-8 sm:mt-9">
               <Link
                 href="/contact-us"
-                className="group inline-flex h-[46px] items-center justify-center border border-[#F04D02] px-6 text-[10px] font-semibold uppercase tracking-[1px] text-[#F04D02] transition-all duration-300 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302] hover:text-white sm:h-[48px] sm:px-7 sm:text-[11px]"
+                className="group relative inline-flex h-[48px] items-center justify-center overflow-hidden border border-[#F04D02] px-8 text-[10px] font-semibold uppercase tracking-[1.5px] text-[#F04D02] no-underline transition-all duration-300 hover:no-underline sm:h-[50px] sm:px-9 sm:text-[11px]"
                 style={{
-                  borderBottomRightRadius: "25px",
+                  borderBottomRightRadius: "26px",
                 }}
               >
-                Work With Us
+                <span className="absolute inset-0 origin-left scale-x-0 bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition-transform duration-500 group-hover:scale-x-100" />
+
+                <span className="relative z-10 text-[#F04D02] transition-colors duration-300 group-hover:text-white">
+                  Work With Us
+                </span>
               </Link>
+            </div>
+
+            {/* Bottom Info */}
+            <div className="mt-8 flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.025]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#F04D02] shadow-[0_0_14px_rgba(240,77,2,0.9)]" />
+              </div>
+
+              <span className="text-[7px] font-medium uppercase tracking-[2.2px] text-white/25 sm:text-[8px]">
+                Strategy • Creativity • Technology
+              </span>
             </div>
           </div>
 
-          {/* ================= SERVICES GRID ================= */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
-              <Link
-                key={service.id}
-                href={service.href}
-                className={`
-                  group relative flex min-h-[155px]
-                  flex-col items-center justify-center
-                  overflow-hidden px-4 py-6
-                  text-center
-                  transition-all duration-300
-                  hover:bg-[#F04D02]/10
+          {/* =================================================
+              SERVICES GRID
+          ================================================== */}
 
-                  /* MOBILE */
-                  border-b border-white/10
+          <div className="relative overflow-hidden rounded-[3px] border border-white/[0.08] bg-white/[0.015]">
 
-                  /* TABLET */
-                  sm:min-h-[165px]
-                  sm:px-5
+            {/* Grid Top Glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/4 top-0 h-24 w-1/2 bg-[#F04D02]/5 blur-[55px]"
+            />
 
-                  /* DESKTOP */
-                  lg:min-h-[165px]
-                  lg:border-b-0
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map((service, index) => (
+                <Link
+                  key={service.id}
+                  href={service.href}
+                  className={`
+                    group relative flex min-h-[180px]
+                    flex-col items-center justify-center
+                    overflow-hidden px-5 py-8
+                    text-center
+                    no-underline
+                    outline-none
+                    transition-all duration-500
+                    hover:bg-[#F04D02]/[0.045]
+                    hover:no-underline
+                    focus-visible:ring-1
+                    focus-visible:ring-inset
+                    focus-visible:ring-[#F04D02]
 
-                  ${
-                    index < 3
-                      ? "lg:border-b lg:border-white/10"
-                      : ""
-                  }
+                    border-b border-white/[0.08]
 
-                  ${
-                    index % 3 !== 2
-                      ? "lg:after:absolute lg:after:right-0 lg:after:top-0 lg:after:h-full lg:after:w-px lg:after:bg-white/10"
-                      : ""
-                  }
+                    sm:min-h-[195px]
 
-                  ${
-                    index % 2 === 0
-                      ? "sm:after:absolute sm:after:right-0 sm:after:top-0 sm:after:h-full sm:after:w-px sm:after:bg-white/10"
-                      : ""
-                  }
+                    lg:min-h-[200px]
+                    lg:border-b-0
 
-                  ${index === 2 ? "lg:after:hidden" : ""}
-                  ${index === 5 ? "lg:after:hidden" : ""}
-                `}
-              >
-                {/* ================= HOVER LINE ================= */}
-                <span className="absolute left-0 top-0 h-full w-[2px] origin-bottom scale-y-0 bg-gradient-to-b from-[#F04D02] to-[#FE8302] transition-transform duration-300 group-hover:scale-y-100" />
+                    ${
+                      index < 3
+                        ? "lg:border-b lg:border-white/[0.08]"
+                        : ""
+                    }
 
-                {/* ================= ICON ================= */}
-                <div className="relative flex h-[70px] w-[70px] shrink-0 items-center justify-center sm:h-[78px] sm:w-[78px] lg:h-[82px] lg:w-[82px]">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    width={72}
-                    height={72}
-                    unoptimized
-                    className="h-[62px] w-[62px] object-contain transition-transform duration-300 group-hover:scale-110 sm:h-[68px] sm:w-[68px] lg:h-[72px] lg:w-[72px]"
+                    ${
+                      index % 3 !== 2
+                        ? "lg:border-r lg:border-white/[0.08]"
+                        : ""
+                    }
+
+                    ${
+                      index % 2 === 0
+                        ? "sm:border-r sm:border-white/[0.08]"
+                        : ""
+                    }
+
+                    ${
+                      index === services.length - 1
+                        ? "border-b-0"
+                        : ""
+                    }
+                  `}
+                >
+                  {/* Hover Glow */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-[#F04D02]/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
                   />
-                </div>
 
-                {/* ================= SERVICE HEADING ================= */}
-                <div className="mt-3 flex min-h-[48px] w-full max-w-[280px] items-center justify-center sm:h-[50px]">
-                  <h3 className="w-full text-[14px] font-semibold leading-[1.35] text-white transition-colors duration-300 group-hover:text-[#FE8302] sm:text-[15px] lg:text-[16px]">
+                  {/* Left Orange Line */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-0 left-0 top-0 w-[2px] origin-bottom scale-y-0 bg-gradient-to-b from-[#F04D02] to-[#FE8302] transition-transform duration-500 group-hover:scale-y-100"
+                  />
+
+                  {/* Top Orange Line */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-1/2 top-0 h-[2px] w-0 -translate-x-1/2 bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition-all duration-500 group-hover:w-12"
+                  />
+
+                  {/* Number */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute right-4 top-4 select-none text-[9px] font-medium tracking-[1px] text-white/[0.12] transition-colors duration-300 group-hover:text-[#F04D02]/40"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Icon */}
+                  <div className="relative flex h-[74px] w-[74px] items-center justify-center sm:h-[82px] sm:w-[82px]">
+
+                    {/* Icon Glow */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-2 rounded-full bg-[#F04D02]/0 blur-xl transition-all duration-500 group-hover:bg-[#F04D02]/15"
+                    />
+
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      width={82}
+                      height={82}
+                      unoptimized
+                      className="relative z-10 h-[58px] w-[58px] object-contain opacity-90 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 sm:h-[64px] sm:w-[64px] lg:h-[68px] lg:w-[68px]"
+                    />
+                  </div>
+
+                  {/* Service Title */}
+                  <h3 className="mt-4 max-w-[220px] text-[13px] font-semibold leading-[1.4] !text-white no-underline transition-all duration-300 group-hover:!text-[#FE8302] sm:text-[14px] lg:text-[15px]">
                     {service.title}
                   </h3>
-                </div>
 
-                {/* ================= HOVER UNDERLINE ================= */}
-                <span className="mt-3 h-[2px] w-0 shrink-0 bg-[#F04D02] transition-all duration-300 group-hover:w-10" />
-              </Link>
-            ))}
+                  {/* Bottom Accent */}
+                  <span
+                    aria-hidden="true"
+                    className="mt-4 h-[2px] w-0 bg-[#F04D02] transition-all duration-500 group-hover:w-9"
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ================= BOTTOM ORANGE LINE ================= */}
-      <div className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-transparent via-[#F04D02] to-transparent opacity-60" />
+      {/* =====================================================
+          BOTTOM LINE
+      ====================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#F04D02]/70 to-transparent"
+      />
     </section>
   );
 }

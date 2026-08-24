@@ -1,60 +1,137 @@
 "use client";
 
 import { clients } from "@/data/clients";
-
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 
 export default function OurClients() {
-  // 3 rows per column
   const columns = Array.from(
     { length: Math.ceil(clients.length / 3) },
     (_, columnIndex) =>
       Array.from({ length: 3 }, (_, rowIndex) => {
         const index = columnIndex * 3 + rowIndex;
         return clients[index % clients.length];
-      })
+      }),
   );
 
   return (
     <section
       id="clients"
-      className="relative -mt-2 w-full overflow-hidden bg-white py-8 sm:py-10 lg:-mt-4 lg:py-14"
+      className="relative w-full overflow-hidden bg-white py-14 sm:py-16 lg:py-20"
     >
-      <div className="mx-auto w-full max-w-[1400px]">
-        <div className="grid w-full grid-cols-1 items-stretch lg:grid-cols-[34%_66%]">
-          {/* LEFT CONTENT */}
-          <div className="relative flex min-h-[260px] w-full overflow-hidden bg-[#34405A] sm:min-h-[300px] lg:min-h-[390px]">
-            <div className="flex h-full w-full flex-col justify-center px-6 py-8 sm:px-10 sm:py-10 lg:pl-24 lg:pr-8 xl:pl-28">
-              <h2 className="text-left text-[28px] font-normal leading-[1.12] tracking-[-1px] text-white sm:text-[34px] md:text-[36px] lg:text-[40px]">
-                Our Clients
+      {/* Top Border */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F04D02]/30 to-transparent"
+      />
+
+      <div className="mx-auto w-full max-w-[1540px] px-0 lg:px-5">
+        <div className="grid w-full overflow-hidden lg:grid-cols-[34%_66%]">
+          {/* ================= LEFT CONTENT ================= */}
+          <div className="group relative flex min-h-[350px] overflow-hidden bg-[#080B12] text-white sm:min-h-[380px] lg:min-h-[430px]">
+            {/* Main Glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-32 top-1/2 h-[360px] w-[360px] -translate-y-1/2 rounded-full bg-[#F04D02]/10 blur-[110px]"
+            />
+
+            {/* Top Glow */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-24 -top-24 h-[240px] w-[240px] rounded-full bg-[#F04D02]/5 blur-[80px]"
+            />
+
+            {/* Grid Pattern */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-[0.025]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
+                backgroundSize: "58px 58px",
+              }}
+            />
+
+            {/* Decorative Circles */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-24 -right-24 h-[240px] w-[240px] rounded-full border border-white/[0.04]"
+            />
+
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-16 -right-16 h-[155px] w-[155px] rounded-full border border-[#F04D02]/10"
+            />
+
+            {/* Content */}
+            <div className="relative z-10 flex w-full flex-col justify-center px-7 py-12 sm:px-10 lg:px-12 xl:px-16 2xl:px-20">
+              {/* Eyebrow */}
+              <div className="mb-6 flex items-center gap-3">
+                <span className="relative h-px w-9 overflow-hidden bg-[#F04D02] sm:w-11">
+                  <span className="absolute inset-y-0 left-0 w-1/2 bg-[#ff8b63]" />
+                </span>
+
+                <span className="text-[8px] font-semibold uppercase tracking-[2.8px] text-[#FF7040] sm:text-[9px]">
+                  Trusted Partnerships
+                </span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="max-w-[420px] text-[36px] font-medium leading-[1.03] tracking-[-1.8px] sm:text-[42px] md:text-[46px] lg:text-[48px] xl:text-[54px]">
+                Our
+                <br />
+                <span className="text-[#F04D02]">Clients</span>
               </h2>
 
-              <p className="mt-4 w-full max-w-[350px] text-left text-[13px] leading-[1.65] text-white sm:mt-5 sm:text-[14px] lg:text-[15px]">
-                Trusted by industry leaders, our solutions empower businesses
-                to thrive and achieve lasting success with customer
-                satisfaction at the core.
+              {/* Description */}
+              <p className="mt-5 max-w-[400px] text-[12px] leading-[1.8] text-white/50 sm:text-[13px] lg:text-[14px]">
+                We partner with ambitious businesses to create digital
+                experiences that deliver meaningful results, stronger brands,
+                and sustainable growth.
               </p>
+
+              {/* Bottom Info */}
+              <div className="mt-8 flex items-center gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.035]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#F04D02] shadow-[0_0_14px_rgba(240,77,2,0.85)]" />
+                </div>
+
+                <span className="text-[7px] font-medium uppercase tracking-[2px] text-white/30 sm:text-[8px]">
+                  Building brands • Growing businesses
+                </span>
+              </div>
             </div>
+
+            {/* Divider */}
+            <div
+              aria-hidden="true"
+              className="absolute bottom-0 right-0 top-0 hidden w-px bg-gradient-to-b from-transparent via-[#F04D02]/30 to-transparent lg:block"
+            />
           </div>
 
-          {/* RIGHT CLIENT SLIDER */}
-          <div className="min-w-0 w-full overflow-hidden bg-white">
+          {/* ================= CLIENT LOGOS ================= */}
+          <div className="relative min-w-0 overflow-hidden bg-white">
+            {/* Top Highlight */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-0 right-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent"
+            />
+
             <Swiper
               modules={[Autoplay]}
-              loop={columns.length >= 6}
+              loop={columns.length >= 4}
               speed={900}
               autoplay={{
-                delay: 5000,
+                delay: 4500,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: false,
               }}
               slidesPerView={2}
               slidesPerGroup={1}
               spaceBetween={0}
-              watchOverflow={true}
+              watchOverflow
               breakpoints={{
                 0: {
                   slidesPerView: 2,
@@ -76,6 +153,10 @@ export default function OurClients() {
                   slidesPerView: 5,
                   slidesPerGroup: 1,
                 },
+                1280: {
+                  slidesPerView: 5,
+                  slidesPerGroup: 1,
+                },
               }}
               className="!w-full"
             >
@@ -88,12 +169,29 @@ export default function OurClients() {
                     {column.map((client, rowIndex) => (
                       <div
                         key={`${client.name}-${columnIndex}-${rowIndex}`}
-                        className="flex h-[90px] w-full items-center justify-center border-b border-r border-[#E8E8E8] bg-white px-2 sm:h-[100px] md:h-[110px] lg:h-[130px]"
+                        className="group relative flex h-[112px] w-full items-center justify-center overflow-hidden border-b border-r border-[#E5E7EB] bg-white px-3 transition-all duration-500 hover:bg-[#FCFCFC] sm:h-[120px] md:h-[128px] lg:h-[143px]"
                       >
+                        {/* Hover Background */}
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#F04D02]/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        />
+
+                        {/* Soft Glow */}
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute -right-8 -top-8 h-16 w-16 rounded-full bg-[#F04D02]/5 blur-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        />
+
+                        {/* Bottom Accent */}
+                        <span className="pointer-events-none absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-[#F04D02] transition-all duration-500 group-hover:w-10" />
+
+                        {/* ORIGINAL COLOR LOGO */}
                         <img
                           src={client.image}
                           alt={client.name}
-                          className="max-h-[42px] max-w-[85px] object-contain sm:max-h-[50px] sm:max-w-[100px] md:max-h-[55px] md:max-w-[115px] lg:max-h-[65px] lg:max-w-[130px]"
+                          loading="lazy"
+                          className="relative z-10 max-h-[50px] max-w-[100px] object-contain transition-transform duration-500 group-hover:scale-105 sm:max-h-[54px] sm:max-w-[115px] md:max-h-[60px] md:max-w-[125px] lg:max-h-[68px] lg:max-w-[140px]"
                         />
                       </div>
                     ))}
@@ -104,6 +202,12 @@ export default function OurClients() {
           </div>
         </div>
       </div>
+
+      {/* Bottom Border */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/10 to-transparent"
+      />
     </section>
   );
 }

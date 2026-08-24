@@ -1,247 +1,976 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Code2,
   Globe2,
-  Handshake,
-  Trophy,
+  Layers3,
+  MousePointer2,
+  Palette,
+  Search,
+  Sparkles,
+  TrendingUp,
   Users,
 } from "lucide-react";
 
-const rotatingTexts = [
-  "Graphic Designing",
-  "Web Designing",
-  "UI/UX Designing",
-  "Digital Branding",
+const rotatingWords = [
+  "Digital Experiences",
+  "Powerful Brands",
+  "Modern Websites",
+  "Creative Solutions",
+];
+
+const stats = [
+  {
+    value: "700+",
+    label: "Projects Delivered",
+    icon: Layers3,
+  },
+  {
+    value: "400+",
+    label: "Happy Clients",
+    icon: Users,
+  },
+  {
+    value: "10+",
+    label: "Countries Reached",
+    icon: Globe2,
+  },
+  {
+    value: "5.0",
+    label: "Client Satisfaction",
+    icon: Sparkles,
+  },
+];
+
+const services = [
+  {
+    label: "Web Development",
+    icon: Code2,
+  },
+  {
+    label: "UI / UX Design",
+    icon: MousePointer2,
+  },
+  {
+    label: "Digital Marketing",
+    icon: TrendingUp,
+  },
+  {
+    label: "Brand Strategy",
+    icon: Palette,
+  },
+];
+
+const orbitItems = [
+  {
+    label: "WEB",
+    icon: Code2,
+    className: "left-[2%] top-[18%] xl:left-[5%]",
+    animation: "heroFloat1 6s ease-in-out infinite",
+  },
+  {
+    label: "UI / UX",
+    icon: MousePointer2,
+    className: "right-[1%] top-[15%] xl:right-[5%]",
+    animation: "heroFloat2 7s ease-in-out infinite",
+  },
+  {
+    label: "BRAND",
+    icon: Palette,
+    className: "right-[0%] bottom-[22%] xl:right-[4%]",
+    animation: "heroFloat3 6.5s ease-in-out infinite",
+  },
+  {
+    label: "SEO",
+    icon: Search,
+    className: "left-[3%] bottom-[18%] xl:left-[7%]",
+    animation: "heroFloat4 7s ease-in-out infinite",
+  },
 ];
 
 export default function Hero() {
-  const [currentText, setCurrentText] = useState(0);
+  const [activeWord, setActiveWord] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentText((prev) => (prev + 1) % rotatingTexts.length);
-    }, 2500);
+    const interval = window.setInterval(() => {
+      setActiveWord((prev) => (prev + 1) % rotatingWords.length);
+    }, 3200);
 
-    return () => clearInterval(interval);
+    return () => window.clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative isolate w-full overflow-hidden bg-[#070A12] text-white">
+      {/* =========================================================
+          PREMIUM BACKGROUND
+      ========================================================== */}
 
-      {/* LEFT CIRCLE */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-[85px] top-[280px] z-0 h-[150px] w-[150px] rounded-full border-[4px] border-[#F04D02] sm:-left-[90px] sm:top-[330px] sm:h-[175px] sm:w-[175px] sm:border-[5px]"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 78% 35%, rgba(99,102,241,0.13), transparent 27%), radial-gradient(circle at 12% 78%, rgba(240,77,2,0.08), transparent 28%), linear-gradient(135deg, #070A12 0%, #0A0F1C 52%, #070A12 100%)",
+        }}
       />
 
-      {/* LEFT DOTS */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-8 left-[5%] z-0 grid grid-cols-5 gap-1.5 opacity-30 sm:bottom-10 sm:left-[7%] sm:gap-2"
-      >
-        {Array.from({ length: 25 }).map((_, index) => (
-          <span
-            key={index}
-            className="h-1 w-1 rounded-full bg-[#F04D02] sm:h-1.5 sm:w-1.5"
-          />
-        ))}
-      </div>
+        className="pointer-events-none absolute -right-[260px] -top-[300px] h-[620px] w-[620px] rounded-full bg-[#6366F1]/[0.07] blur-[150px] lg:h-[760px] lg:w-[760px]"
+        style={{
+          animation: "heroGlow 12s ease-in-out infinite",
+        }}
+      />
 
-      {/* MAIN */}
-      <div className="relative mx-auto max-w-[1450px] px-5 pb-16 pt-8 sm:px-8 sm:pb-20 sm:pt-12 lg:px-10 lg:pb-24 lg:pt-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-[320px] -left-[250px] h-[600px] w-[600px] rounded-full bg-[#F04D02]/[0.055] blur-[155px] lg:h-[740px] lg:w-[740px]"
+        style={{
+          animation: "heroGlow2 14s ease-in-out infinite",
+        }}
+      />
 
-        {/* IMAGE + CONTENT */}
-        <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[59%_41%] lg:gap-0">
+      {/* =========================================================
+          SUBTLE GRID
+      ========================================================== */}
 
-          {/* IMAGE */}
-          <div className="relative z-10 flex justify-center lg:justify-start lg:pl-[74px] xl:pl-[84px]">
-            <div className="relative h-[380px] w-[92%] max-w-[430px] sm:h-[500px] sm:w-full sm:max-w-[480px] lg:h-[590px] lg:w-[510px] lg:max-w-none xl:h-[590px] xl:w-[510px]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+          maskImage:
+            "radial-gradient(circle at 62% 45%, black 5%, transparent 72%)",
+          WebkitMaskImage:
+            "radial-gradient(circle at 62% 45%, black 5%, transparent 72%)",
+        }}
+      />
 
-              {/* TOP CIRCLE */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-[35px] -top-[25px] z-0 h-[90px] w-[90px] rounded-full border-[4px] border-[#F04D02] sm:-right-[55px] sm:-top-[35px] sm:h-[115px] sm:w-[115px] sm:border-[5px] lg:-right-[62px] lg:-top-[36px] lg:h-[125px] lg:w-[125px] xl:-right-[64px] xl:-top-[38px] xl:h-[130px] xl:w-[130px]"
-              />
+      {/* Side guide lines */}
 
-              {/* IMAGE BOX */}
-              <div className="relative z-10 h-full w-full overflow-hidden bg-[#101722]">
-                <img
-                  src="/images/hero-person.png"
-                  alt="Creative professional working"
-                  className="h-full w-full object-cover object-center"
-                />
+      <div className="pointer-events-none absolute left-[5%] top-0 hidden h-full w-px bg-white/[0.035] lg:block" />
 
-                {/* IMAGE OVERLAY */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-black/[0.04]"
-                />
+      <div className="pointer-events-none absolute right-[5%] top-0 hidden h-full w-px bg-white/[0.035] lg:block" />
 
-                {/* SMALL DOT */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-[25px] top-[45px] z-20 h-3 w-3 rounded-full bg-[#F04D02] sm:right-[38px] sm:top-[58px] sm:h-4 sm:w-4 lg:right-[42px] lg:top-[62px] xl:right-[44px] xl:top-[64px]"
-                />
-              </div>
-            </div>
+      {/* =========================================================
+          MAIN CONTAINER
+      ========================================================== */}
+
+      <div className="relative mx-auto w-full max-w-[1540px] px-4 pb-8 pt-6 min-[375px]:px-5 sm:px-8 sm:pb-10 sm:pt-8 lg:px-12 lg:pb-9 lg:pt-9 xl:px-16">
+        {/* =======================================================
+            TOP BAR
+        ======================================================== */}
+
+        <div className="mb-8 flex items-center justify-between sm:mb-10 lg:mb-11">
+          <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
+              <span className="absolute inset-0 animate-ping rounded-full bg-[#F04D02]/30" />
+
+              <span className="relative h-2.5 w-2.5 rounded-full bg-[#F04D02] shadow-[0_0_18px_rgba(240,77,2,0.8)]" />
+            </span>
+
+            <span className="truncate text-[8px] font-semibold uppercase tracking-[2.5px] text-white/55 sm:text-[10px] sm:tracking-[3px]">
+              GenMax IT Solution
+            </span>
           </div>
 
-          {/* TEXT */}
-          <div className="relative z-20 mt-2 text-center sm:mt-4 lg:mt-0 lg:-ml-[93px] lg:text-left xl:-ml-[103px]">
+          <div className="hidden items-center gap-3 sm:flex">
+            <span className="h-px w-9 bg-white/10 lg:w-12" />
 
-            {/* LABEL */}
-            <div className="mb-4 flex items-center justify-center gap-3 lg:justify-start">
-              <span
-                aria-hidden="true"
-                className="h-[2px] w-8 bg-[#F04D02] sm:w-10"
-              />
+            <span className="text-[8px] font-medium uppercase tracking-[2px] text-white/25">
+              Digital • Creative • Technology
+            </span>
+          </div>
+        </div>
 
-              <span className="text-[10px] font-medium uppercase tracking-[2px] text-[#F04D02] sm:text-[12px] sm:tracking-[2.5px]">
+        {/* =========================================================
+            HERO GRID
+        ========================================================== */}
+
+        <div className="relative grid items-center lg:min-h-[595px] lg:grid-cols-[53%_47%]">
+          {/* =======================================================
+              LEFT CONTENT
+          ======================================================== */}
+
+          <div className="relative z-20 w-full min-w-0 max-w-[850px]">
+            {/* Eyebrow */}
+
+            <div className="mb-5 flex items-center gap-2.5 sm:mb-6 sm:gap-3">
+              <span className="h-px w-8 bg-[#F04D02] sm:w-11" />
+
+              <span className="text-[8px] font-semibold uppercase tracking-[2.3px] text-[#ff7548] sm:text-[9px] sm:tracking-[3px]">
                 Creative Digital Agency
               </span>
             </div>
 
-            {/* HEADING */}
-            <h1 className="mx-auto max-w-[650px] text-[31px] font-normal leading-[1.15] tracking-[-1px] text-[#222222] sm:text-[40px] sm:tracking-[-1.3px] md:text-[44px] lg:mx-0 lg:text-[49px] lg:tracking-[-1.5px] xl:text-[53px]">
+            {/* Main heading */}
 
-              We Empower Your
-              <br />
+            <h1 className="max-w-[870px] text-[38px] font-medium leading-[1.06] tracking-[-2.2px] text-white min-[375px]:text-[41px] sm:text-[54px] sm:tracking-[-2.6px] md:text-[64px] lg:text-[71px] lg:tracking-[-3px] xl:text-[80px]">
+              <span className="block">We build digital</span>
 
-              Brand With World Class
-              <br />
+              <span className="mt-1 block">
+                experiences that{" "}
+                <span className="relative inline-block">
+                  perform.
+                  <span className="absolute -bottom-1 left-0 h-[3px] w-[58%] rounded-full bg-gradient-to-r from-[#F04D02] to-[#ff9d79] shadow-[0_0_16px_rgba(240,77,2,0.3)] sm:h-[5px]" />
+                </span>
+              </span>
 
-              <span
-                key={currentText}
-                className="inline-block font-semibold tracking-[-1.3px] text-[#F04D02] sm:tracking-[-1.6px] lg:tracking-[-1.8px]"
-                style={{
-                  animation: "heroFadeText 0.65s ease-in-out",
-                }}
-              >
-                {rotatingTexts[currentText]}
+              <span className="mt-3 block h-[1.1em] overflow-hidden sm:mt-4">
+                <span
+                  key={activeWord}
+                  className="inline-block bg-gradient-to-r from-[#F04D02] via-[#ff8059] to-[#a78bfa] bg-clip-text font-semibold text-transparent"
+                  style={{
+                    animation: "heroWord 0.55s ease both",
+                  }}
+                >
+                  {rotatingWords[activeWord]}
+                </span>
               </span>
             </h1>
 
-            {/* LINE */}
+            {/* Description */}
+
+            <p className="mt-6 max-w-[610px] text-[12px] leading-[1.8] text-white/45 sm:mt-7 sm:text-[14px] sm:leading-[1.85] md:text-[15px]">
+              We help ambitious businesses turn strategy into high-performing
+              digital experiences through design, technology, branding and
+              growth.
+            </p>
+
+            {/* CTA */}
+
+            <div className="mt-8 flex w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row">
+              <Link
+                href="/contact"
+                className="group relative inline-flex h-[52px] w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-[#F04D02] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white shadow-[0_18px_50px_rgba(240,77,2,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#111827] hover:shadow-[0_22px_60px_rgba(240,77,2,0.25)] sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
+              >
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+
+                <span className="relative">Start a Project</span>
+
+                <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[#F04D02] transition-all duration-300 group-hover:bg-[#F04D02] group-hover:text-white">
+                  <ArrowRight
+                    size={14}
+                    strokeWidth={1.8}
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                  />
+                </span>
+              </Link>
+
+              <Link
+                href="/portfolio"
+                className="group inline-flex h-[52px] w-full items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.025] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white/70 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] hover:text-white sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
+              >
+                View Our Work
+
+                <ArrowUpRight
+                  size={15}
+                  strokeWidth={1.6}
+                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
+              </Link>
+            </div>
+
+            {/* =====================================================
+                TRUST
+            ====================================================== */}
+
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-9 sm:gap-7">
+              {/* Clients */}
+
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="flex -space-x-2">
+                  {["G", "M", "A", "C"].map((letter, index) => (
+                    <span
+                      key={letter}
+                      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#080c17] bg-gradient-to-br from-[#30384c] to-[#111621] text-[8px] font-semibold text-white/70"
+                      style={{
+                        zIndex: 10 - index,
+                      }}
+                    >
+                      {letter}
+                    </span>
+                  ))}
+                </div>
+
+                <div>
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.8px] text-white/65 sm:text-[9px]">
+                    400+ Clients
+                  </p>
+
+                  <p className="mt-0.5 text-[7px] text-white/25 sm:text-[8px]">
+                    Across multiple industries
+                  </p>
+                </div>
+              </div>
+
+              <span className="hidden h-7 w-px bg-white/10 sm:block" />
+
+              {/* Rating */}
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-semibold text-white">
+                    5.0
+                  </span>
+
+                  <span className="text-[9px] tracking-[1.5px] text-[#F04D02]">
+                    ★★★★★
+                  </span>
+                </div>
+
+                <p className="mt-0.5 text-[7px] text-white/25 sm:text-[8px]">
+                  Client satisfaction
+                </p>
+              </div>
+
+              <span className="hidden h-7 w-px bg-white/10 sm:block" />
+
+              {/* Results */}
+
+              <div className="flex items-center gap-2">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#6366F1]/20 bg-[#6366F1]/[0.06]">
+                  <Sparkles
+                    size={12}
+                    strokeWidth={1.5}
+                    className="text-[#a78bfa]"
+                  />
+                </span>
+
+                <div>
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.8px] text-white/65 sm:text-[9px]">
+                    Results Driven
+                  </p>
+
+                  <p className="mt-0.5 text-[7px] text-white/25 sm:text-[8px]">
+                    Strategy before execution
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Services */}
+
+            <div className="mt-8 hidden flex-wrap gap-x-6 gap-y-3 lg:flex">
+              {services.map((service) => {
+                const Icon = service.icon;
+
+                return (
+                  <div
+                    key={service.label}
+                    className="group flex items-center gap-2"
+                  >
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-[#F04D02]/15 bg-[#F04D02]/[0.05] transition-all duration-300 group-hover:border-[#F04D02]/30 group-hover:bg-[#F04D02]/[0.1]"
+                    >
+                      <Icon
+                        size={9}
+                        strokeWidth={1.8}
+                        className="text-[#F04D02]"
+                      />
+                    </span>
+
+                    <span className="text-[8px] font-medium uppercase tracking-[1.1px] text-white/25 transition-colors duration-300 group-hover:text-white/55">
+                      {service.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* =======================================================
+              DESKTOP VISUAL
+          ======================================================== */}
+
+          <div className="relative hidden h-[600px] min-w-0 lg:block">
+            {/* Main glow */}
+
             <div
-              aria-hidden="true"
-              className="mx-auto mt-6 h-[2px] w-14 bg-[#F04D02] sm:mt-7 sm:w-16 lg:mx-0"
+              className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6366F1]/[0.035] blur-[55px] xl:h-[540px] xl:w-[540px]"
+              style={{
+                animation: "heroVisualPulse 8s ease-in-out infinite",
+              }}
             />
+
+            {/* Outer orbit */}
+
+            <div
+              className="absolute left-1/2 top-1/2 h-[440px] w-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.045] xl:h-[535px] xl:w-[535px]"
+              style={{
+                animation: "heroOrbit 30s linear infinite",
+              }}
+            />
+
+            {/* Middle orbit */}
+
+            <div
+              className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#6366F1]/[0.075] xl:h-[430px] xl:w-[430px]"
+              style={{
+                animation: "heroOrbitReverse 24s linear infinite",
+              }}
+            />
+
+            {/* Inner orbit */}
+
+            <div
+              className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#F04D02]/[0.08] xl:h-[335px] xl:w-[335px]"
+              style={{
+                animation: "heroOrbit 20s linear infinite",
+              }}
+            />
+
+            {/* Connecting lines */}
+
+            <div className="absolute left-[18%] top-[39%] h-px w-[210px] rotate-[17deg] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent xl:w-[255px]" />
+
+            <div className="absolute right-[10%] top-[39%] h-px w-[210px] rotate-[-19deg] bg-gradient-to-r from-transparent via-[#6366F1]/[0.12] to-transparent xl:w-[250px]" />
+
+            <div className="absolute left-[17%] top-[61%] h-px w-[210px] rotate-[-17deg] bg-gradient-to-r from-transparent via-[#F04D02]/[0.12] to-transparent xl:w-[255px]" />
+
+            <div className="absolute right-[12%] top-[61%] h-px w-[210px] rotate-[17deg] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent xl:w-[245px]" />
+
+            {/* Center glow */}
+
+            <div
+              className="absolute left-1/2 top-1/2 h-[230px] w-[230px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(240,77,2,0.14),rgba(99,102,241,0.07),transparent_70%)] blur-[28px] xl:h-[275px] xl:w-[275px]"
+              style={{
+                animation: "heroCenterGlow 6s ease-in-out infinite",
+              }}
+            />
+
+            {/* Center */}
+
+            <div
+              className="absolute left-1/2 top-1/2 flex h-[190px] w-[190px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.015] shadow-[0_0_90px_rgba(99,102,241,0.07)] backdrop-blur-[3px] xl:h-[220px] xl:w-[220px]"
+              style={{
+                animation: "heroCenterFloat 7s ease-in-out infinite",
+              }}
+            >
+              <div className="absolute inset-[15px] rounded-full border border-white/[0.05] xl:inset-[18px]" />
+
+              <div
+                className="absolute inset-[25px] rounded-full border border-dashed border-[#F04D02]/[0.1] xl:inset-[29px]"
+                style={{
+                  animation: "heroOrbit 17s linear infinite",
+                }}
+              />
+
+              <div className="relative flex h-[118px] w-[118px] flex-col items-center justify-center overflow-hidden rounded-full border border-white/[0.1] bg-[#090e1b]/95 shadow-[0_0_60px_rgba(240,77,2,0.08)] xl:h-[138px] xl:w-[138px]">
+                <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_25%,rgba(255,125,83,0.14),transparent_55%)]" />
+
+                <Sparkles
+                  size={15}
+                  strokeWidth={1.5}
+                  className="relative mb-2 text-[#F04D02]"
+                />
+
+                <span className="relative text-[6px] uppercase tracking-[2.5px] text-white/25">
+                  Digital Studio
+                </span>
+
+                <span className="relative mt-1 text-[21px] font-semibold tracking-[-1px] text-white xl:text-[24px]">
+                  GENMAX
+                </span>
+
+                <span className="relative mt-1 text-[5px] uppercase tracking-[1.7px] text-[#a78bfa] xl:text-[6px] xl:tracking-[2px]">
+                  Create • Build • Grow
+                </span>
+              </div>
+            </div>
+
+            {/* Floating labels */}
+
+            {orbitItems.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.label}
+                  className={`absolute ${item.className} flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.025] px-2.5 py-1.5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] xl:px-3 xl:py-2`}
+                  style={{
+                    animation: item.animation,
+                  }}
+                >
+                  <Icon
+                    size={10}
+                    strokeWidth={1.5}
+                    className="text-[#F04D02]"
+                  />
+
+                  <span className="text-[6px] font-semibold uppercase tracking-[1.5px] text-white/35 xl:text-[7px]">
+                    {item.label}
+                  </span>
+                </div>
+              );
+            })}
+
+            {/* Small animated nodes */}
+
+            <span
+              className="absolute left-[17%] top-[19%] h-1.5 w-1.5 rounded-full bg-[#6366F1] shadow-[0_0_18px_#6366F1] xl:left-[20%] xl:h-2 xl:w-2"
+              style={{
+                animation: "heroDot 3.5s ease-in-out infinite",
+              }}
+            />
+
+            <span
+              className="absolute right-[9%] top-[41%] h-1.5 w-1.5 rounded-full bg-[#F04D02] shadow-[0_0_17px_#F04D02]"
+              style={{
+                animation: "heroDot 4s ease-in-out infinite 0.4s",
+              }}
+            />
+
+            <span
+              className="absolute bottom-[17%] right-[25%] h-1.5 w-1.5 rounded-full bg-[#0EA5E9] shadow-[0_0_18px_#0EA5E9] xl:h-2 xl:w-2"
+              style={{
+                animation: "heroDot 4.5s ease-in-out infinite 0.8s",
+              }}
+            />
+
+            {/* Performance badge */}
+
+            <div
+              className="absolute bottom-[8%] right-[6%] flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5 backdrop-blur-xl xl:right-[8%] xl:px-3 xl:py-2"
+              style={{
+                animation: "heroFloat2 8s ease-in-out infinite",
+              }}
+            >
+              <TrendingUp
+                size={10}
+                strokeWidth={1.5}
+                className="text-[#a78bfa]"
+              />
+
+              <span className="text-[6px] font-medium uppercase tracking-[1.3px] text-white/25 xl:text-[7px]">
+                Built to perform
+              </span>
+            </div>
+          </div>
+
+          {/* =======================================================
+              MOBILE VISUAL
+          ======================================================== */}
+
+          <div className="relative mt-11 flex h-[275px] w-full items-center justify-center sm:mt-13 sm:h-[330px] lg:hidden">
+            {/* Glow */}
+
+            <div
+              className="absolute h-[225px] w-[225px] rounded-full bg-[#6366F1]/[0.06] blur-[75px] sm:h-[290px] sm:w-[290px]"
+              style={{
+                animation: "heroMobileGlow 8s ease-in-out infinite",
+              }}
+            />
+
+            {/* Outer orbit */}
+
+            <div
+              className="absolute h-[235px] w-[235px] rounded-full border border-white/[0.045] sm:h-[290px] sm:w-[290px]"
+              style={{
+                animation: "heroOrbitMobile 28s linear infinite",
+              }}
+            />
+
+            {/* Middle orbit */}
+
+            <div
+              className="absolute h-[190px] w-[190px] rounded-full border border-[#F04D02]/[0.075] sm:h-[235px] sm:w-[235px]"
+              style={{
+                animation: "heroOrbitMobileReverse 21s linear infinite",
+              }}
+            />
+
+            {/* Inner orbit */}
+
+            <div
+              className="absolute h-[145px] w-[145px] rounded-full border border-white/[0.055] sm:h-[180px] sm:w-[180px]"
+              style={{
+                animation: "heroOrbitMobile 17s linear infinite",
+              }}
+            />
+
+            {/* Center */}
+
+            <div
+              className="relative flex h-[132px] w-[132px] flex-col items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/[0.025] shadow-[0_0_70px_rgba(99,102,241,0.1)] backdrop-blur-xl sm:h-[155px] sm:w-[155px]"
+              style={{
+                animation: "heroCenterFloatMobile 7s ease-in-out infinite",
+              }}
+            >
+              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_25%,rgba(255,125,83,0.14),transparent_55%)]" />
+
+              <Sparkles
+                size={15}
+                strokeWidth={1.5}
+                className="relative mb-2 text-[#F04D02]"
+              />
+
+              <span className="relative text-[6px] uppercase tracking-[2.3px] text-white/25 sm:text-[7px]">
+                Digital Studio
+              </span>
+
+              <span className="relative mt-1 text-[21px] font-semibold tracking-[-0.5px] sm:text-[23px]">
+                GENMAX
+              </span>
+
+              <span className="relative mt-1 text-[5px] uppercase tracking-[1.7px] text-[#a78bfa] sm:text-[6px]">
+                Create • Build • Grow
+              </span>
+            </div>
+
+            {/* Mobile labels */}
+
+            <div
+              className="absolute left-0 top-[17%] rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1.5 backdrop-blur-xl sm:left-[4%] sm:px-3 sm:py-2"
+              style={{
+                animation: "heroFloat1 6s ease-in-out infinite",
+              }}
+            >
+              <span className="text-[6px] font-semibold tracking-[1.4px] text-white/35 sm:text-[7px]">
+                WEB
+              </span>
+            </div>
+
+            <div
+              className="absolute right-0 top-[15%] rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1.5 backdrop-blur-xl sm:right-[4%] sm:px-3 sm:py-2"
+              style={{
+                animation: "heroFloat2 7s ease-in-out infinite",
+              }}
+            >
+              <span className="text-[6px] font-semibold tracking-[1.4px] text-white/35 sm:text-[7px]">
+                UI / UX
+              </span>
+            </div>
+
+            <div
+              className="absolute bottom-[13%] left-[3%] rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1.5 backdrop-blur-xl sm:left-[7%] sm:px-3 sm:py-2"
+              style={{
+                animation: "heroFloat3 6.5s ease-in-out infinite",
+              }}
+            >
+              <span className="text-[6px] font-semibold tracking-[1.4px] text-white/35 sm:text-[7px]">
+                BRAND
+              </span>
+            </div>
+
+            <div
+              className="absolute bottom-[11%] right-[3%] rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1.5 backdrop-blur-xl sm:right-[7%] sm:px-3 sm:py-2"
+              style={{
+                animation: "heroFloat4 7s ease-in-out infinite",
+              }}
+            >
+              <span className="text-[6px] font-semibold tracking-[1.4px] text-white/35 sm:text-[7px]">
+                SEO
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* STATS CARD */}
-        <div className="relative z-30 mx-auto mt-8 w-full max-w-[1120px] rounded-[5px] bg-white shadow-[0_12px_45px_rgba(0,0,0,0.12)] sm:mt-10 sm:w-[92%] md:w-[88%] lg:-mt-[160px] lg:w-[82%] xl:-mt-[160px] xl:w-[82%]">
+        {/* =========================================================
+            STATS / PROOF BAR
+        ========================================================== */}
 
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+        <div className="relative z-30 mt-4 sm:mt-5 lg:mt-1">
+          <div className="overflow-hidden rounded-[16px] border border-white/[0.08] bg-white/[0.025] shadow-[0_25px_80px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:rounded-[18px]">
+            <div className="grid grid-cols-2 lg:grid-cols-4">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
 
-            {/* EXPERIENCE */}
-            <div className="group flex min-h-[110px] items-center justify-center gap-2 border-b border-r border-[#eeeeee] px-2 py-4 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302] sm:min-h-[120px] sm:gap-3 sm:px-3 lg:mx-3 lg:my-2 lg:min-h-[125px] lg:rounded-[4px] lg:border-0 lg:py-5">
+                return (
+                  <div
+                    key={stat.label}
+                    className={`group relative flex min-h-[92px] items-center justify-center gap-2.5 overflow-hidden px-3 py-4 transition-all duration-500 hover:bg-white/[0.045] sm:min-h-[100px] sm:gap-3 sm:px-4 ${
+                      index < 2
+                        ? "border-b border-white/[0.06] lg:border-b-0"
+                        : ""
+                    } ${
+                      index % 2 === 0 ? "border-r border-white/[0.06]" : ""
+                    } ${
+                      index === 1 || index === 2
+                        ? "lg:border-r lg:border-white/[0.06]"
+                        : ""
+                    }`}
+                  >
+                    <span className="pointer-events-none absolute -bottom-8 left-1/2 h-20 w-20 -translate-x-1/2 rounded-full bg-[#F04D02]/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
 
-              <Trophy
-                size={34}
-                strokeWidth={1.2}
-                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white sm:h-[40px] sm:w-[40px] lg:h-[42px] lg:w-[42px]"
-              />
+                    <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-[9px] border border-white/[0.07] bg-white/[0.025] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[#F04D02]/20 sm:h-9 sm:w-9 sm:rounded-[10px]">
+                      <Icon
+                        size={14}
+                        strokeWidth={1.4}
+                        className="text-[#F04D02] sm:h-4 sm:w-4"
+                      />
+                    </div>
 
-              <div>
-                <p className="text-[22px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white sm:text-[25px] lg:text-[26px]">
-                  12+
-                </p>
+                    <div className="relative min-w-0">
+                      <p className="text-[18px] font-semibold leading-none text-white sm:text-[21px]">
+                        {stat.value}
+                      </p>
 
-                <p className="mt-1.5 text-[10px] leading-4 text-[#444444] transition-colors duration-500 group-hover:text-white sm:mt-2 sm:text-[11px] sm:leading-5 lg:text-[12px]">
-                  Year of
-                  <br />
-                  Experience
-                </p>
-              </div>
+                      <p className="mt-1.5 truncate text-[7px] font-medium uppercase tracking-[0.8px] text-white/25 sm:text-[8px] sm:tracking-[1px]">
+                        {stat.label}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
+          </div>
+        </div>
 
-            {/* PROJECTS */}
-            <div className="group flex min-h-[110px] items-center justify-center gap-2 border-b border-[#eeeeee] px-2 py-4 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302] sm:min-h-[120px] sm:gap-3 sm:px-3 lg:min-h-[125px] lg:border-0 lg:py-5">
+        {/* =========================================================
+            BOTTOM NAVIGATION
+        ========================================================== */}
 
-              <Users
-                size={34}
-                strokeWidth={1.2}
-                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white sm:h-[40px] sm:w-[40px] lg:h-[42px] lg:w-[42px]"
+        <div className="mt-6 hidden items-center justify-between lg:flex">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-12 bg-white/10" />
+
+            <span className="text-[8px] font-semibold uppercase tracking-[2.5px] text-white/20">
+              Strategy • Design • Technology • Growth
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="text-[8px] font-semibold uppercase tracking-[2px] text-white/20">
+              Scroll to explore
+            </span>
+
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 transition-all duration-300 hover:border-[#F04D02]/30 hover:bg-[#F04D02]/10">
+              <ArrowDown
+                size={13}
+                strokeWidth={1.5}
+                className="text-[#F04D02]"
               />
-
-              <div>
-                <p className="text-[22px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white sm:text-[25px] lg:text-[26px]">
-                  700+
-                </p>
-
-                <p className="mt-1.5 text-[10px] leading-4 text-[#444444] transition-colors duration-500 group-hover:text-white sm:mt-2 sm:text-[11px] sm:leading-5 lg:text-[12px]">
-                  Successful
-                  <br />
-                  Projects
-                </p>
-              </div>
-            </div>
-
-            {/* COUNTRIES */}
-            <div className="group flex min-h-[110px] items-center justify-center gap-2 border-r border-[#eeeeee] px-2 py-4 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302] sm:min-h-[120px] sm:gap-3 sm:px-3 lg:min-h-[125px] lg:border-0 lg:py-5">
-
-              <Globe2
-                size={34}
-                strokeWidth={1.2}
-                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white sm:h-[40px] sm:w-[40px] lg:h-[42px] lg:w-[42px]"
-              />
-
-              <div>
-                <p className="text-[22px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white sm:text-[25px] lg:text-[26px]">
-                  10+
-                </p>
-
-                <p className="mt-1.5 text-[10px] leading-4 text-[#444444] transition-colors duration-500 group-hover:text-white sm:mt-2 sm:text-[11px] sm:leading-5 lg:text-[12px]">
-                  Countries
-                  <br />
-                  Worldwide
-                </p>
-              </div>
-            </div>
-
-            {/* CLIENTS */}
-            <div className="group flex min-h-[110px] items-center justify-center gap-2 px-2 py-4 transition-all duration-500 hover:bg-gradient-to-r hover:from-[#F04D02] hover:to-[#FE8302] sm:min-h-[120px] sm:gap-3 sm:px-3 lg:min-h-[125px] lg:py-5">
-
-              <Handshake
-                size={34}
-                strokeWidth={1.2}
-                className="shrink-0 text-[#222222] transition-colors duration-500 group-hover:text-white sm:h-[40px] sm:w-[40px] lg:h-[42px] lg:w-[42px]"
-              />
-
-              <div>
-                <p className="text-[22px] font-medium leading-none text-[#F04D02] transition-colors duration-500 group-hover:text-white sm:text-[25px] lg:text-[26px]">
-                  400+
-                </p>
-
-                <p className="mt-1.5 text-[10px] leading-4 text-[#444444] transition-colors duration-500 group-hover:text-white sm:mt-2 sm:text-[11px] sm:leading-5 lg:text-[12px]">
-                  Happy
-                  <br />
-                  Clients
-                </p>
-              </div>
-            </div>
-
+            </span>
           </div>
         </div>
       </div>
 
-      {/* SAFE ANIMATION */}
+      {/* =========================================================
+          ANIMATIONS
+      ========================================================== */}
+
       <style>{`
-        @keyframes heroFadeText {
+        @keyframes heroWord {
           0% {
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateY(14px);
+            filter: blur(5px);
           }
 
           100% {
             opacity: 1;
             transform: translateY(0);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes heroFloat1 {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(0, -8px, 0);
+          }
+        }
+
+        @keyframes heroFloat2 {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(5px, -7px, 0);
+          }
+        }
+
+        @keyframes heroFloat3 {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(-5px, 7px, 0);
+          }
+        }
+
+        @keyframes heroFloat4 {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+
+          50% {
+            transform: translate3d(5px, 6px, 0);
+          }
+        }
+
+        @keyframes heroOrbit {
+          from {
+            transform: translate(-50%, -50%) rotate(0deg);
+          }
+
+          to {
+            transform: translate(-50%, -50%) rotate(360deg);
+          }
+        }
+
+        @keyframes heroOrbitReverse {
+          from {
+            transform: translate(-50%, -50%) rotate(360deg);
+          }
+
+          to {
+            transform: translate(-50%, -50%) rotate(0deg);
+          }
+        }
+
+        @keyframes heroOrbitMobile {
+          from {
+            transform: rotate(0deg);
+          }
+
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes heroOrbitMobileReverse {
+          from {
+            transform: rotate(360deg);
+          }
+
+          to {
+            transform: rotate(0deg);
+          }
+        }
+
+        @keyframes heroVisualPulse {
+          0%,
+          100% {
+            opacity: 0.65;
+            transform: translate(-50%, -50%) scale(0.97);
+          }
+
+          50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.04);
+          }
+        }
+
+        @keyframes heroCenterGlow {
+          0%,
+          100% {
+            opacity: 0.6;
+            transform: translate(-50%, -50%) scale(0.95);
+          }
+
+          50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05);
+          }
+        }
+
+        @keyframes heroCenterFloat {
+          0%,
+          100% {
+            transform: translate(-50%, -50%) translateY(0);
+          }
+
+          50% {
+            transform: translate(-50%, -50%) translateY(-6px);
+          }
+        }
+
+        @keyframes heroCenterFloatMobile {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-6px);
+          }
+        }
+
+        @keyframes heroMobileGlow {
+          0%,
+          100% {
+            opacity: 0.65;
+            transform: scale(0.96);
+          }
+
+          50% {
+            opacity: 1;
+            transform: scale(1.04);
+          }
+        }
+
+        @keyframes heroGlow {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) scale(1);
+            opacity: 0.75;
+          }
+
+          50% {
+            transform: translate3d(-22px, 18px, 0) scale(1.05);
+            opacity: 1;
+          }
+        }
+
+        @keyframes heroGlow2 {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0) scale(1);
+            opacity: 0.7;
+          }
+
+          50% {
+            transform: translate3d(22px, -18px, 0) scale(1.06);
+            opacity: 1;
+          }
+        }
+
+        @keyframes heroDot {
+          0%,
+          100% {
+            opacity: 0.5;
+            transform: scale(0.85);
+          }
+
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        }
+
+        @media (max-width: 374px) {
+          .hero-small-screen {
+            font-size: 34px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          *,
+          *::before,
+          *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            scroll-behavior: auto !important;
           }
         }
       `}</style>
-
     </section>
   );
 }
