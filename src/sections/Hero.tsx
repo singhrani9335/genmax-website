@@ -106,9 +106,7 @@ export default function Hero() {
 
   return (
     <section className="relative isolate w-full overflow-hidden bg-[#070A12] text-white">
-      {/* =========================================================
-          PREMIUM BACKGROUND
-      ========================================================== */}
+      {/* PREMIUM BACKGROUND */}
 
       <div
         aria-hidden="true"
@@ -135,9 +133,7 @@ export default function Hero() {
         }}
       />
 
-      {/* =========================================================
-          SUBTLE GRID
-      ========================================================== */}
+      {/* SUBTLE GRID */}
 
       <div
         aria-hidden="true"
@@ -159,20 +155,15 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute right-[5%] top-0 hidden h-full w-px bg-white/[0.035] lg:block" />
 
-      {/* =========================================================
-          MAIN CONTAINER
-      ========================================================== */}
+      {/* MAIN CONTAINER */}
 
       <div className="relative mx-auto w-full max-w-[1540px] px-4 pb-8 pt-6 min-[375px]:px-5 sm:px-8 sm:pb-10 sm:pt-8 lg:px-12 lg:pb-9 lg:pt-9 xl:px-16">
-        {/* =======================================================
-            TOP BAR
-        ======================================================== */}
+        {/* TOP BAR */}
 
         <div className="mb-8 flex items-center justify-between sm:mb-10 lg:mb-11">
           <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
             <span className="relative flex h-2.5 w-2.5 shrink-0">
               <span className="absolute inset-0 animate-ping rounded-full bg-[#F04D02]/30" />
-
               <span className="relative h-2.5 w-2.5 rounded-full bg-[#F04D02] shadow-[0_0_18px_rgba(240,77,2,0.8)]" />
             </span>
 
@@ -190,14 +181,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* =========================================================
-            HERO GRID
-        ========================================================== */}
+        {/* HERO GRID */}
 
         <div className="relative grid items-center lg:min-h-[595px] lg:grid-cols-[53%_47%]">
-          {/* =======================================================
-              LEFT CONTENT
-          ======================================================== */}
+          {/* LEFT CONTENT */}
 
           <div className="relative z-20 w-full min-w-0 max-w-[850px]">
             {/* Eyebrow */}
@@ -247,13 +234,17 @@ export default function Hero() {
             {/* CTA */}
 
             <div className="mt-8 flex w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row">
+              {/* START A PROJECT */}
+
               <Link
                 href="/contact"
-                className="group relative inline-flex h-[52px] w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-[#F04D02] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white shadow-[0_18px_50px_rgba(240,77,2,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#111827] hover:shadow-[0_22px_60px_rgba(240,77,2,0.25)] sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
+                className="group relative inline-flex h-[52px] w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-[#F04D02] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white shadow-[0_18px_50px_rgba(240,77,2,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_22px_60px_rgba(240,77,2,0.25)] sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
               >
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-                <span className="relative">Start a Project</span>
+                <span className="relative transition-colors duration-300 group-hover:text-black">
+                  Start a Project
+                </span>
 
                 <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[#F04D02] transition-all duration-300 group-hover:bg-[#F04D02] group-hover:text-white">
                   <ArrowRight
@@ -263,6 +254,8 @@ export default function Hero() {
                   />
                 </span>
               </Link>
+
+              {/* VIEW OUR WORK */}
 
               <Link
                 href="/portfolio"
@@ -278,9 +271,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* =====================================================
-                TRUST
-            ====================================================== */}
+            {/* TRUST */}
 
             <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-9 sm:gap-7">
               {/* Clients */}
@@ -367,8 +358,7 @@ export default function Hero() {
                     key={service.label}
                     className="group flex items-center gap-2"
                   >
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-[#F04D02]/15 bg-[#F04D02]/[0.05] transition-all duration-300 group-hover:border-[#F04D02]/30 group-hover:bg-[#F04D02]/[0.1]"
-                    >
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-[#F04D02]/15 bg-[#F04D02]/[0.05] transition-all duration-300 group-hover:border-[#F04D02]/30 group-hover:bg-[#F04D02]/[0.1]">
                       <Icon
                         size={9}
                         strokeWidth={1.8}
@@ -385,21 +375,15 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* =======================================================
-              DESKTOP VISUAL
-          ======================================================== */}
+          {/* DESKTOP VISUAL */}
 
           <div className="relative hidden h-[600px] min-w-0 lg:block">
-            {/* Main glow */}
-
             <div
               className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6366F1]/[0.035] blur-[55px] xl:h-[540px] xl:w-[540px]"
               style={{
                 animation: "heroVisualPulse 8s ease-in-out infinite",
               }}
             />
-
-            {/* Outer orbit */}
 
             <div
               className="absolute left-1/2 top-1/2 h-[440px] w-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.045] xl:h-[535px] xl:w-[535px]"
@@ -408,8 +392,6 @@ export default function Hero() {
               }}
             />
 
-            {/* Middle orbit */}
-
             <div
               className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#6366F1]/[0.075] xl:h-[430px] xl:w-[430px]"
               style={{
@@ -417,16 +399,12 @@ export default function Hero() {
               }}
             />
 
-            {/* Inner orbit */}
-
             <div
               className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#F04D02]/[0.08] xl:h-[335px] xl:w-[335px]"
               style={{
                 animation: "heroOrbit 20s linear infinite",
               }}
             />
-
-            {/* Connecting lines */}
 
             <div className="absolute left-[18%] top-[39%] h-px w-[210px] rotate-[17deg] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent xl:w-[255px]" />
 
@@ -436,16 +414,12 @@ export default function Hero() {
 
             <div className="absolute right-[12%] top-[61%] h-px w-[210px] rotate-[17deg] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent xl:w-[245px]" />
 
-            {/* Center glow */}
-
             <div
               className="absolute left-1/2 top-1/2 h-[230px] w-[230px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(240,77,2,0.14),rgba(99,102,241,0.07),transparent_70%)] blur-[28px] xl:h-[275px] xl:w-[275px]"
               style={{
                 animation: "heroCenterGlow 6s ease-in-out infinite",
               }}
             />
-
-            {/* Center */}
 
             <div
               className="absolute left-1/2 top-1/2 flex h-[190px] w-[190px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.015] shadow-[0_0_90px_rgba(99,102,241,0.07)] backdrop-blur-[3px] xl:h-[220px] xl:w-[220px]"
@@ -485,8 +459,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating labels */}
-
             {orbitItems.map((item) => {
               const Icon = item.icon;
 
@@ -511,8 +483,6 @@ export default function Hero() {
               );
             })}
 
-            {/* Small animated nodes */}
-
             <span
               className="absolute left-[17%] top-[19%] h-1.5 w-1.5 rounded-full bg-[#6366F1] shadow-[0_0_18px_#6366F1] xl:left-[20%] xl:h-2 xl:w-2"
               style={{
@@ -534,8 +504,6 @@ export default function Hero() {
               }}
             />
 
-            {/* Performance badge */}
-
             <div
               className="absolute bottom-[8%] right-[6%] flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5 backdrop-blur-xl xl:right-[8%] xl:px-3 xl:py-2"
               style={{
@@ -554,21 +522,15 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* =======================================================
-              MOBILE VISUAL
-          ======================================================== */}
+          {/* MOBILE VISUAL */}
 
           <div className="relative mt-11 flex h-[275px] w-full items-center justify-center sm:mt-13 sm:h-[330px] lg:hidden">
-            {/* Glow */}
-
             <div
               className="absolute h-[225px] w-[225px] rounded-full bg-[#6366F1]/[0.06] blur-[75px] sm:h-[290px] sm:w-[290px]"
               style={{
                 animation: "heroMobileGlow 8s ease-in-out infinite",
               }}
             />
-
-            {/* Outer orbit */}
 
             <div
               className="absolute h-[235px] w-[235px] rounded-full border border-white/[0.045] sm:h-[290px] sm:w-[290px]"
@@ -577,8 +539,6 @@ export default function Hero() {
               }}
             />
 
-            {/* Middle orbit */}
-
             <div
               className="absolute h-[190px] w-[190px] rounded-full border border-[#F04D02]/[0.075] sm:h-[235px] sm:w-[235px]"
               style={{
@@ -586,16 +546,12 @@ export default function Hero() {
               }}
             />
 
-            {/* Inner orbit */}
-
             <div
               className="absolute h-[145px] w-[145px] rounded-full border border-white/[0.055] sm:h-[180px] sm:w-[180px]"
               style={{
                 animation: "heroOrbitMobile 17s linear infinite",
               }}
             />
-
-            {/* Center */}
 
             <div
               className="relative flex h-[132px] w-[132px] flex-col items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/[0.025] shadow-[0_0_70px_rgba(99,102,241,0.1)] backdrop-blur-xl sm:h-[155px] sm:w-[155px]"
@@ -623,8 +579,6 @@ export default function Hero() {
                 Create • Build • Grow
               </span>
             </div>
-
-            {/* Mobile labels */}
 
             <div
               className="absolute left-0 top-[17%] rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1.5 backdrop-blur-xl sm:left-[4%] sm:px-3 sm:py-2"
@@ -672,9 +626,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* =========================================================
-            STATS / PROOF BAR
-        ========================================================== */}
+        {/* STATS / PROOF BAR */}
 
         <div className="relative z-30 mt-4 sm:mt-5 lg:mt-1">
           <div className="overflow-hidden rounded-[16px] border border-white/[0.08] bg-white/[0.025] shadow-[0_25px_80px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:rounded-[18px]">
@@ -690,7 +642,9 @@ export default function Hero() {
                         ? "border-b border-white/[0.06] lg:border-b-0"
                         : ""
                     } ${
-                      index % 2 === 0 ? "border-r border-white/[0.06]" : ""
+                      index % 2 === 0
+                        ? "border-r border-white/[0.06]"
+                        : ""
                     } ${
                       index === 1 || index === 2
                         ? "lg:border-r lg:border-white/[0.06]"
@@ -723,9 +677,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* =========================================================
-            BOTTOM NAVIGATION
-        ========================================================== */}
+        {/* BOTTOM NAVIGATION */}
 
         <div className="mt-6 hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-3">
@@ -752,9 +704,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* =========================================================
-          ANIMATIONS
-      ========================================================== */}
+      {/* ANIMATIONS */}
 
       <style>{`
         @keyframes heroWord {
