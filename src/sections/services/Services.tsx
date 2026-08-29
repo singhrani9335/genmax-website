@@ -55,18 +55,6 @@ export default function Services() {
           ================================================== */}
 
           <div className="relative flex flex-col justify-center">
-            {/* Small Label */}
-
-            <div className="mb-6 flex items-center gap-3">
-              <span className="relative h-px w-10 bg-[#F04D02] sm:w-12">
-                <span className="absolute left-0 top-0 h-px w-1/2 bg-[#FF8B63]" />
-              </span>
-
-              <span className="text-[8px] font-semibold uppercase tracking-[3px] text-[#FF7040] sm:text-[9px]">
-                What We Offer
-              </span>
-            </div>
-
             {/* Heading */}
 
             <h2 className="max-w-[520px] text-[38px] font-medium leading-[1.04] tracking-[-2px] text-white sm:text-[46px] md:text-[52px] lg:text-[54px] xl:text-[60px]">
@@ -105,14 +93,14 @@ export default function Services() {
             <div className="mt-8 sm:mt-9">
               <Link
                 href="/contact-us"
-                className="group relative inline-flex h-[48px] items-center justify-center overflow-hidden border border-[#F04D02] px-8 text-[10px] font-semibold uppercase tracking-[1.5px] text-[#F04D02] no-underline transition-all duration-300 hover:no-underline sm:h-[50px] sm:px-9 sm:text-[11px]"
+                className="group relative inline-flex h-[48px] items-center justify-center overflow-hidden border border-[#F04D02] px-8 text-[10px] font-semibold uppercase tracking-[1.5px] text-white no-underline transition-all duration-300 hover:text-white hover:no-underline sm:h-[50px] sm:px-9 sm:text-[11px]"
                 style={{
                   borderBottomRightRadius: "26px",
                 }}
               >
                 <span className="absolute inset-0 origin-left scale-x-0 bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition-transform duration-500 group-hover:scale-x-100" />
 
-                <span className="relative z-10 text-[#F04D02] transition-colors duration-300 group-hover:text-white">
+                <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-white">
                   Work With Us
                 </span>
               </Link>
@@ -187,9 +175,7 @@ export default function Services() {
                       }
                     `}
                   >
-                    {/* =================================================
-                        ICON
-                    ================================================== */}
+                    {/* ICON */}
 
                     <div className="relative flex h-[90px] w-[90px] items-center justify-center sm:h-[98px] sm:w-[98px] lg:h-[105px] lg:w-[105px]">
                       <Image
@@ -202,9 +188,7 @@ export default function Services() {
                       />
                     </div>
 
-                    {/* =================================================
-                        SERVICE TITLE
-                    ================================================== */}
+                    {/* SERVICE TITLE */}
 
                     <h3 className="mt-5 max-w-[230px] text-[13px] font-semibold leading-[1.45] !text-white no-underline sm:text-[14px] lg:text-[15px]">
                       {service.title}

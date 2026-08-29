@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Code2,
@@ -26,22 +25,26 @@ const rotatingWords = [
 
 const stats = [
   {
-    value: "700+",
+    value: 700,
+    suffix: "+",
     label: "Projects Delivered",
     icon: Layers3,
   },
   {
-    value: "400+",
+    value: 400,
+    suffix: "+",
     label: "Happy Clients",
     icon: Users,
   },
   {
-    value: "10+",
+    value: 10,
+    suffix: "+",
     label: "Countries Reached",
     icon: Globe2,
   },
   {
-    value: "5.0",
+    value: 5,
+    suffix: ".0",
     label: "Client Satisfaction",
     icon: Sparkles,
   },
@@ -95,6 +98,7 @@ const orbitItems = [
 
 export default function Hero() {
   const [activeWord, setActiveWord] = useState(0);
+  const [animatedStats, setAnimatedStats] = useState([0, 0, 0, 0]);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -104,9 +108,42 @@ export default function Hero() {
     return () => window.clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const duration = 1800;
+    const startTime = performance.now();
+    let animationFrame = 0;
+
+    const animateStats = (currentTime: number) => {
+      const progress = Math.min(
+        (currentTime - startTime) / duration,
+        1,
+      );
+
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setAnimatedStats(
+        stats.map((stat) =>
+          Math.floor(stat.value * easedProgress),
+        ),
+      );
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animateStats);
+      } else {
+        setAnimatedStats(stats.map((stat) => stat.value));
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animateStats);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
   return (
-    <section className="relative isolate w-full overflow-hidden bg-[#070A12] text-white">
-      {/* PREMIUM BACKGROUND */}
+    <section className="relative isolate w-full overflow-hidden border-none bg-[#070A12] text-white outline-none">
+      {/* =====================================================
+          PREMIUM BACKGROUND
+      ====================================================== */}
 
       <div
         aria-hidden="true"
@@ -133,7 +170,9 @@ export default function Hero() {
         }}
       />
 
-      {/* SUBTLE GRID */}
+      {/* =====================================================
+          SUBTLE GRID
+      ====================================================== */}
 
       <div
         aria-hidden="true"
@@ -149,45 +188,18 @@ export default function Hero() {
         }}
       />
 
-      {/* Side guide lines */}
-
-      <div className="pointer-events-none absolute left-[5%] top-0 hidden h-full w-px bg-white/[0.035] lg:block" />
-
-      <div className="pointer-events-none absolute right-[5%] top-0 hidden h-full w-px bg-white/[0.035] lg:block" />
-
-      {/* MAIN CONTAINER */}
+      {/* =====================================================
+          MAIN CONTAINER
+      ====================================================== */}
 
       <div className="relative mx-auto w-full max-w-[1540px] px-4 pb-8 pt-6 min-[375px]:px-5 sm:px-8 sm:pb-10 sm:pt-8 lg:px-12 lg:pb-9 lg:pt-9 xl:px-16">
-        {/* TOP BAR */}
-
-        <div className="mb-8 flex items-center justify-between sm:mb-10 lg:mb-11">
-          <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-            <span className="relative flex h-2.5 w-2.5 shrink-0">
-              <span className="absolute inset-0 animate-ping rounded-full bg-[#F04D02]/30" />
-              <span className="relative h-2.5 w-2.5 rounded-full bg-[#F04D02] shadow-[0_0_18px_rgba(240,77,2,0.8)]" />
-            </span>
-
-            <span className="truncate text-[8px] font-semibold uppercase tracking-[2.5px] text-white/55 sm:text-[10px] sm:tracking-[3px]">
-              GenMax IT Solution
-            </span>
-          </div>
-
-          <div className="hidden items-center gap-3 sm:flex">
-            <span className="h-px w-9 bg-white/10 lg:w-12" />
-
-            <span className="text-[8px] font-medium uppercase tracking-[2px] text-white/25">
-              Digital • Creative • Technology
-            </span>
-          </div>
-        </div>
-
-        {/* HERO GRID */}
-
         <div className="relative grid items-center lg:min-h-[595px] lg:grid-cols-[53%_47%]">
-          {/* LEFT CONTENT */}
+          {/* =================================================
+              LEFT CONTENT
+          ================================================== */}
 
           <div className="relative z-20 w-full min-w-0 max-w-[850px]">
-            {/* Eyebrow */}
+            {/* EYEBROW */}
 
             <div className="mb-5 flex items-center gap-2.5 sm:mb-6 sm:gap-3">
               <span className="h-px w-8 bg-[#F04D02] sm:w-11" />
@@ -197,15 +209,18 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Main heading */}
+            {/* MAIN HEADING */}
 
             <h1 className="max-w-[870px] text-[38px] font-medium leading-[1.06] tracking-[-2.2px] text-white min-[375px]:text-[41px] sm:text-[54px] sm:tracking-[-2.6px] md:text-[64px] lg:text-[71px] lg:tracking-[-3px] xl:text-[80px]">
-              <span className="block">We build digital</span>
+              <span className="block">
+                We build digital
+              </span>
 
               <span className="mt-1 block">
                 experiences that{" "}
                 <span className="relative inline-block">
                   perform.
+
                   <span className="absolute -bottom-1 left-0 h-[3px] w-[58%] rounded-full bg-gradient-to-r from-[#F04D02] to-[#ff9d79] shadow-[0_0_16px_rgba(240,77,2,0.3)] sm:h-[5px]" />
                 </span>
               </span>
@@ -223,30 +238,34 @@ export default function Hero() {
               </span>
             </h1>
 
-            {/* Description */}
+            {/* DESCRIPTION */}
 
             <p className="mt-6 max-w-[610px] text-[12px] leading-[1.8] text-white/45 sm:mt-7 sm:text-[14px] sm:leading-[1.85] md:text-[15px]">
-              We help ambitious businesses turn strategy into high-performing
-              digital experiences through design, technology, branding and
-              growth.
+              We help ambitious businesses turn strategy into
+              high-performing digital experiences through design,
+              technology, branding and growth.
             </p>
 
-            {/* CTA */}
+            {/* =================================================
+                CTA BUTTONS
+            ================================================== */}
 
             <div className="mt-8 flex w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row">
               {/* START A PROJECT */}
 
               <Link
-                href="/contact"
-                className="group relative inline-flex h-[52px] w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-[#F04D02] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white shadow-[0_18px_50px_rgba(240,77,2,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_22px_60px_rgba(240,77,2,0.25)] sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
+                href="/contact-us"
+                prefetch={true}
+                aria-label="Start a Project - Contact Us"
+                className="group relative z-30 inline-flex h-[52px] w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full bg-[#F04D02] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white no-underline shadow-[0_18px_50px_rgba(240,77,2,0.2)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_22px_60px_rgba(240,77,2,0.25)] sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
               >
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
 
-                <span className="relative transition-colors duration-300 group-hover:text-black">
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
                   Start a Project
                 </span>
 
-                <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[#F04D02] transition-all duration-300 group-hover:bg-[#F04D02] group-hover:text-white">
+                <span className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[#F04D02] transition-all duration-300 group-hover:bg-[#F04D02] group-hover:text-white">
                   <ArrowRight
                     size={14}
                     strokeWidth={1.8}
@@ -259,23 +278,27 @@ export default function Hero() {
 
               <Link
                 href="/portfolio"
-                className="group inline-flex h-[52px] w-full items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.025] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white/70 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] hover:text-white sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
+                prefetch={true}
+                aria-label="View Our Work - Portfolio"
+                className="group relative z-30 inline-flex h-[52px] w-full cursor-pointer items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.025] px-6 text-[9px] font-semibold uppercase tracking-[1.5px] text-white/70 no-underline backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] hover:text-white sm:h-[54px] sm:w-auto sm:px-7 sm:text-[10px]"
               >
-                View Our Work
+                <span className="relative z-10">
+                  View Our Work
+                </span>
 
                 <ArrowUpRight
                   size={15}
                   strokeWidth={1.6}
-                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
               </Link>
             </div>
 
-            {/* TRUST */}
+            {/* =================================================
+                TRUST
+            ================================================== */}
 
             <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4 sm:mt-9 sm:gap-7">
-              {/* Clients */}
-
               <div className="flex items-center gap-2.5 sm:gap-3">
                 <div className="flex -space-x-2">
                   {["G", "M", "A", "C"].map((letter, index) => (
@@ -304,8 +327,6 @@ export default function Hero() {
 
               <span className="hidden h-7 w-px bg-white/10 sm:block" />
 
-              {/* Rating */}
-
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold text-white">
@@ -323,8 +344,6 @@ export default function Hero() {
               </div>
 
               <span className="hidden h-7 w-px bg-white/10 sm:block" />
-
-              {/* Results */}
 
               <div className="flex items-center gap-2">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#6366F1]/20 bg-[#6366F1]/[0.06]">
@@ -347,7 +366,9 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Services */}
+            {/* =================================================
+                SERVICES
+            ================================================== */}
 
             <div className="mt-8 hidden flex-wrap gap-x-6 gap-y-3 lg:flex">
               {services.map((service) => {
@@ -375,7 +396,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* DESKTOP VISUAL */}
+          {/* =================================================
+              DESKTOP VISUAL
+          ================================================== */}
 
           <div className="relative hidden h-[600px] min-w-0 lg:block">
             <div
@@ -522,7 +545,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* MOBILE VISUAL */}
+          {/* =================================================
+              MOBILE VISUAL
+          ================================================== */}
 
           <div className="relative mt-11 flex h-[275px] w-full items-center justify-center sm:mt-13 sm:h-[330px] lg:hidden">
             <div
@@ -542,7 +567,8 @@ export default function Hero() {
             <div
               className="absolute h-[190px] w-[190px] rounded-full border border-[#F04D02]/[0.075] sm:h-[235px] sm:w-[235px]"
               style={{
-                animation: "heroOrbitMobileReverse 21s linear infinite",
+                animation:
+                  "heroOrbitMobileReverse 21s linear infinite",
               }}
             />
 
@@ -556,7 +582,8 @@ export default function Hero() {
             <div
               className="relative flex h-[132px] w-[132px] flex-col items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/[0.025] shadow-[0_0_70px_rgba(99,102,241,0.1)] backdrop-blur-xl sm:h-[155px] sm:w-[155px]"
               style={{
-                animation: "heroCenterFloatMobile 7s ease-in-out infinite",
+                animation:
+                  "heroCenterFloatMobile 7s ease-in-out infinite",
               }}
             >
               <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_25%,rgba(255,125,83,0.14),transparent_55%)]" />
@@ -626,18 +653,20 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* STATS / PROOF BAR */}
+        {/* =====================================================
+            STATS / PROOF BAR
+        ====================================================== */}
 
         <div className="relative z-30 mt-4 sm:mt-5 lg:mt-1">
-          <div className="overflow-hidden rounded-[16px] border border-white/[0.08] bg-white/[0.025] shadow-[0_25px_80px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:rounded-[18px]">
-            <div className="grid grid-cols-2 lg:grid-cols-4">
+          <div className="overflow-hidden rounded-[16px] bg-transparent sm:rounded-[18px]">
+            <div className="grid grid-cols-2 gap-0 lg:grid-cols-4">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
 
                 return (
                   <div
                     key={stat.label}
-                    className={`group relative flex min-h-[92px] items-center justify-center gap-2.5 overflow-hidden px-3 py-4 transition-all duration-500 hover:bg-white/[0.045] sm:min-h-[100px] sm:gap-3 sm:px-4 ${
+                    className={`group relative flex min-h-[92px] origin-center items-center justify-center gap-2.5 overflow-hidden bg-white/[0.025] px-3 py-4 transition-all duration-500 hover:scale-y-[1.08] hover:bg-white/[0.04] sm:min-h-[100px] sm:gap-3 sm:px-4 ${
                       index < 2
                         ? "border-b border-white/[0.06] lg:border-b-0"
                         : ""
@@ -663,7 +692,8 @@ export default function Hero() {
 
                     <div className="relative min-w-0">
                       <p className="text-[18px] font-semibold leading-none text-white sm:text-[21px]">
-                        {stat.value}
+                        {animatedStats[index]}
+                        {stat.suffix}
                       </p>
 
                       <p className="mt-1.5 truncate text-[7px] font-medium uppercase tracking-[0.8px] text-white/25 sm:text-[8px] sm:tracking-[1px]">
@@ -676,35 +706,11 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        {/* BOTTOM NAVIGATION */}
-
-        <div className="mt-6 hidden items-center justify-between lg:flex">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-12 bg-white/10" />
-
-            <span className="text-[8px] font-semibold uppercase tracking-[2.5px] text-white/20">
-              Strategy • Design • Technology • Growth
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-[8px] font-semibold uppercase tracking-[2px] text-white/20">
-              Scroll to explore
-            </span>
-
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 transition-all duration-300 hover:border-[#F04D02]/30 hover:bg-[#F04D02]/10">
-              <ArrowDown
-                size={13}
-                strokeWidth={1.5}
-                className="text-[#F04D02]"
-              />
-            </span>
-          </div>
-        </div>
       </div>
 
-      {/* ANIMATIONS */}
+      {/* =====================================================
+          ANIMATIONS
+      ====================================================== */}
 
       <style>{`
         @keyframes heroWord {

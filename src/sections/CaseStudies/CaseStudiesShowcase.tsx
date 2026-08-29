@@ -2,11 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  ArrowDown,
-  ArrowUp,
-  ArrowUpRight,
-} from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpRight } from "lucide-react";
 
 import { caseStudies } from "@/data/caseStudies";
 import CaseStudyCard from "./CaseStudyCard";
@@ -35,9 +31,7 @@ export default function CaseStudiesShowcase() {
 
     const interval = setInterval(() => {
       setActiveIndex((currentIndex) => {
-        return (
-          (currentIndex + 1) % caseStudies.length
-        );
+        return (currentIndex + 1) % caseStudies.length;
       });
     }, 5000);
 
@@ -73,9 +67,7 @@ export default function CaseStudiesShowcase() {
 
   const handleNext = () => {
     setActiveIndex((currentIndex) => {
-      return (
-        (currentIndex + 1) % caseStudies.length
-      );
+      return (currentIndex + 1) % caseStudies.length;
     });
   };
 
@@ -97,7 +89,7 @@ export default function CaseStudiesShowcase() {
         }}
       />
 
-      {/* Subtle grid */}
+      {/* Subtle Grid */}
 
       <div
         aria-hidden="true"
@@ -109,7 +101,7 @@ export default function CaseStudiesShowcase() {
         }}
       />
 
-      {/* Orange glow */}
+      {/* Orange Glow */}
 
       <div
         aria-hidden="true"
@@ -119,21 +111,9 @@ export default function CaseStudiesShowcase() {
       {/* ================= MAIN CONTAINER ================= */}
 
       <div className="relative z-10 mx-auto w-full max-w-[1500px] px-5 py-14 sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24 xl:px-20">
-
         {/* ================= TOP HEADER ================= */}
 
         <div className="flex flex-col gap-8">
-
-          {/* Eyebrow */}
-
-          <div className="flex items-center gap-3">
-            <span className="h-px w-9 bg-[#F04D02] sm:w-11" />
-
-            <span className="text-[9px] font-semibold uppercase tracking-[2.7px] text-[#FF7040] sm:text-[10px]">
-              Selected Work
-            </span>
-          </div>
-
           {/* Category Navigation */}
 
           <div className="flex w-full flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
@@ -209,7 +189,6 @@ export default function CaseStudiesShowcase() {
         {/* ================= CASE STUDY SHOWCASE ================= */}
 
         <div className="relative mt-10 sm:mt-12 md:mt-16">
-
           {/* Vertical Company Label */}
 
           <div className="absolute left-0 top-1/2 hidden -translate-y-1/2 xl:block">
@@ -226,14 +205,11 @@ export default function CaseStudiesShowcase() {
 
           <div className="mx-auto w-full max-w-[820px] px-0 md:px-8 lg:px-14 xl:px-20">
             <div className="relative">
-
               <div className="absolute -inset-3 -z-10 border border-white/[0.06] sm:-inset-5" />
 
               <CaseStudyCard
                 caseStudy={activeProject}
               />
-
-              <div className="absolute -bottom-2 left-1/2 h-[2px] w-20 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#F04D02] to-transparent sm:w-28" />
             </div>
           </div>
 
@@ -247,14 +223,6 @@ export default function CaseStudiesShowcase() {
             <h3 className="text-[18px] font-medium text-white sm:text-[21px]">
               {activeProject.name}
             </h3>
-
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#F04D02]" />
-
-              <span className="text-[8px] uppercase tracking-[2px] text-white/30">
-                Featured Project
-              </span>
-            </div>
           </div>
 
           {/* ================= DESKTOP NAVIGATION ================= */}
@@ -315,37 +283,6 @@ export default function CaseStudiesShowcase() {
                 className="text-white"
               />
             </button>
-          </div>
-
-          {/* ================= PROGRESS INDICATOR ================= */}
-
-          <div className="mx-auto mt-8 flex max-w-[820px] items-center gap-2 md:mt-10">
-            {caseStudies.map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                aria-label={`Go to case study ${index + 1}`}
-                onClick={() => {
-                  setActiveIndex(index);
-
-                  const category =
-                    caseStudies[index]?.category;
-
-                  if (category) {
-                    setActiveCategory(category);
-                  }
-                }}
-                className="group h-5 flex-1"
-              >
-                <span
-                  className={`block h-[2px] w-full transition-all duration-500 ${
-                    index === activeIndex
-                      ? "bg-[#F04D02]"
-                      : "bg-white/10 group-hover:bg-white/30"
-                  }`}
-                />
-              </button>
-            ))}
           </div>
         </div>
       </div>

@@ -24,22 +24,30 @@ export default function ContactUs() {
         {/* Banner Content */}
         <div className="relative z-10 flex h-full items-center px-5 min-[375px]:px-6 sm:px-8 md:px-10 lg:px-14 xl:px-20">
           <div className="text-left">
-            <h1 className="text-[36px] font-medium leading-tight tracking-[-1.5px] text-black min-[375px]:text-[40px] sm:text-[50px] md:text-[56px] lg:text-[60px]">
-              Contact Us
+            {/* TITLE */}
+            <h1 className="text-[36px] font-medium leading-tight tracking-[-1.5px] text-[#3f4650] min-[375px]:text-[40px] sm:text-[50px] md:text-[56px] lg:text-[60px]">
+              Contact{" "}
+              <span className="text-[#F04D02]">
+                Us
+              </span>
             </h1>
 
-            {/* Breadcrumb */}
+            {/* BREADCRUMB */}
             <div className="mt-3 flex flex-wrap items-center gap-2 text-[9px] uppercase tracking-[1.8px] min-[375px]:text-[10px] sm:mt-4 sm:text-[11px] sm:tracking-[2px]">
               <Link
                 href="/"
-                className="font-semibold text-black no-underline transition-colors duration-300 hover:text-[#F04D02]"
+                className="font-semibold text-[#5f6670] no-underline transition-colors duration-300 hover:text-[#F04D02]"
               >
                 Home
               </Link>
 
-              <span className="text-[#F04D02]">/</span>
+              <span className="text-[#F04D02]">
+                /
+              </span>
 
-              <span className="font-semibold text-black">Contact Us</span>
+              <span className="font-semibold text-[#5f6670]">
+                Contact Us
+              </span>
             </div>
           </div>
         </div>
@@ -67,7 +75,7 @@ export default function ContactUs() {
 
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 min-[375px]:px-5 sm:px-8 md:px-10 lg:px-14 xl:px-20">
           {/* Main Office Panel */}
-          <div className="relative overflow-hidden border border-black/[0.07] bg-white/25 shadow-[0_18px_60px_rgba(23,18,15,0.06)]">
+          <div className="relative overflow-hidden border border-[#17120F]/[0.07] bg-white/25 shadow-[0_18px_60px_rgba(23,18,15,0.06)]">
             <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
               {/* =================================================
                   LEFT — OFFICE DETAILS
@@ -95,7 +103,7 @@ export default function ContactUs() {
 
                     {/* Company Name */}
                     <div className="min-w-0">
-                      <p className="text-[8px] font-semibold uppercase tracking-[2px] text-black/40 sm:text-[10px] sm:tracking-[2.5px]">
+                      <p className="text-[8px] font-semibold uppercase tracking-[2px] text-[#17120F]/40 sm:text-[10px] sm:tracking-[2.5px]">
                         Office Location
                       </p>
 
@@ -123,7 +131,7 @@ export default function ContactUs() {
                         India
                       </h4>
 
-                      <p className="mt-3 max-w-[390px] text-[12px] leading-[1.75] text-black/60 sm:text-[14px] md:text-[15px]">
+                      <p className="mt-3 max-w-[390px] text-[12px] leading-[1.75] text-[#17120F]/60 sm:text-[14px] md:text-[15px]">
                         C3M Aneja Market,
                         <br />
                         Sadarpur, Sec-45,
@@ -134,14 +142,14 @@ export default function ContactUs() {
                   </div>
 
                   {/* Phone Details */}
-                  <div className="mt-7 border-t border-black/[0.07] pt-5 sm:mt-9 sm:pt-7">
+                  <div className="mt-7 border-t border-[#17120F]/[0.07] pt-5 sm:mt-9 sm:pt-7">
                     <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-4">
                       {/* Mobile */}
                       <a
                         href="tel:+919938307637"
                         className="group flex min-w-0 items-center gap-3 no-underline"
                       >
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/[0.08] transition-all duration-300 group-hover:border-[#F04D02]/40 group-hover:bg-[#F04D02]/[0.05]">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#17120F]/[0.08] transition-all duration-300 group-hover:border-[#F04D02]/40 group-hover:bg-[#F04D02]/[0.05]">
                           <Phone
                             size={16}
                             strokeWidth={1.5}
@@ -150,11 +158,11 @@ export default function ContactUs() {
                         </span>
 
                         <div className="min-w-0">
-                          <span className="block text-[8px] font-semibold uppercase tracking-[2px] text-black/40">
+                          <span className="block text-[8px] font-semibold uppercase tracking-[2px] text-[#17120F]/40">
                             Mobile
                           </span>
 
-                          <span className="mt-1 block text-[13px] text-black/65 transition-colors duration-300 group-hover:text-[#F04D02]">
+                          <span className="mt-1 block text-[13px] text-[#17120F]/65 transition-colors duration-300 group-hover:text-[#F04D02]">
                             +91 99383 07637
                           </span>
                         </div>
@@ -165,7 +173,7 @@ export default function ContactUs() {
                         href="tel:+919938307637"
                         className="group flex min-w-0 items-center gap-3 no-underline"
                       >
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/[0.08] transition-all duration-300 group-hover:border-[#F04D02]/40 group-hover:bg-[#F04D02]/[0.05]">
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#17120F]/[0.08] transition-all duration-300 group-hover:border-[#F04D02]/40 group-hover:bg-[#F04D02]/[0.05]">
                           <Phone
                             size={16}
                             strokeWidth={1.5}
@@ -174,11 +182,11 @@ export default function ContactUs() {
                         </span>
 
                         <div className="min-w-0">
-                          <span className="block text-[8px] font-semibold uppercase tracking-[2px] text-black/40">
+                          <span className="block text-[8px] font-semibold uppercase tracking-[2px] text-[#17120F]/40">
                             Toll Free
                           </span>
 
-                          <span className="mt-1 block text-[13px] text-black/65 transition-colors duration-300 group-hover:text-[#F04D02]">
+                          <span className="mt-1 block text-[13px] text-[#17120F]/65 transition-colors duration-300 group-hover:text-[#F04D02]">
                             +91 99383 07637
                           </span>
                         </div>
@@ -191,7 +199,7 @@ export default function ContactUs() {
               {/* =================================================
                   RIGHT — CONTACT INFORMATION
               ================================================== */}
-              <div className="border-t border-black/[0.07] px-5 py-8 min-[375px]:px-6 sm:px-9 sm:py-10 md:px-12 md:py-12 lg:border-l lg:border-t-0 lg:px-14 lg:py-14 xl:px-16 xl:py-16">
+              <div className="border-t border-[#17120F]/[0.07] px-5 py-8 min-[375px]:px-6 sm:px-9 sm:py-10 md:px-12 md:py-12 lg:border-l lg:border-t-0 lg:px-14 lg:py-14 xl:px-16 xl:py-16">
                 <span className="text-[9px] font-semibold uppercase tracking-[2.5px] text-[#F04D02] sm:text-[10px] sm:tracking-[3px]">
                   Get In Touch
                 </span>
@@ -200,7 +208,7 @@ export default function ContactUs() {
                   Contact Information
                 </h3>
 
-                <p className="mt-3 max-w-[470px] text-[12px] leading-6 text-black/50 sm:text-[14px] sm:leading-7">
+                <p className="mt-3 max-w-[470px] text-[12px] leading-6 text-[#17120F]/50 sm:text-[14px] sm:leading-7">
                   Have a question or want to discuss your next project? Reach
                   out to our team and we will be happy to assist you.
                 </p>
@@ -210,9 +218,9 @@ export default function ContactUs() {
                   {/* Email */}
                   <a
                     href="mailto:genmaxitsolution@gmail.com"
-                    className="group flex min-w-0 items-center gap-3 border-b border-black/[0.07] py-4 no-underline sm:gap-4 sm:py-5"
+                    className="group flex min-w-0 items-center gap-3 border-b border-[#17120F]/[0.07] py-4 no-underline sm:gap-4 sm:py-5"
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/[0.08]">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#17120F]/[0.08] transition-all duration-300 group-hover:border-[#F04D02]/40 group-hover:bg-[#F04D02]/[0.05]">
                       <Mail
                         size={18}
                         strokeWidth={1.5}
@@ -221,11 +229,11 @@ export default function ContactUs() {
                     </span>
 
                     <div className="min-w-0">
-                      <span className="block text-[9px] font-semibold uppercase tracking-[2px] text-black/35">
+                      <span className="block text-[9px] font-semibold uppercase tracking-[2px] text-[#17120F]/35">
                         Email
                       </span>
 
-                      <span className="mt-1 block break-all text-[13px] text-black/65 sm:text-[14px]">
+                      <span className="mt-1 block break-all text-[13px] text-[#17120F]/65 transition-colors duration-300 group-hover:text-[#F04D02] sm:text-[14px]">
                         genmaxitsolution@gmail.com
                       </span>
                     </div>
@@ -234,9 +242,9 @@ export default function ContactUs() {
                   {/* Phone */}
                   <a
                     href="tel:+919938307637"
-                    className="group flex min-w-0 items-center gap-3 border-b border-black/[0.07] py-4 no-underline sm:gap-4 sm:py-5"
+                    className="group flex min-w-0 items-center gap-3 border-b border-[#17120F]/[0.07] py-4 no-underline sm:gap-4 sm:py-5"
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/[0.08]">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#17120F]/[0.08] transition-all duration-300 group-hover:border-[#F04D02]/40 group-hover:bg-[#F04D02]/[0.05]">
                       <Phone
                         size={18}
                         strokeWidth={1.5}
@@ -245,11 +253,11 @@ export default function ContactUs() {
                     </span>
 
                     <div className="min-w-0">
-                      <span className="block text-[9px] font-semibold uppercase tracking-[2px] text-black/35">
+                      <span className="block text-[9px] font-semibold uppercase tracking-[2px] text-[#17120F]/35">
                         Phone
                       </span>
 
-                      <span className="mt-1 block text-[13px] text-black/65 sm:text-[14px]">
+                      <span className="mt-1 block text-[13px] text-[#17120F]/65 transition-colors duration-300 group-hover:text-[#F04D02] sm:text-[14px]">
                         +91 99383 07637
                       </span>
                     </div>
@@ -257,7 +265,7 @@ export default function ContactUs() {
 
                   {/* Office Hours */}
                   <div className="flex items-center gap-3 py-4 sm:gap-4 sm:py-5">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/[0.08]">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#17120F]/[0.08]">
                       <Clock
                         size={18}
                         strokeWidth={1.5}
@@ -266,11 +274,11 @@ export default function ContactUs() {
                     </span>
 
                     <div className="min-w-0">
-                      <span className="block text-[9px] font-semibold uppercase tracking-[2px] text-black/35">
+                      <span className="block text-[9px] font-semibold uppercase tracking-[2px] text-[#17120F]/35">
                         Office Hours
                       </span>
 
-                      <span className="mt-1 block text-[12px] leading-6 text-black/65 sm:text-[14px]">
+                      <span className="mt-1 block text-[12px] leading-6 text-[#17120F]/65 sm:text-[14px]">
                         Monday - Saturday : 9:30 AM to 6:30 PM
                         <br />
                         Sunday : Closed
@@ -280,7 +288,7 @@ export default function ContactUs() {
                 </div>
 
                 {/* Location */}
-                <div className="mt-4 flex items-center gap-3 text-black/45 sm:mt-5">
+                <div className="mt-4 flex items-center gap-3 text-[#17120F]/45 sm:mt-5">
                   <MapPin
                     size={15}
                     strokeWidth={1.5}

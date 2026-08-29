@@ -33,12 +33,12 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="m-0 w-full min-h-screen overflow-x-hidden bg-white">
+      <body className="m-0 min-h-screen w-full overflow-x-hidden bg-white">
         {/* ================= NAVBAR ================= */}
         <Navbar />
 
         {/* ================= MAIN CONTENT ================= */}
-        <main className="w-full min-w-0 overflow-x-hidden">
+        <main className="m-0 w-full min-w-0 p-0">
           {children}
         </main>
 

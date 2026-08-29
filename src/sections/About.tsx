@@ -3,10 +3,8 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowUpRight,
   Check,
   Phone,
-  Sparkles,
 } from "lucide-react";
 
 const highlights = [
@@ -67,41 +65,10 @@ export default function About() {
 
       {/* Container */}
       <div className="relative mx-auto w-full max-w-[1480px] px-5 sm:px-7 md:px-10 lg:px-14 xl:px-20">
-        {/* Header */}
-        <div className="mb-11 flex items-center justify-between sm:mb-14 lg:mb-16">
-          <div className="flex min-w-0 items-center gap-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#F04D02]/25 bg-[#F04D02]/[0.07]">
-              <Sparkles
-                size={13}
-                strokeWidth={1.6}
-                className="text-[#FF6A20]"
-              />
-            </span>
-
-            <span className="truncate text-[8px] font-semibold uppercase tracking-[2.5px] text-white/50 sm:text-[10px] sm:tracking-[3px]">
-              About GenMax
-            </span>
-
-            <span className="hidden h-px w-10 bg-[#F04D02]/35 sm:block sm:w-12" />
-          </div>
-
-          <span className="hidden text-[8px] font-medium uppercase tracking-[2px] text-white/20 lg:block">
-            Who we are • What we create
-          </span>
-        </div>
-
         {/* Main Grid */}
         <div className="grid items-center gap-12 md:gap-16 lg:grid-cols-[44%_56%] lg:gap-0">
           {/* Left Content */}
           <div className="relative z-20 w-full min-w-0 lg:pr-10 xl:pr-16">
-            <div className="mb-4 flex items-center gap-2.5 sm:mb-5">
-              <span className="h-px w-7 bg-[#F04D02] sm:w-9" />
-
-              <p className="text-[8px] font-semibold uppercase tracking-[2.3px] text-[#FF6A20] sm:text-[10px] sm:tracking-[2.8px]">
-                Digital • Creative • Strategic
-              </p>
-            </div>
-
             <h2 className="max-w-[650px] text-[36px] font-medium leading-[1.07] tracking-[-1.8px] text-white min-[400px]:text-[39px] sm:text-[47px] sm:tracking-[-2.2px] md:text-[53px] lg:text-[51px] xl:text-[61px]">
               We turn ambitious
               <br />
@@ -146,8 +113,7 @@ export default function About() {
             </div>
 
             {/* CTA */}
-            <div className="mt-9 flex flex-col items-start gap-4 sm:mt-10 sm:flex-row sm:items-center sm:gap-5">
-              {/* IMPORTANT: actual page route */}
+            <div className="mt-9 flex flex-col items-start sm:mt-10">
               <Link
                 href="/about-us"
                 aria-label="Discover More About GenMax"
@@ -165,14 +131,6 @@ export default function About() {
                   />
                 </span>
               </Link>
-
-              <div className="flex items-center gap-2.5">
-                <span className="h-px w-7 bg-white/12 sm:w-8" />
-
-                <span className="text-[7px] font-medium uppercase tracking-[1.6px] text-white/25 sm:text-[8px] sm:tracking-[2px]">
-                  Create • Build • Grow
-                </span>
-              </div>
             </div>
           </div>
 
@@ -195,6 +153,7 @@ export default function About() {
               className="absolute -right-3 -top-3 z-0 h-[65px] w-[65px] rounded-tr-[25px] border-r-2 border-t-2 border-[#6C63FF]/30 sm:-right-4 sm:-top-4 sm:h-[90px] sm:w-[90px] sm:rounded-tr-[32px]"
             />
 
+            {/* Image */}
             <div className="relative z-10 overflow-hidden rounded-[5px] border border-white/[0.08] bg-[#10141D] shadow-[0_30px_90px_rgba(0,0,0,0.32)]">
               <div className="relative h-[250px] min-[400px]:h-[275px] sm:h-[340px] md:h-[390px] lg:h-[420px] xl:h-[460px]">
                 <img
@@ -203,38 +162,14 @@ export default function About() {
                   className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-[1.025]"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#05070B]/85 via-[#05070B]/15 to-transparent" />
-
-                <div className="absolute left-4 top-4 flex max-w-[calc(100%-32px)] items-center gap-2 rounded-full border border-white/10 bg-black/25 px-3 py-1.5 backdrop-blur-xl sm:left-6 sm:top-6 sm:px-3.5 sm:py-2">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF6A20] shadow-[0_0_12px_rgba(255,106,32,0.9)]" />
-
-                  <span className="truncate text-[6px] font-semibold uppercase tracking-[1.5px] text-white/65 sm:text-[7px] sm:tracking-[2px]">
-                    Digital Transformation
-                  </span>
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3 sm:bottom-6 sm:left-6 sm:right-6">
-                  <div className="min-w-0">
-                    <p className="text-[7px] font-medium uppercase tracking-[2px] text-white/35 sm:text-[8px] sm:tracking-[2.5px]">
-                      Experience
-                    </p>
-
-                    <p className="mt-1 text-[21px] font-semibold leading-none tracking-[-0.8px] text-white sm:text-[29px] sm:tracking-[-1px]">
-                      10+ Years
-                    </p>
-                  </div>
-
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 sm:h-10 sm:w-10">
-                    <ArrowUpRight size={15} strokeWidth={1.5} />
-                  </span>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070B]/40 via-[#05070B]/5 to-transparent" />
               </div>
             </div>
 
             {/* Let's Talk */}
             <a
-              href="tel:971507534313"
-              aria-label="Call GenMax IT Solution"
+              href="tel:+919938307637"
+              aria-label="Call GenMax IT Solution at +91 99383 07637"
               className="group relative z-20 flex min-h-[82px] w-full items-center gap-3 overflow-hidden rounded-b-[6px] border border-white/[0.06] border-t-0 bg-[#11151E] px-4 py-4 shadow-[0_18px_50px_rgba(0,0,0,0.28)] transition-all duration-500 hover:bg-[#F04D02] sm:min-h-[96px] sm:gap-5 sm:px-7 md:px-8"
             >
               <span className="pointer-events-none absolute -right-14 top-1/2 h-[140px] w-[140px] -translate-y-1/2 rounded-full bg-white/15 opacity-0 blur-[45px] transition-opacity duration-500 group-hover:opacity-100" />
@@ -254,62 +189,7 @@ export default function About() {
                   Your next big idea deserves a great companion.
                 </span>
               </span>
-
-              <span className="relative z-10 hidden h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/45 transition-all duration-300 group-hover:border-white/25 group-hover:text-white sm:flex">
-                <ArrowUpRight
-                  size={15}
-                  strokeWidth={1.6}
-                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </span>
             </a>
-
-            {/* Experience */}
-            <div className="absolute -bottom-10 left-5 z-30 hidden sm:block lg:left-8">
-              <div className="flex items-center gap-3 rounded-[12px] border border-white/10 bg-[#151922]/95 px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.3)] backdrop-blur-xl">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F04D02]/10">
-                  <Sparkles
-                    size={15}
-                    strokeWidth={1.5}
-                    className="text-[#FF6A20]"
-                  />
-                </div>
-
-                <div>
-                  <p className="text-[17px] font-semibold leading-none text-white">
-                    10+
-                  </p>
-
-                  <p className="mt-1 text-[7px] font-semibold uppercase tracking-[1.5px] text-white/35">
-                    Years of Experience
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Information */}
-        <div className="mt-14 border-t border-white/[0.07] pt-6 sm:mt-20 sm:pt-7 lg:mt-24">
-          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <p className="max-w-[720px] text-[11px] leading-[1.85] text-white/30 sm:text-[13px] sm:leading-[1.9]">
-              From the first conversation to the final launch, we combine
-              business thinking, creative design and reliable technology to
-              build digital experiences made for real-world results.
-            </p>
-
-            <Link
-              href="/contact"
-              className="group inline-flex w-fit shrink-0 items-center gap-2 text-[8px] font-semibold uppercase tracking-[1.6px] text-white/40 transition-colors duration-300 hover:text-[#FF6A20] sm:text-[9px] sm:tracking-[1.8px]"
-            >
-              Start a conversation
-
-              <ArrowUpRight
-                size={13}
-                strokeWidth={1.7}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </Link>
           </div>
         </div>
       </div>

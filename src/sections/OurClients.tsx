@@ -67,17 +67,6 @@ export default function OurClients() {
 
             {/* Content */}
             <div className="relative z-10 flex w-full flex-col justify-center px-7 py-12 sm:px-10 lg:px-12 xl:px-16 2xl:px-20">
-              {/* Eyebrow */}
-              <div className="mb-6 flex items-center gap-3">
-                <span className="relative h-px w-9 overflow-hidden bg-[#F04D02] sm:w-11">
-                  <span className="absolute inset-y-0 left-0 w-1/2 bg-[#ff8b63]" />
-                </span>
-
-                <span className="text-[8px] font-semibold uppercase tracking-[2.8px] text-[#FF7040] sm:text-[9px]">
-                  Trusted Partnerships
-                </span>
-              </div>
-
               {/* Heading */}
               <h2 className="max-w-[420px] text-[36px] font-medium leading-[1.03] tracking-[-1.8px] sm:text-[42px] md:text-[46px] lg:text-[48px] xl:text-[54px]">
                 Our
@@ -91,17 +80,6 @@ export default function OurClients() {
                 experiences that deliver meaningful results, stronger brands,
                 and sustainable growth.
               </p>
-
-              {/* Bottom Info */}
-              <div className="mt-8 flex items-center gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.035]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#F04D02] shadow-[0_0_14px_rgba(240,77,2,0.85)]" />
-                </div>
-
-                <span className="text-[7px] font-medium uppercase tracking-[2px] text-white/30 sm:text-[8px]">
-                  Building brands • Growing businesses
-                </span>
-              </div>
             </div>
 
             {/* Divider */}
@@ -121,7 +99,7 @@ export default function OurClients() {
 
             <Swiper
               modules={[Autoplay]}
-              loop={columns.length >= 4}
+              loop={columns.length >= 2}
               speed={900}
               autoplay={{
                 delay: 4500,
@@ -131,7 +109,7 @@ export default function OurClients() {
               slidesPerView={2}
               slidesPerGroup={1}
               spaceBetween={0}
-              watchOverflow
+              watchOverflow={false}
               breakpoints={{
                 0: {
                   slidesPerView: 2,

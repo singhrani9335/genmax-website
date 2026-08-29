@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+
 import { CaseStudy } from "@/types/caseStudies";
 
 interface CaseStudyCardProps {
@@ -11,7 +13,7 @@ export default function CaseStudyCard({
   const isPriority = caseStudy.id === 1;
 
   return (
-    <div className="group relative mx-auto w-full max-w-[850px]">
+    <div className="relative mx-auto w-full max-w-[850px]">
       {/* ================= SOFT ORANGE GLOW ================= */}
       <div
         aria-hidden="true"
@@ -19,7 +21,7 @@ export default function CaseStudyCard({
       />
 
       {/* ================= LAPTOP FRAME ================= */}
-      <div className="relative overflow-hidden rounded-[14px] border border-white/15 bg-[#111111] p-1.5 shadow-[0_24px_70px_rgba(0,0,0,0.45)] transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:border-white/25 sm:rounded-[20px] sm:p-2 md:rounded-[26px] md:p-3">
+      <div className="relative overflow-hidden rounded-[14px] border border-white/15 bg-[#111111] p-1.5 shadow-[0_24px_70px_rgba(0,0,0,0.45)] sm:rounded-[20px] sm:p-2 md:rounded-[26px] md:p-3">
         {/* TOP CAMERA DETAIL */}
         <span
           aria-hidden="true"
@@ -35,7 +37,7 @@ export default function CaseStudyCard({
             priority={isPriority}
             loading={isPriority ? "eager" : "lazy"}
             sizes="(max-width: 640px) 94vw, (max-width: 768px) 90vw, (max-width: 1280px) 760px, 850px"
-            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="object-cover object-center"
           />
 
           {/* SCREEN OVERLAY */}
@@ -47,7 +49,7 @@ export default function CaseStudyCard({
           {/* SUBTLE ORANGE REFLECTION */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-[#F04D02]/10 blur-[45px] transition-opacity duration-500 group-hover:opacity-100"
+            className="pointer-events-none absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-[#F04D02]/10 blur-[45px]"
           />
 
           {/* SCREEN EDGE */}
@@ -55,6 +57,40 @@ export default function CaseStudyCard({
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 rounded-[9px] ring-1 ring-inset ring-black/10 sm:rounded-[12px] md:rounded-[15px]"
           />
+
+          {/* ================= VERTICAL BUTTONS ================= */}
+          <div className="absolute right-0 top-1/2 z-30 flex -translate-y-1/2 flex-col items-end">
+            {/* Portfolio */}
+            <Link
+              href="/portfolio"
+              className="flex h-[92px] w-[34px] items-center justify-center rounded-l-[7px] bg-[#F04D02] text-white no-underline"
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+              }}
+            >
+              <span className="text-[8px] font-semibold uppercase tracking-[1px] text-white">
+                Portfolio
+              </span>
+            </Link>
+
+            {/* Gap */}
+            <div className="h-[5px]" />
+
+            {/* View Details */}
+            <Link
+              href="/case-studies"
+              className="flex h-[92px] w-[34px] items-center justify-center rounded-l-[7px] bg-black text-white no-underline"
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+              }}
+            >
+              <span className="text-[8px] font-semibold uppercase tracking-[1px] text-white">
+                View Details
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -73,7 +109,7 @@ export default function CaseStudyCard({
       {/* ================= BOTTOM SHADOW ================= */}
       <div
         aria-hidden="true"
-        className="pointer-events-none mx-auto mt-2 h-2 w-[62%] rounded-full bg-black/30 blur-md transition-all duration-500 group-hover:w-[68%]"
+        className="pointer-events-none mx-auto mt-2 h-2 w-[62%] rounded-full bg-black/30 blur-md"
       />
     </div>
   );

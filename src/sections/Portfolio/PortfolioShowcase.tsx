@@ -11,15 +11,21 @@ export default function PortfolioShowcase() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const isResetting = useRef(false);
 
+  // =====================================================
+  // HOME PAGE — SHOW ONLY 4 PROJECTS
+  // =====================================================
+  const homeProjects = projects.slice(0, 4);
+
+  // Duplicate only these 4 projects for infinite slider
   const loopProjects =
-    projects.length > 0
-      ? [...projects, ...projects, ...projects]
+    homeProjects.length > 0
+      ? [...homeProjects, ...homeProjects, ...homeProjects]
       : [];
 
   useEffect(() => {
     const slider = sliderRef.current;
 
-    if (!slider || projects.length === 0) return;
+    if (!slider || homeProjects.length === 0) return;
 
     const getCardWidth = () => {
       const card = slider.querySelector(
@@ -36,7 +42,7 @@ export default function PortfolioShowcase() {
 
       const gap = 24;
 
-      return projects.length * (cardWidth + gap);
+      return homeProjects.length * (cardWidth + gap);
     };
 
     const setInitialPosition = () => {
@@ -58,6 +64,7 @@ export default function PortfolioShowcase() {
 
       if (!setWidth) return;
 
+      // Move back to middle set
       if (slider.scrollLeft >= setWidth * 2) {
         isResetting.current = true;
 
@@ -70,6 +77,7 @@ export default function PortfolioShowcase() {
         });
       }
 
+      // Move forward to middle set
       if (slider.scrollLeft <= 0) {
         isResetting.current = true;
 
@@ -91,10 +99,12 @@ export default function PortfolioShowcase() {
 
     return () => {
       cancelAnimationFrame(frame);
+
       slider.removeEventListener("scroll", handleScroll);
+
       window.removeEventListener("resize", setInitialPosition);
     };
-  }, []);
+  }, [homeProjects.length]);
 
   const scrollSlider = (direction: "left" | "right") => {
     const slider = sliderRef.current;
@@ -116,14 +126,16 @@ export default function PortfolioShowcase() {
     });
   };
 
-  if (!projects.length) return null;
+  if (!homeProjects.length) return null;
 
   return (
     <section
       id="portfolio"
       className="relative w-full overflow-hidden bg-white py-16 sm:py-20 md:py-24 lg:py-28"
     >
-      {/* ================= BACKGROUND DETAILS ================= */}
+      {/* =====================================================
+          BACKGROUND DETAILS
+      ====================================================== */}
 
       <div
         aria-hidden="true"
@@ -135,28 +147,26 @@ export default function PortfolioShowcase() {
         className="pointer-events-none absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-[#17316a]/[0.025] blur-[120px]"
       />
 
+      {/* =====================================================
+          MAIN CONTAINER
+      ====================================================== */}
+
       <div className="relative z-10 mx-auto w-full max-w-[1500px] pl-5 pr-0 sm:pl-7 md:pl-10 lg:pl-16 xl:pl-20">
         <div className="grid w-full items-center gap-10 lg:grid-cols-[330px_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[350px_minmax(0,1fr)] xl:gap-16">
-          {/* ================= LEFT CONTENT ================= */}
+          {/* =================================================
+              LEFT CONTENT
+          ================================================== */}
 
           <div className="relative z-20 pr-5 sm:pr-7 lg:pr-0">
-            {/* Small label */}
-
-            <div className="mb-5 flex items-center gap-3 sm:mb-6">
-              <span className="h-px w-9 bg-[#F04D02] sm:w-11" />
-
-              <span className="text-[9px] font-semibold uppercase tracking-[2.5px] text-[#F04D02] sm:text-[10px]">
-                Our Portfolio
-              </span>
-            </div>
-
             {/* Heading */}
 
             <h2 className="max-w-[330px] text-[36px] font-normal leading-[1.05] tracking-[-1.5px] text-[#142d66] sm:text-[43px] md:text-[50px] lg:text-[54px] xl:text-[58px]">
               A Glimpse at
               <br />
+
               <span className="relative inline-block">
                 Our Work
+
                 <span className="absolute -bottom-2 left-0 h-[2px] w-12 bg-[#F04D02] sm:w-14" />
               </span>
             </h2>
@@ -169,7 +179,7 @@ export default function PortfolioShowcase() {
               businesses.
             </p>
 
-            {/* Button */}
+            {/* View All Projects */}
 
             <Link
               href="/portfolio"
@@ -184,7 +194,9 @@ export default function PortfolioShowcase() {
               />
             </Link>
 
-            {/* Slider Controls */}
+            {/* =================================================
+                SLIDER CONTROLS
+            ================================================== */}
 
             <div className="mt-7 flex items-center gap-3 sm:mt-8 sm:gap-4">
               <button
@@ -212,14 +224,12 @@ export default function PortfolioShowcase() {
                   className="transition-transform duration-300 group-hover:translate-x-0.5"
                 />
               </button>
-
-              <span className="ml-2 text-[9px] font-medium uppercase tracking-[2px] text-[#9aa1ad]">
-                Explore
-              </span>
             </div>
           </div>
 
-          {/* ================= RIGHT SLIDER ================= */}
+          {/* =================================================
+              RIGHT SLIDER
+          ================================================== */}
 
           <div className="relative min-w-0 w-full">
             {/* Dot Decoration */}
@@ -245,7 +255,9 @@ export default function PortfolioShowcase() {
               className="pointer-events-none absolute -right-5 bottom-8 z-0 h-24 w-24 rounded-full border border-[#F04D02]/10"
             />
 
-            {/* Slider */}
+            {/* =================================================
+                SLIDER
+            ================================================== */}
 
             <div className="relative z-10 w-full overflow-hidden">
               <div
