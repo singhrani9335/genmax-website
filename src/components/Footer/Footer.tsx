@@ -20,14 +20,15 @@ import {
 export default function Footer() {
   const [phone, setPhone] = useState("");
 
+  // ================= QUICK LINKS =================
   const quickLinks = [
-    { name: "About", href: "/about" },
+    { name: "About", href: "/about-us" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Case Study", href: "/case-study" },
     { name: "Blog", href: "/blog" },
     { name: "Careers", href: "/careers" },
     { name: "FAQ", href: "/faq" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "/contact-us" },
     { name: "Privacy Policy", href: "/privacy-policy" },
     {
       name: "Terms and Conditions",
@@ -36,15 +37,35 @@ export default function Footer() {
     { name: "Site Map", href: "/site-map" },
   ];
 
+  // ================= SERVICES =================
   const services = [
-    "Digital Marketing",
-    "Trusted SEO Agency in Dubai with Refund Guarantee",
-    "Social Media Marketing",
-    "E Commerce Website",
-    "Web Development",
-    "Graphic Designing",
+    {
+      name: "Digital Marketing",
+      href: "/services/digital-marketing",
+    },
+    {
+      name: "SEO",
+      href: "/services/seo",
+    },
+    {
+      name: "Social Media Marketing",
+      href: "/services/social-media-marketing",
+    },
+    {
+      name: "E Commerce Website",
+      href: "/services/e-commerce-website",
+    },
+    {
+      name: "Web Development",
+      href: "/services/web-development",
+    },
+    {
+      name: "Graphic Designing",
+      href: "/services/graphic-designing",
+    },
   ];
 
+  // ================= GO TO HOME =================
   const goToHome = (
     e: React.MouseEvent<HTMLAnchorElement>
   ) => {
@@ -62,10 +83,8 @@ export default function Footer() {
 
   return (
     <footer className="relative w-full overflow-hidden font-sans">
-
       {/* ================= TOP WHITE SECTION ================= */}
       <section className="relative z-20 min-h-[540px] overflow-visible bg-white">
-
         {/* LEFT SIDE BACKGROUND IMAGE */}
         <div
           className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-[340px] w-[68%] bg-contain bg-bottom bg-left bg-no-repeat sm:block sm:h-[360px] sm:w-[70%] md:h-[380px] md:w-[70%] lg:h-[400px] lg:w-[67%]"
@@ -83,13 +102,10 @@ export default function Footer() {
         />
 
         <div className="relative z-10 mx-auto min-h-[540px] max-w-[1600px]">
-
           {/* ================= CONNECT WITH US ================= */}
           <div className="relative z-20 w-full px-6 pb-6 pt-[195px] sm:px-10 md:px-16 lg:w-[67%] lg:px-[9.5%]">
-
             {/* LOGO + HEADING */}
             <div className="flex items-center gap-5 md:gap-7">
-
               <a
                 href="/"
                 onClick={goToHome}
@@ -110,14 +126,11 @@ export default function Footer() {
                 <br />
                 Straight to Your Inbox!
               </h2>
-
             </div>
 
-            {/* EMAIL */}
+            {/* EMAIL SUBSCRIPTION */}
             <div className="relative z-20 mt-10 w-full max-w-[640px]">
-
               <div className="flex h-[48px] w-full border border-[#222222] bg-white">
-
                 <div className="flex w-[58px] shrink-0 items-center justify-center">
                   <img
                     src="/images/email.png"
@@ -143,7 +156,6 @@ export default function Footer() {
                     className="h-[21px] w-[21px] object-contain"
                   />
                 </button>
-
               </div>
 
               <label className="mt-2 flex items-center gap-2 text-[11px] text-[#444444]">
@@ -163,19 +175,15 @@ export default function Footer() {
                   and consent to being contacted.
                 </span>
               </label>
-
             </div>
           </div>
 
           {/* ================= GET IN TOUCH ================= */}
           <div className="absolute left-1/2 top-[385px] z-[100] w-[calc(100%-32px)] max-w-[390px] -translate-x-1/2 bg-white px-7 pb-8 pt-7 shadow-[0_6px_25px_rgba(0,0,0,0.10)] sm:w-[370px] lg:left-auto lg:right-[5%] lg:top-[350px] lg:w-[360px] lg:max-w-none lg:translate-x-0">
-
             <div className="flex items-start justify-between">
-
               <h2 className="text-[30px] font-semibold leading-tight text-[#222222]">
                 Get In Touch
               </h2>
-
             </div>
 
             <p className="mb-6 mt-4 text-[14px] font-medium leading-[1.75] text-[#444444]">
@@ -187,7 +195,6 @@ export default function Footer() {
             </p>
 
             <form>
-
               {/* NAME */}
               <label className="block text-[13px] font-semibold text-[#222222]">
                 Your Name*
@@ -214,7 +221,6 @@ export default function Footer() {
               </label>
 
               <div className="relative mt-1 w-full">
-
                 <PhoneInput
                   country="in"
                   value={phone}
@@ -234,7 +240,6 @@ export default function Footer() {
                   dropdownClass="!z-[9999]"
                   searchClass="!mx-[10px] !my-[6px] !w-[calc(100%-20px)]"
                 />
-
               </div>
 
               {/* MESSAGE */}
@@ -249,9 +254,7 @@ export default function Footer() {
 
               {/* PRIVACY + BUTTON */}
               <div className="mt-6 flex items-start justify-between gap-3">
-
                 <label className="flex max-w-[220px] items-start gap-2 text-[11px] font-medium leading-[1.5] text-[#444444]">
-
                   <input
                     type="checkbox"
                     className="mt-[2px] h-[14px] w-[14px] shrink-0 accent-[#F04D02]"
@@ -267,7 +270,6 @@ export default function Footer() {
                     </Link>{" "}
                     and consent to being contacted.
                   </span>
-
                 </label>
 
                 <button
@@ -275,35 +277,28 @@ export default function Footer() {
                   aria-label="Submit"
                   className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-white transition hover:from-[#222222] hover:to-[#333333]"
                 >
-                  <span className="text-[19px]">➤</span>
+                  <span className="text-[19px]">
+                    ➤
+                  </span>
                 </button>
-
               </div>
-
             </form>
           </div>
-
         </div>
       </section>
 
       {/* ================= DARK + ORANGE FOOTER ================= */}
       <section className="relative z-10 min-h-[470px] bg-gradient-to-br from-[#222222] via-[#222222] to-[#F04D02] text-white">
-
         <div className="mx-auto max-w-[1600px] px-6 pb-10 pt-[35px] sm:px-10 md:px-16 lg:px-[5%]">
-
           <div className="w-full text-left lg:w-[68%]">
-
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-5 lg:grid-cols-[0.85fr_1fr_1fr] lg:gap-5">
-
               {/* ================= QUICK LINKS ================= */}
               <div className="text-left">
-
                 <h3 className="mb-6 text-[18px] font-semibold uppercase">
                   QUICK LINKS
                 </h3>
 
                 <ul className="space-y-[8px]">
-
                   {quickLinks.map((link) => (
                     <li key={link.name}>
                       <Link
@@ -314,18 +309,15 @@ export default function Footer() {
                       </Link>
                     </li>
                   ))}
-
                 </ul>
 
                 {/* ================= FOLLOW US ================= */}
                 <div className="mt-7">
-
                   <h3 className="mb-3 text-[18px] font-semibold">
                     Follow Us On:
                   </h3>
 
                   <div className="flex flex-wrap items-center gap-3">
-
                     {/* X */}
                     <a
                       href="https://x.com/"
@@ -391,39 +383,32 @@ export default function Footer() {
                     >
                       <FaYoutube size={24} />
                     </a>
-
                   </div>
-
                 </div>
               </div>
 
               {/* ================= SERVICES ================= */}
               <div className="text-left">
-
                 <h3 className="mb-6 text-[18px] font-semibold uppercase">
                   SERVICES
                 </h3>
 
                 <ul className="space-y-[8px]">
-
                   {services.map((service) => (
-                    <li key={service}>
-                      <a
-                        href="#"
+                    <li key={service.name}>
+                      <Link
+                        href={service.href}
                         className="block max-w-[300px] text-[14px] font-normal leading-6 transition hover:text-[#FE8302] sm:text-[15px]"
                       >
-                        {service}
-                      </a>
+                        {service.name}
+                      </Link>
                     </li>
                   ))}
-
                 </ul>
-
               </div>
 
               {/* ================= LOCATION ================= */}
               <div className="text-left">
-
                 <a
                   href="/"
                   onClick={goToHome}
@@ -438,7 +423,6 @@ export default function Footer() {
                 </a>
 
                 <div className="mt-7 flex gap-3">
-
                   <img
                     src="/images/address.svg"
                     alt="Location"
@@ -446,7 +430,6 @@ export default function Footer() {
                   />
 
                   <div>
-
                     <h3 className="mb-1 text-[16px] font-semibold">
                       INDIA
                     </h3>
@@ -466,12 +449,9 @@ export default function Footer() {
                       <br />
                       genmaxitsolution@gmail.com
                     </p>
-
                   </div>
-
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -479,16 +459,13 @@ export default function Footer() {
 
       {/* ================= COPYRIGHT ================= */}
       <div className="bg-[#222222] px-5 py-3 text-center text-white">
-
         <p className="text-[11px] sm:text-[12px]">
           © 2026 Genmax. All Rights Reserved.
         </p>
-
       </div>
 
       {/* ================= FLOATING BUTTONS ================= */}
       <div className="fixed right-4 top-[205px] z-[100] flex flex-col gap-3">
-
         {/* CALL */}
         <a
           href="tel:+919938307637"
@@ -517,9 +494,7 @@ export default function Footer() {
         >
           <FaShareNodes size={18} />
         </button>
-
       </div>
-
     </footer>
   );
 }

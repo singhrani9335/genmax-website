@@ -4,41 +4,41 @@ export const services = [
     title: "Digital Marketing",
     image:
       "https://www.mightywarner.ae/uploads/sub_service/image/digital-marketing.svg",
-    href: "/digital-marketing-company",
+    href: "/services/digital-marketing",
   },
   {
     id: "seo",
-    title: "Trusted SEO Agency in Dubai with Refund Guarantee",
+    title: "SEO",
     image:
       "https://www.mightywarner.ae/uploads/sub_service/image/search-engine-optimization.svg",
-    href: "/seo-company-dubai",
+    href: "/services/seo",
   },
   {
     id: "social-media-marketing",
     title: "Social Media Marketing",
     image:
       "https://www.mightywarner.ae/uploads/sub_service/image/social-media-marketing.svg",
-    href: "/social-media-marketing-dubai",
+    href: "/services/social-media-marketing",
   },
   {
-    id: "e-commerce",
-    title: "E Commerce Website",
+    id: "e-commerce-website",
+    title: "E-Commerce Website",
     image:
       "https://www.mightywarner.ae/uploads/sub_service/image/e-commerce-website.svg",
-    href: "/ecommerce-website-dubai",
+    href: "/services/e-commerce-website",
   },
   {
     id: "web-development",
     title: "Web Development",
     image:
       "https://www.mightywarner.ae/uploads/sub_service/image/web-development.svg",
-    href: "/web-development-company",
+    href: "/services/web-development",
   },
   {
     id: "graphic-designing",
     title: "Graphic Designing",
     image:
       "https://www.mightywarner.ae/uploads/sub_service/image/graphic-designing.svg",
-    href: "/graphic-designing-services-dubai",
+    href: "/services/graphic-designing",
   },
 ];

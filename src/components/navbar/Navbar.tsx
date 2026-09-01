@@ -34,7 +34,9 @@ const services = [
   },
   {
     title: "Graphic Design",
-    items: [["Graphic Designing", "/services/graphic-designing"]],
+    items: [
+      ["Graphic Designing", "/services/graphic-designing"],
+    ],
   },
 ];
 
@@ -57,7 +59,10 @@ export default function Navbar() {
     const label = link.label?.toLowerCase().trim();
 
     if (label === "about" || label === "about us") {
-      return { ...link, href: "/about-us" };
+      return {
+        ...link,
+        href: "/about-us",
+      };
     }
 
     if (
@@ -65,7 +70,10 @@ export default function Navbar() {
       label === "contact us" ||
       label === "contact-us"
     ) {
-      return { ...link, href: "/contact-us" };
+      return {
+        ...link,
+        href: "/contact-us",
+      };
     }
 
     return link;
@@ -82,6 +90,7 @@ export default function Navbar() {
       <header className="fixed left-0 right-0 top-0 z-[9999] w-full bg-white shadow-[0_2px_15px_rgba(0,0,0,0.06)]">
         <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-12 xl:px-16">
           <div className="flex h-[76px] items-center justify-between sm:h-[86px] lg:h-[100px]">
+
             {/* LOGO */}
             <Link
               href="/"
@@ -98,6 +107,7 @@ export default function Navbar() {
             </Link>
 
             <div className="flex items-center">
+
               {/* DESKTOP NAVIGATION */}
               <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
                 {links.map((link: any) => {
@@ -112,12 +122,13 @@ export default function Navbar() {
                         onMouseEnter={() => setServicesOpen(true)}
                         onMouseLeave={() => setServicesOpen(false)}
                       >
+                        {/* SERVICES BUTTON */}
                         <button
                           type="button"
                           onClick={() =>
                             setServicesOpen((prev) => !prev)
                           }
-                          className={`flex items-center gap-1 text-[12px] font-medium uppercase tracking-[0.35px] transition-colors xl:text-[13px] ${
+                          className={`flex items-center gap-1 text-[12px] font-medium uppercase tracking-[0.35px] transition-colors duration-200 xl:text-[13px] ${
                             servicesOpen
                               ? "text-[#F04D02]"
                               : "text-[#333333]"
@@ -128,12 +139,14 @@ export default function Navbar() {
                           <ChevronDown
                             size={15}
                             className={`transition-transform duration-300 ${
-                              servicesOpen ? "rotate-180" : ""
+                              servicesOpen
+                                ? "rotate-180"
+                                : ""
                             }`}
                           />
                         </button>
 
-                        {/* MEGA MENU */}
+                        {/* DESKTOP MEGA MENU */}
                         <div
                           className={`absolute left-1/2 top-[100px] w-[calc(100vw-100px)] max-w-[1280px] -translate-x-1/2 transition-all duration-300 ${
                             servicesOpen
@@ -143,12 +156,16 @@ export default function Navbar() {
                         >
                           <div className="border-t border-[#eee] bg-white shadow-[0_18px_45px_rgba(0,0,0,0.12)]">
                             <div className="grid grid-cols-3 gap-8 px-10 py-8">
+
                               {services.map((group) => (
                                 <div key={group.title}>
+
+                                  {/* CATEGORY TITLE */}
                                   <h3 className="border-b border-[#ddd] pb-3 text-[15px] font-bold uppercase tracking-[0.5px] text-[#F04D02]">
                                     {group.title}
                                   </h3>
 
+                                  {/* SERVICE LINKS */}
                                   <div className="mt-3 flex flex-col">
                                     {group.items.map(
                                       ([name, href]) => (
@@ -158,15 +175,18 @@ export default function Navbar() {
                                           onClick={() =>
                                             setServicesOpen(false)
                                           }
-                                          className="py-2 text-[14px] font-semibold text-[#687582] transition-colors hover:text-[#F04D02]"
+                                          className="group block py-2 text-[14px] font-semibold text-[#687582] transition-all duration-200"
                                         >
-                                          {name}
+                                          <span className="text-[#687582] transition-colors duration-200 group-hover:text-[#F04D02]">
+                                            {name}
+                                          </span>
                                         </Link>
                                       )
                                     )}
                                   </div>
                                 </div>
                               ))}
+
                             </div>
                           </div>
                         </div>
@@ -178,7 +198,7 @@ export default function Navbar() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.35px] text-[#333] transition-colors hover:text-[#F04D02] xl:text-[13px]"
+                      className="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.35px] text-[#333333] transition-colors duration-200 hover:text-[#F04D02] xl:text-[13px]"
                     >
                       {link.label}
                     </Link>
@@ -188,6 +208,7 @@ export default function Navbar() {
 
               {/* DESKTOP BUTTONS */}
               <div className="ml-5 hidden items-center gap-2 lg:flex">
+
                 <button
                   type="button"
                   onClick={() => openPopup("quote")}
@@ -199,7 +220,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => openPopup("consultation")}
-                  className="h-[46px] bg-gradient-to-r from-[#F04D02] to-[#FE8302] px-6 text-[11px] font-semibold uppercase tracking-[0.7px] text-white transition-all hover:opacity-90"
+                  className="h-[46px] bg-gradient-to-r from-[#F04D02] to-[#FE8302] px-6 text-[11px] font-semibold uppercase tracking-[0.7px] text-white transition-opacity hover:opacity-90"
                 >
                   Let's Talk
                 </button>
@@ -208,10 +229,11 @@ export default function Navbar() {
                   type="button"
                   aria-label="Open menu"
                   onClick={() => setMobileOpen(true)}
-                  className="flex h-[46px] w-[46px] items-center justify-center text-[#333] transition-colors hover:text-[#F04D02]"
+                  className="flex h-[46px] w-[46px] items-center justify-center text-[#333333] transition-colors hover:text-[#F04D02]"
                 >
                   <Menu size={29} />
                 </button>
+
               </div>
 
               {/* MOBILE MENU BUTTON */}
@@ -219,10 +241,11 @@ export default function Navbar() {
                 type="button"
                 aria-label="Open menu"
                 onClick={() => setMobileOpen(true)}
-                className="flex h-[42px] w-[42px] items-center justify-center text-[#333] lg:hidden"
+                className="flex h-[42px] w-[42px] items-center justify-center text-[#333333] lg:hidden"
               >
                 <Menu size={27} />
               </button>
+
             </div>
           </div>
         </div>
@@ -242,7 +265,9 @@ export default function Navbar() {
           aria-label="Close menu"
           onClick={closeMobileMenu}
           className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-            mobileOpen ? "opacity-100" : "opacity-0"
+            mobileOpen
+              ? "opacity-100"
+              : "opacity-0"
           }`}
         />
 
@@ -256,6 +281,7 @@ export default function Navbar() {
         >
           {/* MOBILE HEADER */}
           <div className="flex items-center justify-between border-b border-[#eee] pb-5">
+
             <Link
               href="/"
               onClick={closeMobileMenu}
@@ -274,10 +300,11 @@ export default function Navbar() {
               type="button"
               aria-label="Close menu"
               onClick={closeMobileMenu}
-              className="text-[#333] hover:text-[#F04D02]"
+              className="text-[#333333] transition-colors hover:text-[#F04D02]"
             >
               <X size={26} />
             </button>
+
           </div>
 
           {/* MOBILE LINKS */}
@@ -289,15 +316,17 @@ export default function Navbar() {
               if (isServices) {
                 return (
                   <div key={link.label}>
+
+                    {/* SERVICES BUTTON */}
                     <button
                       type="button"
                       onClick={() =>
                         setServicesOpen((prev) => !prev)
                       }
-                      className={`flex w-full items-center justify-between border-b border-[#eee] py-4 text-[13px] font-medium uppercase tracking-[0.6px] ${
+                      className={`flex w-full items-center justify-between border-b border-[#eee] py-4 text-[13px] font-medium uppercase tracking-[0.6px] transition-colors duration-200 ${
                         servicesOpen
                           ? "text-[#F04D02]"
-                          : "text-[#333]"
+                          : "text-[#333333]"
                       }`}
                     >
                       Services
@@ -305,7 +334,9 @@ export default function Navbar() {
                       <ChevronDown
                         size={17}
                         className={`transition-transform duration-300 ${
-                          servicesOpen ? "rotate-180" : ""
+                          servicesOpen
+                            ? "rotate-180"
+                            : ""
                         }`}
                       />
                     </button>
@@ -319,29 +350,37 @@ export default function Navbar() {
                       }`}
                     >
                       <div className="bg-[#fafafa] p-4">
+
                         {services.map((group) => (
                           <div
                             key={group.title}
                             className="mb-5 last:mb-0"
                           >
+
+                            {/* CATEGORY TITLE */}
                             <h3 className="mb-2 text-[12px] font-bold uppercase text-[#F04D02]">
                               {group.title}
                             </h3>
 
+                            {/* MOBILE SERVICE LINKS */}
                             {group.items.map(
                               ([name, href]) => (
                                 <Link
                                   key={name}
                                   href={href}
                                   onClick={closeMobileMenu}
-                                  className="block border-b border-[#eee] py-2.5 text-[12px] font-medium text-[#687582] hover:text-[#F04D02]"
+                                  className="group block border-b border-[#eee] py-2.5 text-[12px] font-medium text-[#687582]"
                                 >
-                                  {name}
+                                  <span className="text-[#687582] transition-colors duration-200 group-hover:text-[#F04D02]">
+                                    {name}
+                                  </span>
                                 </Link>
                               )
                             )}
+
                           </div>
                         ))}
+
                       </div>
                     </div>
                   </div>
@@ -353,7 +392,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className="block border-b border-[#eee] py-4 text-[13px] font-medium uppercase tracking-[0.6px] text-[#333] hover:text-[#F04D02]"
+                  className="block border-b border-[#eee] py-4 text-[13px] font-medium uppercase tracking-[0.6px] text-[#333333] transition-colors duration-200 hover:text-[#F04D02]"
                 >
                   {link.label}
                 </Link>
@@ -363,10 +402,11 @@ export default function Navbar() {
 
           {/* MOBILE CTA */}
           <div className="mt-7 space-y-3">
+
             <button
               type="button"
               onClick={() => openPopup("quote")}
-              className="h-[48px] w-full bg-[#222] text-[11px] font-semibold uppercase tracking-[0.8px] text-white hover:bg-[#F04D02]"
+              className="h-[48px] w-full bg-[#222] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-colors hover:bg-[#F04D02]"
             >
               Get A Quote
             </button>
@@ -378,6 +418,7 @@ export default function Navbar() {
             >
               Let's Talk
             </button>
+
           </div>
         </aside>
       </div>
@@ -406,11 +447,12 @@ export default function Navbar() {
               : "translate-y-5 scale-95"
           }`}
         >
+          {/* CLOSE */}
           <button
             type="button"
             aria-label="Close popup"
             onClick={() => setPopup(null)}
-            className="absolute right-5 top-5 text-white/80 hover:text-white"
+            className="absolute right-5 top-5 text-white/80 transition-colors hover:text-white"
           >
             <X size={27} />
           </button>
@@ -433,6 +475,7 @@ export default function Navbar() {
             onSubmit={(e) => e.preventDefault()}
           >
             <div className="grid gap-7 sm:grid-cols-2">
+
               <FormField
                 label="Name"
                 name="name"
@@ -444,6 +487,7 @@ export default function Navbar() {
                 name="phone"
                 type="tel"
               />
+
             </div>
 
             <div className="mt-7">
@@ -467,6 +511,7 @@ export default function Navbar() {
             </div>
 
             <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+
               <label className="flex items-start gap-2 text-[12px] leading-5 text-white">
                 <input
                   type="checkbox"
@@ -492,6 +537,7 @@ export default function Navbar() {
               >
                 Send
               </button>
+
             </div>
           </form>
         </div>

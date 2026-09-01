@@ -55,7 +55,7 @@ export default function Services() {
           ================================================== */}
 
           <div className="relative flex flex-col justify-center">
-            {/* Heading */}
+            {/* HEADING */}
 
             <h2 className="max-w-[520px] text-[38px] font-medium leading-[1.04] tracking-[-2px] text-white sm:text-[46px] md:text-[52px] lg:text-[54px] xl:text-[60px]">
               Powerful
@@ -64,17 +64,19 @@ export default function Services() {
               <br />
               Solutions
               <br />
-              <span className="text-white/90">For Modern Brands.</span>
+              <span className="text-white/90">
+                For Modern Brands.
+              </span>
             </h2>
 
-            {/* Accent */}
+            {/* ACCENT */}
 
             <div className="mt-7 flex items-center gap-2">
               <span className="h-[2px] w-12 bg-[#F04D02]" />
               <span className="h-[2px] w-3 bg-[#FE8302]" />
             </div>
 
-            {/* Description */}
+            {/* DESCRIPTION */}
 
             <p className="mt-6 max-w-[570px] text-[12px] leading-[1.9] text-white/50 sm:text-[13px] md:text-[14px] lg:text-[15px]">
               At Genmax, we combine creativity, technology, and digital
@@ -140,6 +142,7 @@ export default function Services() {
                       text-center
                       no-underline
                       outline-none
+                      transition-all duration-300
 
                       /* MOBILE */
                       ${
@@ -173,24 +176,30 @@ export default function Services() {
                           ? "lg:border-b lg:border-white/[0.10]"
                           : "lg:border-b-0"
                       }
+
+                      hover:bg-white/[0.035]
                     `}
                   >
-                    {/* ICON */}
+                    {/* =================================================
+                        ICON
+                    ================================================== */}
 
-                    <div className="relative flex h-[90px] w-[90px] items-center justify-center sm:h-[98px] sm:w-[98px] lg:h-[105px] lg:w-[105px]">
+                    <div className="relative flex h-[90px] w-[90px] items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 sm:h-[98px] sm:w-[98px] lg:h-[105px] lg:w-[105px]">
                       <Image
                         src={service.image}
                         alt={service.title}
                         width={105}
                         height={105}
                         unoptimized
-                        className="relative z-10 h-[68px] w-[68px] object-contain opacity-90 sm:h-[76px] sm:w-[76px] lg:h-[82px] lg:w-[82px]"
+                        className="relative z-10 h-[68px] w-[68px] object-contain opacity-90 transition-opacity duration-300 group-hover:opacity-100 sm:h-[76px] sm:w-[76px] lg:h-[82px] lg:w-[82px]"
                       />
                     </div>
 
-                    {/* SERVICE TITLE */}
+                    {/* =================================================
+                        SERVICE TITLE
+                    ================================================== */}
 
-                    <h3 className="mt-5 max-w-[230px] text-[13px] font-semibold leading-[1.45] !text-white no-underline sm:text-[14px] lg:text-[15px]">
+                    <h3 className="mt-5 max-w-[230px] text-[13px] font-semibold leading-[1.45] !text-white no-underline transition-colors duration-300 group-hover:!text-[#FE8302] sm:text-[14px] lg:text-[15px]">
                       {service.title}
                     </h3>
                   </Link>
