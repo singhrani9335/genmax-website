@@ -3,23 +3,20 @@ import NewsCard from "./NewsCard";
 
 export default function TestimonialsNews() {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto w-full max-w-[1500px] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-        <div className="grid w-full grid-cols-1 items-start gap-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 xl:gap-24">
-          <div className="min-w-0 w-full">
+    <section className="relative w-full overflow-hidden bg-white py-10 sm:py-14 lg:py-16 xl:py-18">
+      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-0">
+        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[620px_1fr] lg:gap-20 xl:gap-24">
+          {/* LEFT SIDE */}
+          <div className="min-w-0">
             <TestimonialCard />
           </div>
 
-          <div className="min-w-0 w-full">
+          {/* RIGHT SIDE */}
+          <div className="min-w-0">
             <NewsCard />
           </div>
         </div>
       </div>
-
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 h-px w-full bg-[#e9edf2]"
-      />
     </section>
   );
 }

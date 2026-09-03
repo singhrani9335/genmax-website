@@ -16,13 +16,10 @@ const categories = [
 ];
 
 export default function CaseStudiesShowcase() {
-  const [activeCategory, setActiveCategory] =
-    useState("E-Commerce");
-
+  const [activeCategory, setActiveCategory] = useState("E-Commerce");
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const activeProject =
-    caseStudies[activeIndex] || caseStudies[0];
+  const activeProject = caseStudies[activeIndex] || caseStudies[0];
 
   /* ================= AUTO SLIDE ================= */
 
@@ -37,6 +34,14 @@ export default function CaseStudiesShowcase() {
 
     return () => clearInterval(interval);
   }, []);
+
+  /* ================= SYNC CATEGORY ================= */
+
+  useEffect(() => {
+    if (!activeProject) return;
+
+    setActiveCategory(activeProject.category);
+  }, [activeProject]);
 
   /* ================= CATEGORY ================= */
 
@@ -89,7 +94,7 @@ export default function CaseStudiesShowcase() {
         }}
       />
 
-      {/* Subtle Grid */}
+      {/* ================= SUBTLE GRID ================= */}
 
       <div
         aria-hidden="true"
@@ -101,7 +106,7 @@ export default function CaseStudiesShowcase() {
         }}
       />
 
-      {/* Orange Glow */}
+      {/* ================= ORANGE GLOW ================= */}
 
       <div
         aria-hidden="true"
@@ -114,20 +119,17 @@ export default function CaseStudiesShowcase() {
         {/* ================= TOP HEADER ================= */}
 
         <div className="flex flex-col gap-8">
-          {/* Category Navigation */}
+          {/* CATEGORY NAVIGATION */}
 
           <div className="flex w-full flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
             {categories.map((category) => {
-              const isActive =
-                category === activeCategory;
+              const isActive = category === activeCategory;
 
               return (
                 <button
                   key={category}
                   type="button"
-                  onClick={() =>
-                    handleCategoryClick(category)
-                  }
+                  onClick={() => handleCategoryClick(category)}
                   className={`group relative px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-[0.8px] transition-all duration-300 sm:px-4 sm:text-[11px] md:px-5 md:text-[12px] ${
                     isActive
                       ? "text-white"
@@ -168,14 +170,14 @@ export default function CaseStudiesShowcase() {
             </p>
           </div>
 
-          {/* ================= VIEW ALL BUTTON ================= */}
+          {/* ================= VIEW ALL CASE STUDY ================= */}
 
           <Link
-            href="/case-studies"
+            href="/case-study"
             className="group inline-flex w-fit items-center gap-3 rounded-br-[23px] border border-white/20 bg-white/[0.06] px-6 py-3.5 text-[10px] font-semibold uppercase tracking-[1px] !text-white backdrop-blur-sm transition-all duration-300 hover:border-[#F04D02] hover:bg-[#F04D02] hover:!text-white sm:px-7 sm:py-4 sm:text-[11px]"
           >
             <span className="!text-white group-hover:!text-white">
-              View All Case Studies
+              View All Case Study
             </span>
 
             <ArrowUpRight
@@ -189,7 +191,7 @@ export default function CaseStudiesShowcase() {
         {/* ================= CASE STUDY SHOWCASE ================= */}
 
         <div className="relative mt-10 sm:mt-12 md:mt-16">
-          {/* Vertical Company Label */}
+          {/* ================= VERTICAL COMPANY LABEL ================= */}
 
           <div className="absolute left-0 top-1/2 hidden -translate-y-1/2 xl:block">
             <div className="flex items-center gap-4">
@@ -201,7 +203,7 @@ export default function CaseStudiesShowcase() {
             </div>
           </div>
 
-          {/* Main Image */}
+          {/* ================= MAIN IMAGE ================= */}
 
           <div className="mx-auto w-full max-w-[820px] px-0 md:px-8 lg:px-14 xl:px-20">
             <div className="relative">
@@ -287,7 +289,7 @@ export default function CaseStudiesShowcase() {
         </div>
       </div>
 
-      {/* Bottom Line */}
+      {/* ================= BOTTOM LINE ================= */}
 
       <div
         aria-hidden="true"

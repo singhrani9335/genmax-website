@@ -1,179 +1,190 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Quote } from "lucide-react";
+import { useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
 
 import { testimonials } from "@/data/testimonialsNews";
 
 import "swiper/css";
 
 export default function TestimonialCard() {
-  const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!testimonials.length) {
     return null;
   }
 
-  const totalTestimonials = testimonials.length;
-  const shouldLoop = totalTestimonials > 1;
+  const shouldLoop = testimonials.length > 1;
+
+  // =====================================
+  // GO TO HOME PAGE
+  // =====================================
+  const goToHomePage = () => {
+    window.location.href = "/";
+  };
 
   return (
-    <div className="relative w-full">
-      {/* =====================================================
-          HEADER
-      ====================================================== */}
-      <div>
-        <div className="mb-5 flex items-center gap-3">
-          <span
-            aria-hidden="true"
-            className="h-px w-10 bg-[#F04D02]"
-          />
-
-          <span className="text-[9px] font-semibold uppercase tracking-[3px] text-[#F04D02] sm:text-[10px]">
-            Client Stories
-          </span>
+    <div className="w-full">
+      {/* =====================================
+          FIXED HEADING
+      ====================================== */}
+      <div className="flex items-start gap-7">
+        <div
+          aria-hidden="true"
+          className="flex shrink-0 gap-2 pt-2"
+        >
+          <span className="block h-[88px] w-[52px] rounded-tl-[12px] rounded-br-[8px] bg-[#F04D02]" />
+          <span className="block h-[88px] w-[52px] rounded-tl-[12px] rounded-br-[8px] bg-[#F04D02]" />
         </div>
 
-        <h2 className="max-w-[650px] text-[32px] font-normal leading-[1.08] tracking-[-1.4px] text-[#07182f] sm:text-[38px] md:text-[43px] lg:text-[48px]">
-          Trusted by people
-          <br />
-          <span className="text-[#07182f]/40">
-            who value great work.
-          </span>
+        <h2 className="pt-1 text-[31px] font-normal leading-[1.2] tracking-[0.5px] text-[#1f2d42] sm:text-[36px] lg:text-[40px]">
+          Client Testimonials
         </h2>
       </div>
 
-      {/* =====================================================
+      {/* =====================================
           TESTIMONIAL SLIDER
-      ====================================================== */}
-      <div className="relative mt-12 sm:mt-14 lg:mt-16">
-        {/* Accent Line */}
-        <div
-          aria-hidden="true"
-          className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-[#F04D02] via-[#F04D02]/40 to-transparent"
-        />
-
-        <div className="pl-7 sm:pl-10 lg:pl-12">
-          <Swiper
-            modules={[Autoplay]}
-            loop={shouldLoop}
-            speed={900}
-            slidesPerView={1}
-            slidesPerGroup={1}
-            spaceBetween={0}
-            allowTouchMove={false}
-            autoplay={
-              shouldLoop
-                ? {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: false,
-                    waitForTransition: false,
+          ONLY CONTENT BELOW HEADING SLIDES
+      ====================================== */}
+      <div className="mt-3 sm:mt-5 lg:mt-6">
+        <Swiper
+          modules={[Autoplay]}
+          loop={shouldLoop}
+          speed={900}
+          slidesPerView={1}
+          slidesPerGroup={1}
+          allowTouchMove
+          autoplay={
+            shouldLoop
+              ? {
+                  delay: 5000,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                }
+              : false
+          }
+          onSlideChange={(swiper) => {
+            setActiveIndex(swiper.realIndex);
+          }}
+          className="!w-full"
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide
+              key={`${testimonial.name}-${index}`}
+              className="!h-auto"
+            >
+              {/* =====================================
+                  CLICK / TOUCH AREA
+              ====================================== */}
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={goToHomePage}
+                onKeyDown={(event) => {
+                  if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                  ) {
+                    event.preventDefault();
+                    goToHomePage();
                   }
-                : false
-            }
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-            onSlideChange={(swiper) => {
-              setActiveIndex(swiper.realIndex);
-            }}
-            className="!w-full"
-          >
-            {testimonials.map((testimonial, index) => (
-              <SwiperSlide
-                key={`${testimonial.name}-${index}`}
-                className="!h-auto"
+                }}
+                className="min-h-[410px] w-full cursor-pointer select-none pl-[158px] pr-2 sm:min-h-[390px] sm:pl-[165px] lg:min-h-[405px] lg:pl-[160px]"
+                aria-label="Go to home page"
               >
-                <article className="relative min-h-[390px] pr-2 sm:min-h-[370px] sm:pr-4 lg:min-h-[350px] lg:pr-0">
-                  {/* Large Decorative Quote */}
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -left-3 -top-12 select-none font-serif text-[120px] leading-none text-[#F04D02]/[0.07] sm:text-[145px]"
-                  >
-                    “
-                  </div>
+                {/* TESTIMONIAL TEXT */}
+                <p className="max-w-[455px] text-[14px] leading-[2.15] tracking-[0.1px] text-[#535f70]">
+                  {testimonial.text}
+                </p>
 
-                  {/* Quote Icon */}
-                  <div className="relative mb-8 flex h-11 w-11 items-center justify-center rounded-full bg-[#F04D02]/[0.08]">
-                    <Quote
-                      size={19}
-                      strokeWidth={1.5}
-                      className="text-[#F04D02]"
-                    />
-                  </div>
+                {/* CLIENT NAME */}
+                <h3 className="mt-10 text-[18px] font-normal tracking-[0.2px] text-[#253247] sm:mt-11 sm:text-[19px]">
+                  {testimonial.name}
+                </h3>
 
-                  {/* Testimonial */}
-                  <p className="relative max-w-[720px] text-[18px] font-normal leading-[1.7] tracking-[-0.2px] text-[#18283c] sm:text-[21px] md:text-[23px] lg:text-[25px]">
-                    “{testimonial.text}”
-                  </p>
-
-                  {/* Client */}
-                  <div className="mt-9 flex items-center gap-4 sm:mt-10">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#07182f] text-[13px] font-semibold uppercase text-white">
-                      {testimonial.name.charAt(0)}
-                    </div>
-
-                    <div className="min-w-0">
-                      <h3 className="truncate text-[14px] font-semibold text-[#07182f] sm:text-[15px]">
-                        {testimonial.name}
-                      </h3>
-
-                      <p className="mt-1 text-[9px] uppercase tracking-[2px] text-[#8a94a1] sm:text-[10px]">
-                        Client
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Rating */}
-                  <div className="mt-6 flex items-center gap-3">
-                    <div className="flex gap-1">
-                      {Array.from({
-                        length: testimonial.rating,
-                      }).map((_, starIndex) => (
-                        <span
-                          key={starIndex}
-                          aria-hidden="true"
-                          className="text-[14px] text-[#F04D02]"
-                        >
-                          ★
-                        </span>
-                      ))}
-                    </div>
-
+                {/* STARS */}
+                <div className="mt-4 flex items-center gap-[3px]">
+                  {Array.from({
+                    length: testimonial.rating,
+                  }).map((_, starIndex) => (
                     <span
+                      key={starIndex}
                       aria-hidden="true"
-                      className="h-4 w-px bg-[#dce1e7]"
-                    />
+                      className="text-[16px] leading-none text-[#d6ad25]"
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
 
-                    <span className="text-[9px] uppercase tracking-[1.5px] text-[#8b95a1]">
-                      Verified Client
+                {/* GOOGLE REVIEWS */}
+                <div className="mt-7 select-none">
+                  <div className="flex items-end gap-1">
+                    <span className="text-[42px] font-normal leading-none tracking-[-3px] text-[#4285F4]">
+                      G
+                    </span>
+
+                    <span className="text-[39px] font-normal leading-none tracking-[-3px] text-[#EA4335]">
+                      o
+                    </span>
+
+                    <span className="text-[39px] font-normal leading-none tracking-[-3px] text-[#FBBC05]">
+                      o
+                    </span>
+
+                    <span className="text-[39px] font-normal leading-none tracking-[-3px] text-[#4285F4]">
+                      g
+                    </span>
+
+                    <span className="text-[39px] font-normal leading-none tracking-[-3px] text-[#34A853]">
+                      l
+                    </span>
+
+                    <span className="text-[39px] font-normal leading-none tracking-[-3px] text-[#EA4335]">
+                      e
                     </span>
                   </div>
-                </article>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+
+                  <div className="mt-1 flex items-center gap-2">
+                    <span className="text-[16px] tracking-[1px] text-[#536174]">
+                      Reviews
+                    </span>
+
+                    <div className="flex gap-[2px]">
+                      {Array.from({ length: 5 }).map(
+                        (_, starIndex) => (
+                          <span
+                            key={starIndex}
+                            aria-hidden="true"
+                            className="text-[9px] text-[#d6ad25]"
+                          >
+                            ★
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
-      {/* =====================================================
-          PROGRESS
-      ====================================================== */}
+      {/* =====================================
+          SLIDER INDICATORS
+      ====================================== */}
       {shouldLoop && (
-        <div className="mt-5 flex items-center border-t border-[#edf0f3] pt-5 sm:mt-6">
-          <div className="flex w-full items-center gap-2">
+        <div className="mt-2 pl-[158px] sm:pl-[165px] lg:pl-[160px]">
+          <div className="flex items-center gap-2">
             {testimonials.map((_, index) => (
               <span
                 key={index}
-                className={`block h-[2px] max-w-[70px] flex-1 transition-all duration-500 ${
-                  index === activeIndex
-                    ? "bg-gradient-to-r from-[#F04D02] to-[#FE8302]"
-                    : "bg-[#dfe4ea]"
+                className={`block h-[2px] rounded-full transition-all duration-300 ${
+                  activeIndex === index
+                    ? "w-8 bg-[#F04D02]"
+                    : "w-3 bg-[#d8dde3]"
                 }`}
               />
             ))}

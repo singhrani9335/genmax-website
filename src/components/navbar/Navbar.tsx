@@ -3,13 +3,53 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Menu, X } from "lucide-react";
+
+import {
+  ChevronDown,
+  Menu,
+  X,
+  Megaphone,
+  Search,
+  Share2,
+  ShoppingCart,
+  Code2,
+  PenTool,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
+
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPinterestP,
+  FaYoutube,
+} from "react-icons/fa6";
 
 import { navbarLinks } from "@/data/navbar";
 
+/* =========================================================
+   TYPES
+========================================================= */
+
 type PopupType = "quote" | "consultation" | null;
 
-const services = [
+type NavbarLink = {
+  label: string;
+  href: string;
+};
+
+type ServiceGroup = {
+  title: string;
+  items: [string, string][];
+};
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+const services: ServiceGroup[] = [
   {
     title: "Marketing",
     items: [
@@ -40,22 +80,107 @@ const services = [
   },
 ];
 
+/* =========================================================
+   MENU SERVICES
+========================================================= */
+
+const menuServices = [
+  {
+    title: "Digital Marketing",
+    href: "/services/digital-marketing",
+    icon: Megaphone,
+  },
+  {
+    title: "SEO",
+    href: "/services/seo",
+    icon: Search,
+  },
+  {
+    title: "Social Media Marketing",
+    href: "/services/social-media-marketing",
+    icon: Share2,
+  },
+  {
+    title: "E-Commerce Website",
+    href: "/services/e-commerce-website",
+    icon: ShoppingCart,
+  },
+  {
+    title: "Web Development",
+    href: "/services/web-development",
+    icon: Code2,
+  },
+  {
+    title: "Graphic Designing",
+    href: "/services/graphic-designing",
+    icon: PenTool,
+  },
+];
+
+/* =========================================================
+   SOCIAL LINKS
+========================================================= */
+
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/",
+    icon: FaFacebookF,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+    icon: FaInstagram,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/",
+    icon: FaLinkedinIn,
+  },
+  {
+    label: "Pinterest",
+    href: "https://www.pinterest.com/",
+    icon: FaPinterestP,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/",
+    icon: FaYoutube,
+  },
+];
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [popup, setPopup] = useState<PopupType>(null);
+
+  /* =======================================================
+     CLOSE MENU
+  ======================================================= */
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
     setServicesOpen(false);
   };
 
+  /* =======================================================
+     OPEN POPUP
+  ======================================================= */
+
   const openPopup = (type: PopupType) => {
     closeMobileMenu();
     setPopup(type);
   };
 
-  const getLink = (link: any) => {
+  /* =======================================================
+     NORMALIZE NAVBAR LINKS
+  ======================================================= */
+
+  const getLink = (link: NavbarLink): NavbarLink => {
     const label = link.label?.toLowerCase().trim();
 
     if (label === "about" || label === "about us") {
@@ -79,19 +204,28 @@ export default function Navbar() {
     return link;
   };
 
-  const links = navbarLinks.map(getLink);
+  const links = (navbarLinks as NavbarLink[]).map(getLink);
 
   return (
     <>
-      {/* NAVBAR SPACER */}
+      {/* =====================================================
+          NAVBAR SPACER
+      ===================================================== */}
+
       <div className="h-[76px] sm:h-[86px] lg:h-[100px]" />
 
-      {/* HEADER */}
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
+
       <header className="fixed left-0 right-0 top-0 z-[9999] w-full bg-white shadow-[0_2px_15px_rgba(0,0,0,0.06)]">
         <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-12 xl:px-16">
           <div className="flex h-[76px] items-center justify-between sm:h-[86px] lg:h-[100px]">
 
-            {/* LOGO */}
+            {/* =================================================
+                LOGO
+            ================================================= */}
+
             <Link
               href="/"
               className="relative h-[60px] w-[200px] shrink-0 sm:h-[70px] sm:w-[240px] lg:h-[82px] lg:w-[285px]"
@@ -108,11 +242,14 @@ export default function Navbar() {
 
             <div className="flex items-center">
 
-              {/* DESKTOP NAVIGATION */}
+              {/* =================================================
+                  DESKTOP NAVIGATION
+              ================================================= */}
+
               <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
-                {links.map((link: any) => {
+                {links.map((link) => {
                   const isServices =
-                    link.label?.toLowerCase() === "services";
+                    link.label?.toLowerCase().trim() === "services";
 
                   if (isServices) {
                     return (
@@ -122,13 +259,12 @@ export default function Navbar() {
                         onMouseEnter={() => setServicesOpen(true)}
                         onMouseLeave={() => setServicesOpen(false)}
                       >
-                        {/* SERVICES BUTTON */}
                         <button
                           type="button"
                           onClick={() =>
                             setServicesOpen((prev) => !prev)
                           }
-                          className={`flex items-center gap-1 text-[12px] font-medium uppercase tracking-[0.35px] transition-colors duration-200 xl:text-[13px] ${
+                          className={`flex items-center gap-1 text-[12px] font-bold uppercase tracking-[0.35px] transition-colors duration-200 xl:text-[13px] ${
                             servicesOpen
                               ? "text-[#F04D02]"
                               : "text-[#333333]"
@@ -139,14 +275,13 @@ export default function Navbar() {
                           <ChevronDown
                             size={15}
                             className={`transition-transform duration-300 ${
-                              servicesOpen
-                                ? "rotate-180"
-                                : ""
+                              servicesOpen ? "rotate-180" : ""
                             }`}
                           />
                         </button>
 
-                        {/* DESKTOP MEGA MENU */}
+                        {/* DESKTOP SERVICES MENU */}
+
                         <div
                           className={`absolute left-1/2 top-[100px] w-[calc(100vw-100px)] max-w-[1280px] -translate-x-1/2 transition-all duration-300 ${
                             servicesOpen
@@ -154,18 +289,16 @@ export default function Navbar() {
                               : "pointer-events-none invisible -translate-y-2 opacity-0"
                           }`}
                         >
-                          <div className="border-t border-[#eee] bg-white shadow-[0_18px_45px_rgba(0,0,0,0.12)]">
+                          <div className="border-t border-[#eeeeee] bg-white shadow-[0_18px_45px_rgba(0,0,0,0.12)]">
                             <div className="grid grid-cols-3 gap-8 px-10 py-8">
 
                               {services.map((group) => (
                                 <div key={group.title}>
 
-                                  {/* CATEGORY TITLE */}
-                                  <h3 className="border-b border-[#ddd] pb-3 text-[15px] font-bold uppercase tracking-[0.5px] text-[#F04D02]">
+                                  <h3 className="border-b border-[#dddddd] pb-3 text-[15px] font-bold uppercase tracking-[0.5px] text-[#F04D02]">
                                     {group.title}
                                   </h3>
 
-                                  {/* SERVICE LINKS */}
                                   <div className="mt-3 flex flex-col">
                                     {group.items.map(
                                       ([name, href]) => (
@@ -177,13 +310,14 @@ export default function Navbar() {
                                           }
                                           className="group block py-2 text-[14px] font-semibold text-[#687582] transition-all duration-200"
                                         >
-                                          <span className="text-[#687582] transition-colors duration-200 group-hover:text-[#F04D02]">
+                                          <span className="transition-colors duration-200 group-hover:text-[#F04D02]">
                                             {name}
                                           </span>
                                         </Link>
                                       )
                                     )}
                                   </div>
+
                                 </div>
                               ))}
 
@@ -198,7 +332,7 @@ export default function Navbar() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="whitespace-nowrap text-[12px] font-medium uppercase tracking-[0.35px] text-[#333333] transition-colors duration-200 hover:text-[#F04D02] xl:text-[13px]"
+                      className="whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.35px] text-[#333333] transition-colors duration-200 hover:text-[#F04D02] xl:text-[13px]"
                     >
                       {link.label}
                     </Link>
@@ -206,13 +340,16 @@ export default function Navbar() {
                 })}
               </nav>
 
-              {/* DESKTOP BUTTONS */}
+              {/* =================================================
+                  DESKTOP BUTTONS
+              ================================================= */}
+
               <div className="ml-5 hidden items-center gap-2 lg:flex">
 
                 <button
                   type="button"
                   onClick={() => openPopup("quote")}
-                  className="h-[46px] border border-[#222] bg-[#222] px-6 text-[11px] font-semibold uppercase tracking-[0.7px] text-white transition-all hover:border-[#F04D02] hover:bg-[#F04D02]"
+                  className="h-[46px] border border-[#222222] bg-[#222222] px-6 text-[11px] font-semibold uppercase tracking-[0.7px] text-white transition-all hover:border-[#F04D02] hover:bg-[#F04D02]"
                 >
                   Get A Quote
                 </button>
@@ -225,9 +362,12 @@ export default function Navbar() {
                   Let's Talk
                 </button>
 
+                {/* MENU BUTTON */}
+
                 <button
                   type="button"
                   aria-label="Open menu"
+                  aria-expanded={mobileOpen}
                   onClick={() => setMobileOpen(true)}
                   className="flex h-[46px] w-[46px] items-center justify-center text-[#333333] transition-colors hover:text-[#F04D02]"
                 >
@@ -236,10 +376,14 @@ export default function Navbar() {
 
               </div>
 
-              {/* MOBILE MENU BUTTON */}
+              {/* =================================================
+                  MOBILE MENU BUTTON
+              ================================================= */}
+
               <button
                 type="button"
                 aria-label="Open menu"
+                aria-expanded={mobileOpen}
                 onClick={() => setMobileOpen(true)}
                 className="flex h-[42px] w-[42px] items-center justify-center text-[#333333] lg:hidden"
               >
@@ -251,15 +395,26 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* MOBILE MENU */}
+      {/* =========================================================
+          RIGHT SIDE MENU DRAWER
+          
+          IMPORTANT:
+          This is NOT full screen.
+          Only the right-side white panel opens.
+      ========================================================= */}
+
       <div
-        className={`fixed inset-0 z-[10000] transition-all duration-300 ${
+        className={`fixed inset-0 z-[10000] transition-opacity duration-300 ${
           mobileOpen
-            ? "visible"
-            : "pointer-events-none invisible"
+            ? "visible opacity-100"
+            : "pointer-events-none invisible opacity-0"
         }`}
       >
-        {/* OVERLAY */}
+
+        {/* =====================================================
+            DARK OVERLAY
+        ===================================================== */}
+
         <button
           type="button"
           aria-label="Close menu"
@@ -271,159 +426,278 @@ export default function Navbar() {
           }`}
         />
 
-        {/* DRAWER */}
+        {/* =====================================================
+            RIGHT SIDE WHITE DRAWER
+        ===================================================== */}
+
         <aside
-          className={`absolute right-0 top-0 h-full w-[300px] overflow-y-auto bg-white p-6 shadow-2xl transition-transform duration-300 sm:w-[360px] ${
+          className={`absolute right-0 top-0 flex h-full w-[320px] flex-col overflow-y-auto bg-white shadow-[-15px_0_45px_rgba(0,0,0,0.12)] transition-transform duration-500 ease-out sm:w-[380px] lg:w-[420px] ${
             mobileOpen
               ? "translate-x-0"
               : "translate-x-full"
           }`}
         >
-          {/* MOBILE HEADER */}
-          <div className="flex items-center justify-between border-b border-[#eee] pb-5">
+
+          {/* ===================================================
+              DRAWER HEADER
+          =================================================== */}
+
+          <div className="flex shrink-0 items-center justify-between border-b border-[#eeeeee] px-6 py-5 sm:px-8">
+
+            {/* LOGO */}
 
             <Link
               href="/"
               onClick={closeMobileMenu}
-              className="relative h-[60px] w-[200px]"
+              className="relative h-[58px] w-[190px] sm:h-[65px] sm:w-[220px]"
             >
               <Image
                 src="/images/genmax-logo.png"
                 alt="GenMax IT Solution"
                 fill
-                sizes="200px"
+                sizes="220px"
                 className="object-contain object-left"
               />
             </Link>
+
+            {/* CLOSE */}
 
             <button
               type="button"
               aria-label="Close menu"
               onClick={closeMobileMenu}
-              className="text-[#333333] transition-colors hover:text-[#F04D02]"
+              className="flex h-[42px] w-[42px] shrink-0 items-center justify-center text-[#333333] transition-colors duration-200 hover:text-[#F04D02]"
             >
-              <X size={26} />
+              <X size={25} strokeWidth={1.7} />
             </button>
 
           </div>
 
-          {/* MOBILE LINKS */}
-          <nav className="mt-6">
-            {links.map((link: any) => {
-              const isServices =
-                link.label?.toLowerCase() === "services";
+          {/* ===================================================
+              DRAWER CONTENT
+          =================================================== */}
 
-              if (isServices) {
-                return (
-                  <div key={link.label}>
+          <div className="flex-1 overflow-y-auto px-6 py-5 sm:px-8">
 
-                    {/* SERVICES BUTTON */}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setServicesOpen((prev) => !prev)
-                      }
-                      className={`flex w-full items-center justify-between border-b border-[#eee] py-4 text-[13px] font-medium uppercase tracking-[0.6px] transition-colors duration-200 ${
-                        servicesOpen
-                          ? "text-[#F04D02]"
-                          : "text-[#333333]"
-                      }`}
-                    >
-                      Services
+            {/* =================================================
+                NAVIGATION LINKS
+            ================================================= */}
 
-                      <ChevronDown
-                        size={17}
-                        className={`transition-transform duration-300 ${
+            <nav>
+
+              {links.map((link) => {
+                const isServices =
+                  link.label?.toLowerCase().trim() === "services";
+
+                if (isServices) {
+                  return (
+                    <div key={link.label}>
+
+                      {/* SERVICES */}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setServicesOpen((prev) => !prev)
+                        }
+                        className={`flex w-full items-center justify-between border-b border-[#eeeeee] py-4 text-left text-[17px] font-medium transition-colors duration-200 ${
                           servicesOpen
-                            ? "rotate-180"
-                            : ""
+                            ? "text-[#F04D02]"
+                            : "text-[#222222]"
                         }`}
-                      />
-                    </button>
+                      >
+                        <span>Services</span>
 
-                    {/* MOBILE SERVICES */}
-                    <div
-                      className={`overflow-hidden transition-all duration-300 ${
-                        servicesOpen
-                          ? "max-h-[1300px] opacity-100"
-                          : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="bg-[#fafafa] p-4">
+                        <ChevronDown
+                          size={18}
+                          className={`transition-transform duration-300 ${
+                            servicesOpen
+                              ? "rotate-180"
+                              : ""
+                          }`}
+                        />
+                      </button>
 
-                        {services.map((group) => (
-                          <div
-                            key={group.title}
-                            className="mb-5 last:mb-0"
-                          >
+                      {/* SERVICES LIST */}
 
-                            {/* CATEGORY TITLE */}
-                            <h3 className="mb-2 text-[12px] font-bold uppercase text-[#F04D02]">
-                              {group.title}
-                            </h3>
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ${
+                          servicesOpen
+                            ? "max-h-[1000px] opacity-100"
+                            : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="bg-[#fafafa] px-4 py-3">
 
-                            {/* MOBILE SERVICE LINKS */}
-                            {group.items.map(
-                              ([name, href]) => (
-                                <Link
-                                  key={name}
-                                  href={href}
-                                  onClick={closeMobileMenu}
-                                  className="group block border-b border-[#eee] py-2.5 text-[12px] font-medium text-[#687582]"
-                                >
-                                  <span className="text-[#687582] transition-colors duration-200 group-hover:text-[#F04D02]">
+                          {services.map((group) => (
+                            <div
+                              key={group.title}
+                              className="mb-5 last:mb-0"
+                            >
+
+                              <h3 className="mb-2 text-[11px] font-bold uppercase tracking-[0.8px] text-[#F04D02]">
+                                {group.title}
+                              </h3>
+
+                              {group.items.map(
+                                ([name, href]) => (
+                                  <Link
+                                    key={name}
+                                    href={href}
+                                    onClick={closeMobileMenu}
+                                    className="block border-b border-[#eeeeee] py-2.5 text-[13px] font-medium text-[#687582] transition-colors duration-200 hover:text-[#F04D02]"
+                                  >
                                     {name}
-                                  </span>
-                                </Link>
-                              )
-                            )}
+                                  </Link>
+                                )
+                              )}
 
-                          </div>
-                        ))}
+                            </div>
+                          ))}
 
+                        </div>
                       </div>
+
                     </div>
-                  </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={closeMobileMenu}
+                    className="block border-b border-[#eeeeee] py-4 text-[17px] font-medium text-[#222222] transition-colors duration-200 hover:text-[#F04D02]"
+                  >
+                    {link.label}
+                  </Link>
                 );
-              }
+              })}
 
-              return (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={closeMobileMenu}
-                  className="block border-b border-[#eee] py-4 text-[13px] font-medium uppercase tracking-[0.6px] text-[#333333] transition-colors duration-200 hover:text-[#F04D02]"
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
+            </nav>
 
-          {/* MOBILE CTA */}
-          <div className="mt-7 space-y-3">
+            {/* =================================================
+                SOCIAL MEDIA
+            ================================================= */}
 
-            <button
-              type="button"
-              onClick={() => openPopup("quote")}
-              className="h-[48px] w-full bg-[#222] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-colors hover:bg-[#F04D02]"
-            >
-              Get A Quote
-            </button>
+            <div className="mt-9 border-t border-[#eeeeee] pt-7">
 
-            <button
-              type="button"
-              onClick={() => openPopup("consultation")}
-              className="h-[48px] w-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-[11px] font-semibold uppercase tracking-[0.8px] text-white"
-            >
-              Let's Talk
-            </button>
+              <p className="mb-5 text-[16px] font-medium text-[#333333]">
+                Follow Us On:
+              </p>
+
+              <div className="flex items-center gap-6">
+
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="flex items-center justify-center text-[#222222] transition-colors duration-200 hover:text-[#F04D02]"
+                    >
+                      <Icon size={21} />
+                    </a>
+                  );
+                })}
+
+              </div>
+
+            </div>
+
+            {/* =================================================
+                CONTACT INFORMATION
+            ================================================= */}
+
+            <div className="mt-9 border-t border-[#eeeeee] pt-7">
+
+              {/* LOCATION */}
+
+              <div className="flex items-start gap-3">
+
+                <MapPin
+                  size={20}
+                  className="mt-0.5 shrink-0 text-[#F04D02]"
+                />
+
+                <div>
+                  <h3 className="text-[14px] font-bold uppercase tracking-[0.4px] text-[#222222]">
+                    India
+                  </h3>
+
+                  <p className="mt-1 text-[11px] uppercase tracking-[1px] text-[#999999]">
+                    GenMax IT Solution
+                  </p>
+                </div>
+
+              </div>
+
+              <p className="mt-4 pl-[32px] text-[13px] leading-6 text-[#687582]">
+                Sec-45, Delhi NCR, India – 201301,
+                <br />
+                C3M Aneja Market, Sadarpur
+              </p>
+
+              {/* PHONE */}
+
+              <a
+                href="tel:+919938307637"
+                className="mt-4 flex items-center gap-3 text-[13px] text-[#687582] transition-colors hover:text-[#F04D02]"
+              >
+                <Phone size={16} />
+                +91 99383 07637
+              </a>
+
+              {/* EMAIL */}
+
+              <a
+                href="mailto:genmaxitsolution@gmail.com"
+                className="mt-3 flex items-center gap-3 break-all text-[13px] text-[#687582] transition-colors hover:text-[#F04D02]"
+              >
+                <Mail size={16} />
+                genmaxitsolution@gmail.com
+              </a>
+
+            </div>
+
+            {/* =================================================
+                CTA BUTTONS
+            ================================================= */}
+
+            <div className="mt-8 space-y-3 pb-5">
+
+              <button
+                type="button"
+                onClick={() => openPopup("quote")}
+                className="h-[48px] w-full bg-[#222222] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-colors duration-200 hover:bg-[#F04D02]"
+              >
+                Get A Quote
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  openPopup("consultation")
+                }
+                className="h-[48px] w-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-[11px] font-semibold uppercase tracking-[0.8px] text-white transition-opacity duration-200 hover:opacity-90"
+              >
+                Let's Talk
+              </button>
+
+            </div>
 
           </div>
         </aside>
       </div>
 
-      {/* POPUP */}
+      {/* =========================================================
+          POPUP
+      ========================================================= */}
+
       <div
         className={`fixed inset-0 z-[20000] flex items-center justify-center p-4 transition-all duration-300 ${
           popup
@@ -431,7 +705,9 @@ export default function Navbar() {
             : "pointer-events-none invisible opacity-0"
         }`}
       >
+
         {/* OVERLAY */}
+
         <button
           type="button"
           aria-label="Close popup"
@@ -440,6 +716,7 @@ export default function Navbar() {
         />
 
         {/* POPUP CONTENT */}
+
         <div
           className={`relative z-10 w-full max-w-[900px] bg-gradient-to-br from-[#C90000] via-[#D30020] to-[#E91E63] p-6 shadow-2xl transition-all duration-300 sm:p-10 lg:p-14 ${
             popup
@@ -447,7 +724,9 @@ export default function Navbar() {
               : "translate-y-5 scale-95"
           }`}
         >
+
           {/* CLOSE */}
+
           <button
             type="button"
             aria-label="Close popup"
@@ -456,6 +735,8 @@ export default function Navbar() {
           >
             <X size={27} />
           </button>
+
+          {/* HEADING */}
 
           <h2 className="text-[30px] font-medium text-white sm:text-[40px]">
             {popup === "quote"
@@ -470,10 +751,12 @@ export default function Navbar() {
           </p>
 
           {/* FORM */}
+
           <form
             className="mt-8"
             onSubmit={(e) => e.preventDefault()}
           >
+
             <div className="grid gap-7 sm:grid-cols-2">
 
               <FormField
@@ -491,28 +774,38 @@ export default function Navbar() {
             </div>
 
             <div className="mt-7">
+
               <FormField
                 label="Email"
                 name="email"
                 type="email"
               />
+
             </div>
 
             <div className="mt-7">
-              <label className="mb-2 block text-sm text-white">
+
+              <label
+                htmlFor="message"
+                className="mb-2 block text-sm text-white"
+              >
                 Message*
               </label>
 
               <textarea
+                id="message"
+                name="message"
                 required
                 rows={3}
                 className="w-full resize-none border-0 border-b border-white bg-transparent px-0 py-2 text-white outline-none"
               />
+
             </div>
 
             <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
 
               <label className="flex items-start gap-2 text-[12px] leading-5 text-white">
+
                 <input
                   type="checkbox"
                   required
@@ -529,6 +822,7 @@ export default function Navbar() {
                   </Link>
                   .
                 </span>
+
               </label>
 
               <button
@@ -539,14 +833,19 @@ export default function Navbar() {
               </button>
 
             </div>
+
           </form>
+
         </div>
       </div>
     </>
   );
 }
 
-/* REUSABLE FORM FIELD */
+/* =========================================================
+   REUSABLE FORM FIELD
+========================================================= */
+
 function FormField({
   label,
   name,
@@ -558,6 +857,7 @@ function FormField({
 }) {
   return (
     <div>
+
       <label
         htmlFor={name}
         className="mb-2 block text-sm text-white"
@@ -572,6 +872,7 @@ function FormField({
         required
         className="h-[38px] w-full border-0 border-b border-white bg-transparent px-0 text-white outline-none"
       />
+
     </div>
   );
 }

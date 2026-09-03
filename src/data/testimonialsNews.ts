@@ -33,10 +33,10 @@ export const testimonials = [
 
 export const latestNews = [
   {
-    date: "14 July 2026",
-    title: "How Does Page Speed on Your Website Affect Your SEO Rankings?",
+    date: "14 August 2026",
+    title: "How To Decrease the Bounce Rate of Your Website?",
     description:
-      "Website speed plays an important role in user experience and search visibility. A fast, responsive website can help reduce bounce rates, improve engagement, and create a stronger digital experience.",
+      "If a website has a high bounce rate, it means that visitors are leaving the website without checking out the other pages or taking a proper and meaningful action. To encourage people to stay longer on it, one can create a better user experience.",
   },
   {
     date: "08 July 2026",

@@ -59,11 +59,11 @@ export default function CaseStudyCard({
           />
 
           {/* ================= VERTICAL BUTTONS ================= */}
-          <div className="absolute right-0 top-1/2 z-30 flex -translate-y-1/2 flex-col items-end">
+          <div className="pointer-events-none absolute right-0 top-1/2 z-50 flex -translate-y-1/2 flex-col items-end">
             {/* Portfolio */}
             <Link
               href="/portfolio"
-              className="flex h-[92px] w-[34px] items-center justify-center rounded-l-[7px] bg-[#F04D02] text-white no-underline"
+              className="pointer-events-auto relative z-50 flex h-[92px] w-[34px] items-center justify-center rounded-l-[7px] bg-[#F04D02] text-white no-underline"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(180deg)",
@@ -75,12 +75,12 @@ export default function CaseStudyCard({
             </Link>
 
             {/* Gap */}
-            <div className="h-[5px]" />
+            <div className="pointer-events-none h-[5px]" />
 
             {/* View Details */}
             <Link
-              href="/case-studies"
-              className="flex h-[92px] w-[34px] items-center justify-center rounded-l-[7px] bg-black text-white no-underline"
+              href={caseStudy.detailsUrl}
+              className="pointer-events-auto relative z-50 flex h-[92px] w-[34px] items-center justify-center rounded-l-[7px] bg-black text-white no-underline"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(180deg)",
