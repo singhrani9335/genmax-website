@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -11,13 +11,105 @@ import { ecommerceHero } from "@/data/ecommerce";
 
 export default function EcommerceHero() {
   const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+  const [formError, setFormError] = useState("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    setFormMessage("");
+    setFormError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const website = String(formData.get("website") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const privacy = formData.get("privacy");
+
+    const cleanPhone = phone.trim();
+
+    // Required fields validation
+    if (!name || !cleanPhone || !email || !message) {
+      setFormError("Please fill in all required fields.");
+      return;
+    }
+
+    // Privacy validation
+    if (!privacy) {
+      setFormError(
+        "Please agree to the Privacy Policy before submitting."
+      );
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setFormError("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: cleanPhone,
+          website,
+          message,
+          service: "E-Commerce",
+          source: "E-Commerce Service Page",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Something went wrong. Please try again."
+        );
+      }
+
+      setFormMessage(
+        "Thank you! Your enquiry has been sent successfully. Our team will contact you shortly."
+      );
+
+      form.reset();
+      setPhone("");
+    } catch (error) {
+      console.error("E-Commerce form submission error:", error);
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="w-full bg-white py-5 sm:py-7 lg:py-9">
       <div className="mx-auto w-full max-w-[1320px] px-4 sm:px-8 md:px-10 lg:px-12 xl:px-14">
         <div className="flex flex-col lg:flex-row lg:items-start">
+
           {/* ================= LEFT SIDE ================= */}
           <div className="w-full lg:w-[66%]">
+
             {/* HERO IMAGE */}
             <div className="relative w-full overflow-hidden">
               <Image
@@ -57,14 +149,17 @@ export default function EcommerceHero() {
 
           {/* ================= RIGHT FORM ================= */}
           <div className="relative z-20 mt-6 w-full lg:mt-0 lg:w-[34%]">
+
             {/* ORANGE CORNER */}
             <div className="pointer-events-none absolute -left-[25px] top-[25px] hidden h-[65px] w-[65px] rounded-full border-l-[5px] border-t-[5px] border-[#F04D02] lg:block" />
 
             <div className="relative min-h-[510px] w-full overflow-hidden bg-gradient-to-br from-[#080B12] via-[#101A42] to-[#173D91] px-5 py-7 shadow-[0_18px_45px_rgba(0,0,0,0.16)] sm:min-h-[530px] sm:px-6 sm:py-8 lg:min-h-[550px] lg:px-7 lg:py-8 xl:min-h-[560px] xl:px-8">
+
               {/* GLOW */}
               <div className="pointer-events-none absolute -right-24 -top-24 h-[180px] w-[180px] rounded-full bg-[#214DA0]/30 blur-[60px]" />
 
               <div className="relative z-10">
+
                 {/* PHONE */}
                 <h2 className="text-[25px] font-medium leading-tight !text-white sm:text-[28px]">
                   Toll Free:
@@ -79,7 +174,11 @@ export default function EcommerceHero() {
                 </a>
 
                 {/* ================= FORM ================= */}
-                <form className="mt-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-4"
+                >
+
                   {/* NAME */}
                   <div className="border-b border-white/50">
                     <input
@@ -88,7 +187,8 @@ export default function EcommerceHero() {
                       placeholder="Your Name*"
                       autoComplete="name"
                       required
-                      className="h-[46px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[46px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -99,9 +199,15 @@ export default function EcommerceHero() {
                       value={phone}
                       onChange={(value) => setPhone(value)}
                       enableSearch
-                      preferredCountries={["in", "ae", "us", "gb"]}
+                      preferredCountries={[
+                        "in",
+                        "ae",
+                        "us",
+                        "gb",
+                      ]}
                       searchPlaceholder="Search country..."
                       placeholder="Phone*"
+                      disabled={isSubmitting}
                       containerClass="!w-full"
                       inputClass="!h-[46px] !w-full !rounded-none !border-0 !bg-transparent !pl-[48px] !pr-1 !text-[13px] !text-white !outline-none !shadow-none"
                       buttonClass="!h-[46px] !w-[42px] !rounded-none !border-0 !bg-transparent"
@@ -118,7 +224,8 @@ export default function EcommerceHero() {
                       placeholder="Email Address*"
                       autoComplete="email"
                       required
-                      className="h-[46px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[46px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -129,7 +236,8 @@ export default function EcommerceHero() {
                       name="website"
                       placeholder="Your Website"
                       autoComplete="url"
-                      className="h-[46px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[46px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -140,7 +248,8 @@ export default function EcommerceHero() {
                       placeholder="Tell us about your requirements*"
                       required
                       rows={3}
-                      className="min-h-[72px] w-full resize-none bg-transparent px-1 py-3 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="min-h-[72px] w-full resize-none bg-transparent px-1 py-3 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -150,6 +259,7 @@ export default function EcommerceHero() {
                       type="checkbox"
                       name="privacy"
                       required
+                      disabled={isSubmitting}
                       className="mt-[3px] h-[13px] w-[13px] shrink-0 cursor-pointer accent-[#F04D02]"
                     />
 
@@ -165,18 +275,41 @@ export default function EcommerceHero() {
                     </span>
                   </label>
 
+                  {/* ERROR MESSAGE */}
+                  {formError && (
+                    <p className="mt-3 text-[11px] leading-[1.5] text-red-300">
+                      {formError}
+                    </p>
+                  )}
+
+                  {/* SUCCESS MESSAGE */}
+                  {formMessage && (
+                    <p className="mt-3 text-[11px] leading-[1.5] text-green-300">
+                      {formMessage}
+                    </p>
+                  )}
+
                   {/* SUBMIT */}
                   <button
                     type="submit"
                     aria-label="Submit form"
-                    className="mt-4 flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#F04D02] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#FE8302]"
+                    disabled={isSubmitting}
+                    className="mt-4 flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#F04D02] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#FE8302] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
-                    <Send
-                      size={17}
-                      strokeWidth={1.8}
-                      className="ml-[2px]"
-                    />
+                    {isSubmitting ? (
+                      <span
+                        className="h-[17px] w-[17px] animate-spin rounded-full border-2 border-white/40 border-t-white"
+                        aria-label="Sending"
+                      />
+                    ) : (
+                      <Send
+                        size={17}
+                        strokeWidth={1.8}
+                        className="ml-[2px]"
+                      />
+                    )}
                   </button>
+
                 </form>
               </div>
             </div>

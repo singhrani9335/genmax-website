@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -11,6 +11,92 @@ import { mobileAppDevelopmentHero } from "@/data/mobileAppDevelopment";
 
 export default function MobileAppDevelopmentHero() {
   const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+  const [formError, setFormError] = useState("");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (isSubmitting) return;
+
+    setFormMessage("");
+    setFormError("");
+    setIsSubmitting(true);
+
+    try {
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+
+      const name = String(formData.get("name") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const website = String(formData.get("website") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+      const privacy = formData.get("privacy");
+
+      const cleanPhone = phone.trim();
+
+      if (!name || !cleanPhone || !email || !message) {
+        setFormError("Please fill in all required fields.");
+        return;
+      }
+
+      if (!privacy) {
+        setFormError(
+          "Please agree to the Privacy Policy before submitting the form.",
+        );
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        setFormError("Please enter a valid email address.");
+        return;
+      }
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: cleanPhone,
+          website,
+          message,
+          service: "Mobile App Development",
+          source: "Mobile App Development Service Page",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error || "Something went wrong. Please try again.",
+        );
+      }
+
+      setFormMessage(
+        "Thank you! Your enquiry has been sent successfully. Our team will contact you shortly.",
+      );
+
+      form.reset();
+      setPhone("");
+    } catch (error) {
+      console.error("Mobile App Development form error:", error);
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="w-full bg-white py-6 sm:py-8 lg:py-10">
@@ -79,7 +165,7 @@ export default function MobileAppDevelopmentHero() {
                 </a>
 
                 {/* ================= FORM ================= */}
-                <form className="mt-5">
+                <form className="mt-5" onSubmit={handleSubmit}>
                   {/* NAME */}
                   <div className="border-b border-white/50">
                     <input
@@ -88,7 +174,8 @@ export default function MobileAppDevelopmentHero() {
                       placeholder="Your Name*"
                       autoComplete="name"
                       required
-                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-60"
                     />
                   </div>
 
@@ -102,6 +189,7 @@ export default function MobileAppDevelopmentHero() {
                       preferredCountries={["in", "ae", "us", "gb"]}
                       searchPlaceholder="Search country..."
                       placeholder="Phone*"
+                      disabled={isSubmitting}
                       containerClass="!w-full"
                       inputClass="!h-[48px] !w-full !rounded-none !border-0 !bg-transparent !pl-[48px] !pr-1 !text-[13px] !text-white !outline-none !shadow-none"
                       buttonClass="!h-[48px] !w-[42px] !rounded-none !border-0 !bg-transparent"
@@ -118,7 +206,8 @@ export default function MobileAppDevelopmentHero() {
                       placeholder="Email Address*"
                       autoComplete="email"
                       required
-                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-60"
                     />
                   </div>
 
@@ -129,7 +218,8 @@ export default function MobileAppDevelopmentHero() {
                       name="website"
                       placeholder="Your Website"
                       autoComplete="url"
-                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-60"
                     />
                   </div>
 
@@ -140,7 +230,8 @@ export default function MobileAppDevelopmentHero() {
                       placeholder="Tell us about your requirements*"
                       required
                       rows={3}
-                      className="min-h-[78px] w-full resize-none bg-transparent px-1 py-3 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="min-h-[78px] w-full resize-none bg-transparent px-1 py-3 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-60"
                     />
                   </div>
 
@@ -150,6 +241,7 @@ export default function MobileAppDevelopmentHero() {
                       type="checkbox"
                       name="privacy"
                       required
+                      disabled={isSubmitting}
                       className="mt-[3px] h-[13px] w-[13px] shrink-0 cursor-pointer accent-[#F04D02]"
                     />
 
@@ -165,17 +257,36 @@ export default function MobileAppDevelopmentHero() {
                     </span>
                   </label>
 
+                  {/* ERROR MESSAGE */}
+                  {formError && (
+                    <p className="mt-3 text-[11px] leading-[1.5] !text-red-300">
+                      {formError}
+                    </p>
+                  )}
+
+                  {/* SUCCESS MESSAGE */}
+                  {formMessage && (
+                    <p className="mt-3 text-[11px] leading-[1.5] !text-green-300">
+                      {formMessage}
+                    </p>
+                  )}
+
                   {/* SUBMIT */}
                   <button
                     type="submit"
                     aria-label="Submit form"
-                    className="mt-5 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#F04D02] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#FE8302]"
+                    disabled={isSubmitting}
+                    className="mt-5 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#F04D02] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#FE8302] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
-                    <Send
-                      size={17}
-                      strokeWidth={1.8}
-                      className="ml-[2px]"
-                    />
+                    {isSubmitting ? (
+                      <span className="h-[17px] w-[17px] animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                    ) : (
+                      <Send
+                        size={17}
+                        strokeWidth={1.8}
+                        className="ml-[2px]"
+                      />
+                    )}
                   </button>
                 </form>
               </div>

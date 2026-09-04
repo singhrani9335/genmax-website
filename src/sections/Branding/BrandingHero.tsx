@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -11,11 +11,104 @@ import { brandingHero } from "@/data/branding";
 
 export default function BrandingHero() {
   const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+  const [formError, setFormError] = useState("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setFormMessage("");
+    setFormError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const website = String(formData.get("website") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const privacyAccepted = formData.get("privacy");
+    const cleanPhone = phone.trim();
+
+    // Required fields validation
+    if (!name || !cleanPhone || !email || !message) {
+      setFormError("Please fill in all required fields.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Privacy validation
+    if (!privacyAccepted) {
+      setFormError("Please agree to the Privacy Policy.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setFormError("Please enter a valid email address.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: cleanPhone,
+          website,
+          message,
+
+          // Service information
+          service: "Branding",
+          source: "Branding Service Page",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Failed to send your enquiry."
+        );
+      }
+
+      setFormMessage(
+        "Thank you! Your enquiry has been sent successfully. Our team will contact you shortly."
+      );
+
+      // Reset form
+      form.reset();
+      setPhone("");
+    } catch (error) {
+      console.error("Branding Form Error:", error);
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section className="w-full bg-white py-6 sm:py-8 lg:py-10">
       <div className="mx-auto w-full max-w-[1320px] px-6 sm:px-10 md:px-12 lg:px-14 xl:px-16">
         <div className="flex flex-col lg:flex-row lg:items-start">
+
           {/* ================= LEFT SIDE ================= */}
           <div className="w-full lg:w-[66%]">
             <div className="relative w-full">
@@ -56,14 +149,17 @@ export default function BrandingHero() {
 
           {/* ================= RIGHT FORM ================= */}
           <div className="relative z-20 w-full lg:w-[34%]">
+
             {/* ORANGE CORNER */}
             <div className="pointer-events-none absolute -left-[28px] top-[28px] hidden h-[70px] w-[70px] rounded-full border-l-[5px] border-t-[5px] border-[#F04D02] lg:block" />
 
             <div className="relative min-h-[530px] w-full overflow-hidden bg-gradient-to-br from-[#080B12] via-[#101A42] to-[#173D91] px-6 py-8 shadow-[0_18px_45px_rgba(0,0,0,0.16)] sm:min-h-[550px] sm:px-7 sm:py-9 lg:min-h-[570px] lg:px-7 lg:py-9 xl:min-h-[580px] xl:px-8">
+
               {/* GLOW */}
               <div className="pointer-events-none absolute -right-24 -top-24 h-[190px] w-[190px] rounded-full bg-[#214DA0]/30 blur-[60px]" />
 
               <div className="relative z-10">
+
                 {/* PHONE */}
                 <h2 className="text-[27px] font-medium leading-tight !text-white sm:text-[29px]">
                   Toll Free:
@@ -78,7 +174,11 @@ export default function BrandingHero() {
                 </a>
 
                 {/* ================= FORM ================= */}
-                <form className="mt-5">
+                <form
+                  className="mt-5"
+                  onSubmit={handleSubmit}
+                >
+
                   {/* NAME */}
                   <div className="border-b border-white/50">
                     <input
@@ -87,7 +187,8 @@ export default function BrandingHero() {
                       placeholder="Your Name*"
                       autoComplete="name"
                       required
-                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -101,6 +202,7 @@ export default function BrandingHero() {
                       preferredCountries={["in", "ae", "us", "gb"]}
                       searchPlaceholder="Search country..."
                       placeholder="Phone*"
+                      disabled={isSubmitting}
                       containerClass="!w-full"
                       inputClass="!h-[48px] !w-full !rounded-none !border-0 !bg-transparent !pl-[48px] !pr-1 !text-[13px] !text-white !outline-none !shadow-none"
                       buttonClass="!h-[48px] !w-[42px] !rounded-none !border-0 !bg-transparent"
@@ -117,7 +219,8 @@ export default function BrandingHero() {
                       placeholder="Email Address*"
                       autoComplete="email"
                       required
-                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -128,7 +231,8 @@ export default function BrandingHero() {
                       name="website"
                       placeholder="Your Website"
                       autoComplete="url"
-                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="h-[48px] w-full bg-transparent px-1 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -139,7 +243,8 @@ export default function BrandingHero() {
                       placeholder="Tell us about your requirements*"
                       required
                       rows={3}
-                      className="min-h-[78px] w-full resize-none bg-transparent px-1 py-3 text-[13px] !text-white outline-none placeholder:!text-white/80"
+                      disabled={isSubmitting}
+                      className="min-h-[78px] w-full resize-none bg-transparent px-1 py-3 text-[13px] !text-white outline-none placeholder:!text-white/80 disabled:cursor-not-allowed disabled:opacity-70"
                     />
                   </div>
 
@@ -149,6 +254,7 @@ export default function BrandingHero() {
                       type="checkbox"
                       name="privacy"
                       required
+                      disabled={isSubmitting}
                       className="mt-[3px] h-[13px] w-[13px] shrink-0 cursor-pointer accent-[#F04D02]"
                     />
 
@@ -164,18 +270,41 @@ export default function BrandingHero() {
                     </span>
                   </label>
 
+                  {/* ERROR MESSAGE */}
+                  {formError && (
+                    <p className="mt-3 text-[11px] leading-[1.5] !text-red-300">
+                      {formError}
+                    </p>
+                  )}
+
+                  {/* SUCCESS MESSAGE */}
+                  {formMessage && (
+                    <p className="mt-3 text-[11px] leading-[1.5] !text-green-300">
+                      {formMessage}
+                    </p>
+                  )}
+
                   {/* SUBMIT */}
                   <button
                     type="submit"
                     aria-label="Submit form"
-                    className="mt-5 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#F04D02] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#FE8302]"
+                    disabled={isSubmitting}
+                    className="mt-5 flex h-[44px] w-[44px] items-center justify-center rounded-full bg-[#F04D02] text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#FE8302] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
                   >
-                    <Send
-                      size={17}
-                      strokeWidth={1.8}
-                      className="ml-[2px]"
-                    />
+                    {isSubmitting ? (
+                      <span
+                        className="h-[17px] w-[17px] animate-spin rounded-full border-2 border-white/30 border-t-white"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <Send
+                        size={17}
+                        strokeWidth={1.8}
+                        className="ml-[2px]"
+                      />
+                    )}
                   </button>
+
                 </form>
               </div>
             </div>

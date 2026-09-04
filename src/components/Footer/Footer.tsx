@@ -11,16 +11,46 @@ import {
   FaPinterestP,
   FaLinkedinIn,
   FaInstagram,
-  FaYoutube,
   FaPhone,
   FaWhatsapp,
   FaShareNodes,
 } from "react-icons/fa6";
 
-export default function Footer() {
-  const [phone, setPhone] = useState("");
+import { FaYoutube } from "react-icons/fa";
 
-  // ================= QUICK LINKS =================
+export default function Footer() {
+  // =====================================================
+  // CONTACT FORM STATES
+  // =====================================================
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
+
+  // =====================================================
+  // CONTACT FORM SUBMIT STATES
+  // =====================================================
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+  const [formError, setFormError] = useState("");
+
+  // =====================================================
+  // NEWSLETTER STATES
+  // =====================================================
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterAccepted, setNewsletterAccepted] =
+    useState(false);
+  const [isNewsletterSubmitting, setIsNewsletterSubmitting] =
+    useState(false);
+  const [newsletterMessage, setNewsletterMessage] =
+    useState("");
+  const [newsletterError, setNewsletterError] =
+    useState("");
+
+  // =====================================================
+  // QUICK LINKS
+  // =====================================================
   const quickLinks = [
     { name: "About", href: "/about-us" },
     { name: "Portfolio", href: "/portfolio" },
@@ -37,7 +67,9 @@ export default function Footer() {
     { name: "Site Map", href: "/site-map" },
   ];
 
-  // ================= SERVICES =================
+  // =====================================================
+  // SERVICES
+  // =====================================================
   const services = [
     {
       name: "Digital Marketing",
@@ -65,7 +97,9 @@ export default function Footer() {
     },
   ];
 
-  // ================= GO TO HOME =================
+  // =====================================================
+  // GO TO HOME
+  // =====================================================
   const goToHome = (
     e: React.MouseEvent<HTMLAnchorElement>
   ) => {
@@ -81,9 +115,182 @@ export default function Footer() {
     }
   };
 
+  // =====================================================
+  // CONTACT FORM SUBMIT
+  // =====================================================
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    setFormMessage("");
+    setFormError("");
+
+    // ================= FRONTEND VALIDATION =================
+    if (!name.trim()) {
+      setFormError("Please enter your name.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setFormError("Please enter your email.");
+      return;
+    }
+
+    if (!phone.trim()) {
+      setFormError("Please enter your phone number.");
+      return;
+    }
+
+    if (!message.trim()) {
+      setFormError("Please enter your message.");
+      return;
+    }
+
+    if (!privacyAccepted) {
+      setFormError(
+        "Please agree to the Privacy Policy before submitting."
+      );
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message ||
+            "Something went wrong. Please try again."
+        );
+      }
+
+      // ================= SUCCESS =================
+      setFormMessage(
+        "Thank you! Your message has been submitted successfully."
+      );
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+      setPrivacyAccepted(false);
+    } catch (error) {
+      console.error(
+        "Contact form submission error:",
+        error
+      );
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // =====================================================
+  // NEWSLETTER SUBMIT
+  // =====================================================
+  const handleNewsletterSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    setNewsletterMessage("");
+    setNewsletterError("");
+
+    // ================= VALIDATION =================
+    if (!newsletterEmail.trim()) {
+      setNewsletterError(
+        "Please enter your email address."
+      );
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(newsletterEmail.trim())) {
+      setNewsletterError(
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    if (!newsletterAccepted) {
+      setNewsletterError(
+        "Please agree to the Privacy Policy before subscribing."
+      );
+      return;
+    }
+
+    try {
+      setIsNewsletterSubmitting(true);
+
+      // ================= SEND TO NEWSLETTER API =================
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: newsletterEmail.trim(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message ||
+            "Unable to subscribe. Please try again."
+        );
+      }
+
+      // ================= SUCCESS =================
+      setNewsletterMessage(
+        "Thank you! You have successfully subscribed."
+      );
+
+      setNewsletterEmail("");
+      setNewsletterAccepted(false);
+    } catch (error) {
+      console.error(
+        "Newsletter submission error:",
+        error
+      );
+
+      setNewsletterError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsNewsletterSubmitting(false);
+    }
+  };
+
   return (
     <footer className="relative w-full overflow-hidden font-sans">
-      {/* ================= TOP WHITE SECTION ================= */}
+      {/* =====================================================
+          TOP WHITE SECTION
+      ====================================================== */}
       <section className="relative z-20 min-h-[540px] overflow-visible bg-white">
         {/* LEFT SIDE BACKGROUND IMAGE */}
         <div
@@ -102,7 +309,9 @@ export default function Footer() {
         />
 
         <div className="relative z-10 mx-auto min-h-[540px] max-w-[1600px]">
-          {/* ================= CONNECT WITH US ================= */}
+          {/* =================================================
+              CONNECT WITH US
+          ================================================== */}
           <div className="relative z-20 w-full px-6 pb-6 pt-[195px] sm:px-10 md:px-16 lg:w-[67%] lg:px-[9.5%]">
             {/* LOGO + HEADING */}
             <div className="flex items-center gap-5 md:gap-7">
@@ -128,8 +337,13 @@ export default function Footer() {
               </h2>
             </div>
 
-            {/* EMAIL SUBSCRIPTION */}
-            <div className="relative z-20 mt-10 w-full max-w-[640px]">
+            {/* =================================================
+                NEWSLETTER SUBSCRIPTION
+            ================================================== */}
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="relative z-20 mt-10 w-full max-w-[640px]"
+            >
               <div className="flex h-[48px] w-full border border-[#222222] bg-white">
                 <div className="flex w-[58px] shrink-0 items-center justify-center">
                   <img
@@ -141,26 +355,47 @@ export default function Footer() {
 
                 <input
                   type="email"
+                  value={newsletterEmail}
+                  onChange={(e) =>
+                    setNewsletterEmail(e.target.value)
+                  }
+                  disabled={isNewsletterSubmitting}
                   placeholder="Enter Your Email..."
-                  className="min-w-0 flex-1 border-0 bg-transparent px-1 text-[13px] text-[#222222] outline-none placeholder:text-[#777777]"
+                  autoComplete="email"
+                  className="min-w-0 flex-1 border-0 bg-transparent px-1 text-[13px] text-[#222222] outline-none placeholder:text-[#777777] disabled:cursor-not-allowed disabled:opacity-60"
                 />
 
                 <button
-                  type="button"
+                  type="submit"
                   aria-label="Subscribe"
-                  className="flex h-[48px] w-[62px] shrink-0 items-center justify-center bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition hover:from-[#222222] hover:to-[#333333]"
+                  disabled={isNewsletterSubmitting}
+                  className="flex h-[48px] w-[62px] shrink-0 items-center justify-center bg-gradient-to-r from-[#F04D02] to-[#FE8302] transition hover:from-[#222222] hover:to-[#333333] disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  <img
-                    src="/images/newsletter_send.svg"
-                    alt="Send"
-                    className="h-[21px] w-[21px] object-contain"
-                  />
+                  {isNewsletterSubmitting ? (
+                    <span className="text-[15px] font-semibold text-white">
+                      ...
+                    </span>
+                  ) : (
+                    <img
+                      src="/images/newsletter_send.svg"
+                      alt="Send"
+                      className="h-[21px] w-[21px] object-contain"
+                    />
+                  )}
                 </button>
               </div>
 
+              {/* PRIVACY CHECKBOX */}
               <label className="mt-2 flex items-center gap-2 text-[11px] text-[#444444]">
                 <input
                   type="checkbox"
+                  checked={newsletterAccepted}
+                  onChange={(e) =>
+                    setNewsletterAccepted(
+                      e.target.checked
+                    )
+                  }
+                  disabled={isNewsletterSubmitting}
                   className="h-[15px] w-[15px] shrink-0 accent-[#F04D02]"
                 />
 
@@ -175,10 +410,26 @@ export default function Footer() {
                   and consent to being contacted.
                 </span>
               </label>
-            </div>
+
+              {/* NEWSLETTER SUCCESS */}
+              {newsletterMessage && (
+                <p className="mt-3 text-[11px] font-medium leading-5 text-green-600">
+                  {newsletterMessage}
+                </p>
+              )}
+
+              {/* NEWSLETTER ERROR */}
+              {newsletterError && (
+                <p className="mt-3 text-[11px] font-medium leading-5 text-red-600">
+                  {newsletterError}
+                </p>
+              )}
+            </form>
           </div>
 
-          {/* ================= GET IN TOUCH ================= */}
+          {/* =================================================
+              GET IN TOUCH
+          ================================================== */}
           <div className="absolute left-1/2 top-[385px] z-[100] w-[calc(100%-32px)] max-w-[390px] -translate-x-1/2 bg-white px-7 pb-8 pt-7 shadow-[0_6px_25px_rgba(0,0,0,0.10)] sm:w-[370px] lg:left-auto lg:right-[5%] lg:top-[350px] lg:w-[360px] lg:max-w-none lg:translate-x-0">
             <div className="flex items-start justify-between">
               <h2 className="text-[30px] font-semibold leading-tight text-[#222222]">
@@ -194,7 +445,10 @@ export default function Footer() {
               Your Brand?
             </p>
 
-            <form>
+            {/* =================================================
+                CONTACT FORM
+            ================================================== */}
+            <form onSubmit={handleSubmit}>
               {/* NAME */}
               <label className="block text-[13px] font-semibold text-[#222222]">
                 Your Name*
@@ -202,7 +456,13 @@ export default function Footer() {
 
               <input
                 type="text"
-                className="h-[36px] w-full border-0 border-b border-[#777777] bg-transparent text-[14px] font-medium text-[#222222] outline-none focus:border-[#F04D02]"
+                value={name}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
+                disabled={isSubmitting}
+                autoComplete="name"
+                className="h-[36px] w-full border-0 border-b border-[#777777] bg-transparent text-[14px] font-medium text-[#222222] outline-none focus:border-[#F04D02] disabled:cursor-not-allowed disabled:opacity-60"
               />
 
               {/* EMAIL */}
@@ -212,7 +472,13 @@ export default function Footer() {
 
               <input
                 type="email"
-                className="h-[36px] w-full border-0 border-b border-[#777777] bg-transparent text-[14px] font-medium text-[#222222] outline-none focus:border-[#F04D02]"
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+                disabled={isSubmitting}
+                autoComplete="email"
+                className="h-[36px] w-full border-0 border-b border-[#777777] bg-transparent text-[14px] font-medium text-[#222222] outline-none focus:border-[#F04D02] disabled:cursor-not-allowed disabled:opacity-60"
               />
 
               {/* PHONE */}
@@ -224,7 +490,9 @@ export default function Footer() {
                 <PhoneInput
                   country="in"
                   value={phone}
-                  onChange={(value) => setPhone(value)}
+                  onChange={(value) =>
+                    setPhone(value)
+                  }
                   enableSearch
                   preferredCountries={[
                     "in",
@@ -234,6 +502,7 @@ export default function Footer() {
                   ]}
                   searchPlaceholder="Search country..."
                   placeholder="Enter phone number"
+                  disabled={isSubmitting}
                   containerClass="!w-full"
                   inputClass="!h-[36px] !w-full !rounded-none !border-0 !border-b !border-[#777777] !bg-transparent !pl-[48px] !text-[14px] !font-medium !text-[#222222] !outline-none focus:!border-[#F04D02]"
                   buttonClass="!h-[36px] !border-0 !border-b !border-[#777777] !rounded-none !bg-transparent"
@@ -249,7 +518,12 @@ export default function Footer() {
 
               <textarea
                 rows={2}
-                className="h-[45px] w-full resize-none border-0 border-b border-[#777777] bg-transparent text-[14px] font-medium text-[#222222] outline-none focus:border-[#F04D02]"
+                value={message}
+                onChange={(e) =>
+                  setMessage(e.target.value)
+                }
+                disabled={isSubmitting}
+                className="h-[45px] w-full resize-none border-0 border-b border-[#777777] bg-transparent text-[14px] font-medium text-[#222222] outline-none focus:border-[#F04D02] disabled:cursor-not-allowed disabled:opacity-60"
               />
 
               {/* PRIVACY + BUTTON */}
@@ -257,6 +531,13 @@ export default function Footer() {
                 <label className="flex max-w-[220px] items-start gap-2 text-[11px] font-medium leading-[1.5] text-[#444444]">
                   <input
                     type="checkbox"
+                    checked={privacyAccepted}
+                    onChange={(e) =>
+                      setPrivacyAccepted(
+                        e.target.checked
+                      )
+                    }
+                    disabled={isSubmitting}
                     className="mt-[2px] h-[14px] w-[14px] shrink-0 accent-[#F04D02]"
                   />
 
@@ -275,19 +556,36 @@ export default function Footer() {
                 <button
                   type="submit"
                   aria-label="Submit"
-                  className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-white transition hover:from-[#222222] hover:to-[#333333]"
+                  disabled={isSubmitting}
+                  className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-[#F04D02] to-[#FE8302] text-white transition hover:from-[#222222] hover:to-[#333333] disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  <span className="text-[19px]">
-                    ➤
+                  <span className="text-[17px]">
+                    {isSubmitting ? "..." : "➤"}
                   </span>
                 </button>
               </div>
+
+              {/* SUCCESS MESSAGE */}
+              {formMessage && (
+                <p className="mt-4 text-[11px] font-medium leading-5 text-green-600">
+                  {formMessage}
+                </p>
+              )}
+
+              {/* ERROR MESSAGE */}
+              {formError && (
+                <p className="mt-4 text-[11px] font-medium leading-5 text-red-600">
+                  {formError}
+                </p>
+              )}
             </form>
           </div>
         </div>
       </section>
 
-      {/* ================= DARK + ORANGE FOOTER ================= */}
+      {/* =====================================================
+          DARK + ORANGE FOOTER
+      ====================================================== */}
       <section className="relative z-10 min-h-[470px] bg-gradient-to-br from-[#222222] via-[#222222] to-[#F04D02] text-white">
         <div className="mx-auto max-w-[1600px] px-6 pb-10 pt-[35px] sm:px-10 md:px-16 lg:px-[5%]">
           <div className="w-full text-left lg:w-[68%]">
@@ -457,14 +755,18 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* ================= COPYRIGHT ================= */}
+      {/* =====================================================
+          COPYRIGHT
+      ====================================================== */}
       <div className="bg-[#222222] px-5 py-3 text-center text-white">
         <p className="text-[11px] sm:text-[12px]">
           © 2026 Genmax. All Rights Reserved.
         </p>
       </div>
 
-      {/* ================= FLOATING BUTTONS ================= */}
+      {/* =====================================================
+          FLOATING BUTTONS
+      ====================================================== */}
       <div className="fixed right-4 top-[205px] z-[100] flex flex-col gap-3">
         {/* CALL */}
         <a

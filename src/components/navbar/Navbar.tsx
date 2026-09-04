@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,6 +27,9 @@ import {
   FaPinterestP,
   FaYoutube,
 } from "react-icons/fa6";
+
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 import { navbarLinks } from "@/data/navbar";
 
@@ -74,9 +78,7 @@ const services: ServiceGroup[] = [
   },
   {
     title: "Graphic Design",
-    items: [
-      ["Graphic Designing", "/services/graphic-designing"],
-    ],
+    items: [["Graphic Designing", "/services/graphic-designing"]],
   },
 ];
 
@@ -159,6 +161,15 @@ export default function Navbar() {
   const [popup, setPopup] = useState<PopupType>(null);
 
   /* =======================================================
+     POPUP FORM STATES
+  ======================================================= */
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
+  const [formError, setFormError] = useState("");
+  const [popupPhone, setPopupPhone] = useState("");
+
+  /* =======================================================
      CLOSE MENU
   ======================================================= */
 
@@ -174,6 +185,110 @@ export default function Navbar() {
   const openPopup = (type: PopupType) => {
     closeMobileMenu();
     setPopup(type);
+    setFormMessage("");
+    setFormError("");
+    setPopupPhone("");
+  };
+
+  /* =======================================================
+     CLOSE POPUP
+  ======================================================= */
+
+  const closePopup = () => {
+    if (isSubmitting) return;
+
+    setPopup(null);
+    setFormMessage("");
+    setFormError("");
+    setPopupPhone("");
+  };
+
+  /* =======================================================
+     POPUP FORM SUBMIT
+  ======================================================= */
+
+  const handlePopupSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setFormMessage("");
+    setFormError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") || "").trim();
+    const phone = popupPhone.trim();
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+
+    const privacyAccepted = formData.get("privacy");
+
+    if (!name || !phone || !email || !message) {
+      setFormError("Please fill in all required fields.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!privacyAccepted) {
+      setFormError("Please agree to the Privacy Policy.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setFormError("Please enter a valid email address.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Failed to send your message."
+        );
+      }
+
+      setFormMessage(
+        popup === "quote"
+          ? "Your quote request has been sent successfully."
+          : "Your consultation request has been sent successfully."
+      );
+
+      form.reset();
+      setPopupPhone("");
+    } catch (error) {
+      console.error("Popup Form Error:", error);
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   /* =======================================================
@@ -291,10 +406,8 @@ export default function Navbar() {
                         >
                           <div className="border-t border-[#eeeeee] bg-white shadow-[0_18px_45px_rgba(0,0,0,0.12)]">
                             <div className="grid grid-cols-3 gap-8 px-10 py-8">
-
                               {services.map((group) => (
                                 <div key={group.title}>
-
                                   <h3 className="border-b border-[#dddddd] pb-3 text-[15px] font-bold uppercase tracking-[0.5px] text-[#F04D02]">
                                     {group.title}
                                   </h3>
@@ -317,10 +430,8 @@ export default function Navbar() {
                                       )
                                     )}
                                   </div>
-
                                 </div>
                               ))}
-
                             </div>
                           </div>
                         </div>
@@ -345,7 +456,6 @@ export default function Navbar() {
               ================================================= */}
 
               <div className="ml-5 hidden items-center gap-2 lg:flex">
-
                 <button
                   type="button"
                   onClick={() => openPopup("quote")}
@@ -373,7 +483,6 @@ export default function Navbar() {
                 >
                   <Menu size={29} />
                 </button>
-
               </div>
 
               {/* =================================================
@@ -389,7 +498,6 @@ export default function Navbar() {
               >
                 <Menu size={27} />
               </button>
-
             </div>
           </div>
         </div>
@@ -397,10 +505,6 @@ export default function Navbar() {
 
       {/* =========================================================
           RIGHT SIDE MENU DRAWER
-          
-          IMPORTANT:
-          This is NOT full screen.
-          Only the right-side white panel opens.
       ========================================================= */}
 
       <div
@@ -410,37 +514,25 @@ export default function Navbar() {
             : "pointer-events-none invisible opacity-0"
         }`}
       >
-
-        {/* =====================================================
-            DARK OVERLAY
-        ===================================================== */}
+        {/* DARK OVERLAY */}
 
         <button
           type="button"
           aria-label="Close menu"
           onClick={closeMobileMenu}
           className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-            mobileOpen
-              ? "opacity-100"
-              : "opacity-0"
+            mobileOpen ? "opacity-100" : "opacity-0"
           }`}
         />
 
-        {/* =====================================================
-            RIGHT SIDE WHITE DRAWER
-        ===================================================== */}
+        {/* RIGHT SIDE WHITE DRAWER */}
 
         <aside
           className={`absolute right-0 top-0 flex h-full w-[320px] flex-col overflow-y-auto bg-white shadow-[-15px_0_45px_rgba(0,0,0,0.12)] transition-transform duration-500 ease-out sm:w-[380px] lg:w-[420px] ${
-            mobileOpen
-              ? "translate-x-0"
-              : "translate-x-full"
+            mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-
-          {/* ===================================================
-              DRAWER HEADER
-          =================================================== */}
+          {/* DRAWER HEADER */}
 
           <div className="flex shrink-0 items-center justify-between border-b border-[#eeeeee] px-6 py-5 sm:px-8">
 
@@ -470,21 +562,15 @@ export default function Navbar() {
             >
               <X size={25} strokeWidth={1.7} />
             </button>
-
           </div>
 
-          {/* ===================================================
-              DRAWER CONTENT
-          =================================================== */}
+          {/* DRAWER CONTENT */}
 
           <div className="flex-1 overflow-y-auto px-6 py-5 sm:px-8">
 
-            {/* =================================================
-                NAVIGATION LINKS
-            ================================================= */}
+            {/* NAVIGATION LINKS */}
 
             <nav>
-
               {links.map((link) => {
                 const isServices =
                   link.label?.toLowerCase().trim() === "services";
@@ -492,7 +578,6 @@ export default function Navbar() {
                 if (isServices) {
                   return (
                     <div key={link.label}>
-
                       {/* SERVICES */}
 
                       <button
@@ -511,9 +596,7 @@ export default function Navbar() {
                         <ChevronDown
                           size={18}
                           className={`transition-transform duration-300 ${
-                            servicesOpen
-                              ? "rotate-180"
-                              : ""
+                            servicesOpen ? "rotate-180" : ""
                           }`}
                         />
                       </button>
@@ -528,13 +611,11 @@ export default function Navbar() {
                         }`}
                       >
                         <div className="bg-[#fafafa] px-4 py-3">
-
                           {services.map((group) => (
                             <div
                               key={group.title}
                               className="mb-5 last:mb-0"
                             >
-
                               <h3 className="mb-2 text-[11px] font-bold uppercase tracking-[0.8px] text-[#F04D02]">
                                 {group.title}
                               </h3>
@@ -551,13 +632,10 @@ export default function Navbar() {
                                   </Link>
                                 )
                               )}
-
                             </div>
                           ))}
-
                         </div>
                       </div>
-
                     </div>
                   );
                 }
@@ -573,21 +651,16 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-
             </nav>
 
-            {/* =================================================
-                SOCIAL MEDIA
-            ================================================= */}
+            {/* SOCIAL MEDIA */}
 
             <div className="mt-9 border-t border-[#eeeeee] pt-7">
-
               <p className="mb-5 text-[16px] font-medium text-[#333333]">
                 Follow Us On:
               </p>
 
               <div className="flex items-center gap-6">
-
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
 
@@ -604,21 +677,16 @@ export default function Navbar() {
                     </a>
                   );
                 })}
-
               </div>
-
             </div>
 
-            {/* =================================================
-                CONTACT INFORMATION
-            ================================================= */}
+            {/* CONTACT INFORMATION */}
 
             <div className="mt-9 border-t border-[#eeeeee] pt-7">
 
               {/* LOCATION */}
 
               <div className="flex items-start gap-3">
-
                 <MapPin
                   size={20}
                   className="mt-0.5 shrink-0 text-[#F04D02]"
@@ -633,7 +701,6 @@ export default function Navbar() {
                     GenMax IT Solution
                   </p>
                 </div>
-
               </div>
 
               <p className="mt-4 pl-[32px] text-[13px] leading-6 text-[#687582]">
@@ -661,15 +728,11 @@ export default function Navbar() {
                 <Mail size={16} />
                 genmaxitsolution@gmail.com
               </a>
-
             </div>
 
-            {/* =================================================
-                CTA BUTTONS
-            ================================================= */}
+            {/* CTA BUTTONS */}
 
             <div className="mt-8 space-y-3 pb-5">
-
               <button
                 type="button"
                 onClick={() => openPopup("quote")}
@@ -687,9 +750,7 @@ export default function Navbar() {
               >
                 Let's Talk
               </button>
-
             </div>
-
           </div>
         </aside>
       </div>
@@ -705,33 +766,32 @@ export default function Navbar() {
             : "pointer-events-none invisible opacity-0"
         }`}
       >
-
         {/* OVERLAY */}
 
         <button
           type="button"
           aria-label="Close popup"
-          onClick={() => setPopup(null)}
+          onClick={closePopup}
           className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         />
 
         {/* POPUP CONTENT */}
 
         <div
-          className={`relative z-10 w-full max-w-[900px] bg-gradient-to-br from-[#C90000] via-[#D30020] to-[#E91E63] p-6 shadow-2xl transition-all duration-300 sm:p-10 lg:p-14 ${
+          className={`popup-scroll-hidden relative z-10 w-full max-w-[900px] max-h-[95vh] overflow-y-auto bg-gradient-to-br from-[#C90000] via-[#F04D02] to-[#FE8302] p-6 shadow-2xl transition-all duration-300 sm:p-10 lg:p-14 ${
             popup
               ? "translate-y-0 scale-100"
               : "translate-y-5 scale-95"
           }`}
         >
-
           {/* CLOSE */}
 
           <button
             type="button"
             aria-label="Close popup"
-            onClick={() => setPopup(null)}
-            className="absolute right-5 top-5 text-white/80 transition-colors hover:text-white"
+            onClick={closePopup}
+            disabled={isSubmitting}
+            className="absolute right-5 top-5 text-white/80 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             <X size={27} />
           </button>
@@ -754,10 +814,11 @@ export default function Navbar() {
 
           <form
             className="mt-8"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handlePopupSubmit}
           >
-
             <div className="grid gap-7 sm:grid-cols-2">
+
+              {/* NAME */}
 
               <FormField
                 label="Name"
@@ -765,26 +826,60 @@ export default function Navbar() {
                 type="text"
               />
 
-              <FormField
-                label="Phone"
-                name="phone"
-                type="tel"
-              />
+              {/* PHONE */}
 
+              <div>
+                <label
+                  htmlFor="popup-phone"
+                  className="mb-2 block text-sm text-white"
+                >
+                  Phone*
+                </label>
+
+                <div className="relative mt-1 w-full">
+                  <PhoneInput
+                    country="in"
+                    value={popupPhone}
+                    onChange={(value) => setPopupPhone(value)}
+                    enableSearch
+                    preferredCountries={[
+                      "in",
+                      "ae",
+                      "us",
+                      "gb",
+                    ]}
+                    searchPlaceholder="Search country..."
+                    placeholder="Enter phone number"
+                    disabled={isSubmitting}
+                    containerClass="!w-full"
+                    inputClass="!h-[38px] !w-full !rounded-none !border-0 !border-b !border-white !bg-transparent !pl-[48px] !text-[14px] !font-medium !text-white !outline-none placeholder:!text-white/60 focus:!border-white"
+                    buttonClass="!h-[38px] !w-[42px] !rounded-none !border-0 !border-b !border-white !bg-transparent"
+                    dropdownClass="!z-[30000]"
+                    searchClass="!mx-[10px] !my-[6px] !w-[calc(100%-20px)]"
+                    inputProps={{
+                      id: "popup-phone",
+                      name: "phone",
+                      required: true,
+                      autoComplete: "tel",
+                    }}
+                  />
+                </div>
+              </div>
             </div>
 
-            <div className="mt-7">
+            {/* EMAIL */}
 
+            <div className="mt-7">
               <FormField
                 label="Email"
                 name="email"
                 type="email"
               />
-
             </div>
 
-            <div className="mt-7">
+            {/* MESSAGE */}
 
+            <div className="mt-7">
               <label
                 htmlFor="message"
                 className="mb-2 block text-sm text-white"
@@ -797,17 +892,35 @@ export default function Navbar() {
                 name="message"
                 required
                 rows={3}
-                className="w-full resize-none border-0 border-b border-white bg-transparent px-0 py-2 text-white outline-none"
+                className="w-full resize-none border-0 border-b border-white bg-transparent px-0 py-2 text-white outline-none placeholder:text-white/60"
+                placeholder="Write your message..."
               />
-
             </div>
+
+            {/* SUCCESS MESSAGE */}
+
+            {formMessage && (
+              <div className="mt-5 border border-white/40 bg-white/10 px-4 py-3 text-[13px] leading-5 text-white">
+                {formMessage}
+              </div>
+            )}
+
+            {/* ERROR MESSAGE */}
+
+            {formError && (
+              <div className="mt-5 border border-white/40 bg-black/10 px-4 py-3 text-[13px] leading-5 text-white">
+                {formError}
+              </div>
+            )}
+
+            {/* PRIVACY + SEND */}
 
             <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
 
               <label className="flex items-start gap-2 text-[12px] leading-5 text-white">
-
                 <input
                   type="checkbox"
+                  name="privacy"
                   required
                   className="mt-1 h-4 w-4"
                 />
@@ -816,26 +929,28 @@ export default function Navbar() {
                   I agree to the{" "}
                   <Link
                     href="/privacy-policy"
+                    onClick={() => {
+                      if (!isSubmitting) {
+                        setPopup(null);
+                      }
+                    }}
                     className="font-semibold underline"
                   >
                     Privacy Policy
                   </Link>
                   .
                 </span>
-
               </label>
 
               <button
                 type="submit"
-                className="h-[58px] w-full border border-white px-10 text-[12px] font-semibold uppercase tracking-[0.6px] text-white transition-colors hover:bg-white hover:text-[#D5002F] sm:w-[220px]"
+                disabled={isSubmitting}
+                className="h-[58px] w-full border border-white px-10 text-[12px] font-semibold uppercase tracking-[0.6px] text-white transition-colors hover:bg-white hover:text-[#F04D02] disabled:cursor-not-allowed disabled:opacity-60 sm:w-[220px]"
               >
-                Send
+                {isSubmitting ? "Sending..." : "Send"}
               </button>
-
             </div>
-
           </form>
-
         </div>
       </div>
     </>
@@ -857,7 +972,6 @@ function FormField({
 }) {
   return (
     <div>
-
       <label
         htmlFor={name}
         className="mb-2 block text-sm text-white"
@@ -870,9 +984,8 @@ function FormField({
         name={name}
         type={type}
         required
-        className="h-[38px] w-full border-0 border-b border-white bg-transparent px-0 text-white outline-none"
+        className="h-[38px] w-full border-0 border-b border-white bg-transparent px-0 text-white outline-none placeholder:text-white/60"
       />
-
     </div>
   );
 }

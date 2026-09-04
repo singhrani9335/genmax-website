@@ -165,6 +165,22 @@ table {
 }
 
 /* ================================
+   POPUP SCROLLBAR HIDDEN
+================================ */
+
+/* Navbar popup ke andar scrollbar/slider hide rahega,
+   lekin content normally scroll ho sakega. */
+
+.popup-scroll-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.popup-scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================================
    COMMON COLORS
 ================================ */
 
